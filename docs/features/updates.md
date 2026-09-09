@@ -1,7 +1,13 @@
 # Updates
 
-Tinycast checks GitHub Releases once a day, offers the newest release for its own channel in a native
-window with its release notes, installs it and relaunches. There is no Sparkle and no appcast: the
+This self-use fork disables upstream updates: `UpdateCheckStore` uses `.development` regardless of
+bundle id and ignores the old update cache. Automatic checks never start; the menu's manual action
+only reports that this build does not update itself. Release builds retain `Tinycast.app` and
+`com.tinycast.app`, preserving their existing settings and data.
+
+The upstream implementation described below checks GitHub Releases once a day and offers the newest
+release for its own channel in a native window with its release notes, installs it and relaunches.
+There is no Sparkle and no appcast: the
 release feed the website already reads is the feed the app reads.
 
 ## Invariants
@@ -61,7 +67,8 @@ release feed the website already reads is the feed the app reads.
 
 ## Channel and version
 
-`ReleaseChannel` is derived from the bundle id, and nothing else:
+`ReleaseChannel(bundleID:)` maps the upstream identities as follows. This fork's `UpdateCheckStore`
+does not use that initializer; its effective channel is always `.development`.
 
 | Bundle id | Channel | Takes |
 | --- | --- | --- |

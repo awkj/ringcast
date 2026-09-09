@@ -13,6 +13,10 @@ the signing identity itself is in [signing.md](signing.md).
 It builds a Release `Tinycast.app` signed with `Tinycast Self-Signed` and packs it with an
 `/Applications` symlink. Official per-channel releases are built by CI, below.
 
+This self-use fork keeps the original app name and bundle id but disables upstream update checks in
+`UpdateCheckStore`. Replacing an earlier `Tinycast.app` preserves its settings and data; the version
+number does not need to exceed upstream releases.
+
 ## Signing & Gatekeeper
 
 Both local builds and CI releases sign with the same stable `Tinycast Self-Signed` identity, not an
