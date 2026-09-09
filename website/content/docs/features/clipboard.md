@@ -15,12 +15,16 @@ The footer names where a paste will land — "Paste to Notes" — so you always 
 | Action                         | Shortcut                             |
 | ------------------------------ | ------------------------------------ |
 | Paste                          | <kbd>↵</kbd>                         |
-| Copy to Clipboard              | <kbd>⌘</kbd><kbd>↵</kbd>             |
+| Copy to Clipboard              | <kbd>⌘</kbd><kbd>C</kbd> or <kbd>⌘</kbd><kbd>↵</kbd> |
 | Paste, keeping the window open | <kbd>⌥</kbd><kbd>↵</kbd>             |
 | Filter by type                 | <kbd>⌘</kbd><kbd>P</kbd>             |
 | Pin / Unpin Entry              | <kbd>⌘</kbd><kbd>.</kbd>             |
 | Delete Entry                   | <kbd>⌃</kbd><kbd>X</kbd>             |
 | Delete All Entries             | <kbd>⌃</kbd><kbd>⇧</kbd><kbd>X</kbd> |
+
+<kbd>⌘</kbd><kbd>C</kbd> always copies the selected history entry and closes the window.
+Changing the default action in Settings swaps <kbd>↵</kbd> and <kbd>⌘</kbd><kbd>↵</kbd>;
+<kbd>⌘</kbd><kbd>C</kbd> stays Copy to Clipboard.
 
 Pasting needs the [Accessibility permission](/docs/permissions).
 

@@ -107,6 +107,12 @@ final class ClipboardCoordinator {
         if !settings.clipboardEnabled { clipboardStore.close() }
     }
 
+    func copySelectedClip() {
+        let rows = clipboardStore.search(palette.query, filter: palette.clipboardFilter)
+        guard rows.indices.contains(palette.selection) else { return }
+        copyToClipboard(rows[palette.selection])
+    }
+
     func copyToClipboard(_ item: ClipboardItem) {
         paletteCoordinator.hidePalette(restoreFocus: false)
         if Paster.copy(item, store: clipboardStore) {

@@ -15,8 +15,7 @@ final class PaletteWindowController: NSObject, NSWindowDelegate {
     /// Live only between mouse-down and mouse-up on a drag handle; nil means a move was ours.
     private var drag: DragSession?
     private let dropGuides = PaletteDropGuideController()
-    /// ⌘V: `Edit ▸ Paste` claims it before `sendEvent` whenever the board also carries text.
-    private var pasteMonitor: Any?
+    private var clipboardShortcutMonitor: Any?
     /// ⌘⎋: the window server claims it, so no keystroke is left for the responder chain to see.
     private lazy var commandEscapeTap = CommandEscapeTap { [weak self] in
         guard let self, self.panel?.isKeyWindow == true else { return false }
@@ -82,7 +81,7 @@ final class PaletteWindowController: NSObject, NSWindowDelegate {
 
     // Isolated so teardown may touch the main-actor monitor; the block is already weak.
     isolated deinit {
-        if let pasteMonitor { NSEvent.removeMonitor(pasteMonitor) }
+        if let clipboardShortcutMonitor { NSEvent.removeMonitor(clipboardShortcutMonitor) }
     }
 
     /// The character a bare-⌘ chord names, through the ASCII layout so an IME cannot move it.
@@ -95,13 +94,21 @@ final class PaletteWindowController: NSObject, NSWindowDelegate {
     }
 
     /// A local monitor sees the key before menu dispatch; returning nil swallows it.
-    private func installPasteMonitor() {
-        pasteMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+    private func installClipboardShortcutMonitor() {
+        clipboardShortcutMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             [weak self] event in
             guard let self, self.panel?.isKeyWindow == true,
-                Self.commandCharacter(from: event) == "v"
+                let character = Self.commandCharacter(from: event)
             else { return event }
-            return self.attachPastedFile() ? nil : event
+            switch character {
+            case "c" where self.core.palette.mode == .clipboard:
+                self.core.clipboardCoordinator.copySelectedClip()
+                return nil
+            case "v":
+                return self.attachPastedFile() ? nil : event
+            default:
+                return event
+            }
         }
     }
 
@@ -300,7 +307,7 @@ final class PaletteWindowController: NSObject, NSWindowDelegate {
             }
             return core.palette.pop()
         }
-        installPasteMonitor()
+        installClipboardShortcutMonitor()
         // Handled at the panel: the field editor or a missing main menu eats these first.
         panel.onCommandShortcut = { [weak self] event in
             guard let self, Self.commandCharacter(from: event) != nil else { return false }

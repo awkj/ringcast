@@ -310,6 +310,8 @@ caches, TCC grants and login item, so this cannot disturb an installed copy.
 - A copy appears at the top within about a second; an image copy records a thumbnail
 - Search is correct both under and over three characters
 - ⌘. pins and the highlight follows the row into Pinned; ⌘⌫ deletes; ⌘↵ copies without pasting
+- ⌘C copies the selected history entry and closes the palette with either default action; check
+  text, images, files, filtered results, selected search text and an empty list. Other screens copy normally
 - ⌃X deletes the selected entry and ⌃⇧X clears the history, from the list and from an open ⌘K menu
 - ⌃⇧X asks first, through Tinycast's own dialog; Cancel and Esc both leave every entry in place
 - ↵ pastes into the previous app; ⌥↵ pastes without closing the palette
