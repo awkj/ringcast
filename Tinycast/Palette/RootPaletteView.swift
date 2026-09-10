@@ -206,6 +206,22 @@ struct RootPaletteView: View {
             })
     }
 
+    private var appMenuContent: PopoverMenuContent {
+        PopoverMenuContent(items: [
+            PopoverMenuItem(
+                title: String(localized: "About \(AppIdentity.name)", bundle: .appLanguage),
+                systemImage: "info.circle"
+            ) {
+                core.settingsCoordinator.showAbout()
+            },
+            PopoverMenuItem(title: String(
+                localized: "Settings",
+                bundle: .appLanguage), systemImage: "gearshape", shortcut: "⌘,") {
+                core.settingsCoordinator.showSettings()
+            }
+        ])
+    }
+
     /// The one source every menu path addresses rows through, so none can disagree.
     private var menuContent: PaletteMenuContent? {
         switch openMenu {
@@ -214,6 +230,9 @@ struct RootPaletteView: View {
             return screen.menuContent(
                 at: selection(in: screen), menuSelection: $menuSelection,
                 onActivate: activateMenuItem)
+        case .app:
+            return PaletteMenuContent(
+                popover: appMenuContent, selection: $menuSelection, onActivate: activateMenuItem)
         case .clipboardFilter:
             return PaletteMenuContent(
                 popover: clipboardFilterContent, selection: $menuSelection,
@@ -262,18 +281,11 @@ struct RootPaletteView: View {
                 }
                 .safeAreaInset(edge: .top, spacing: 0) { header }
                 .safeAreaInset(edge: .bottom, spacing: 0) {
-                    if !isCollapsed && !isLightLauncher {
+                    if !isCollapsed {
                         bottomBar(
                             pillLabel: screen.primaryActionTitle, showActionGroup: showActionGroup,
                             formPrimaryShortcut: isExtensionForm,
                             showActions: screen.hasActions(at: sel))
-                    }
-                }
-                .overlay(alignment: .bottom) {
-                    if !isCollapsed && isLightLauncher {
-                        bottomBar(
-                            pillLabel: screen.primaryActionTitle, showActionGroup: showActionGroup,
-                            formPrimaryShortcut: false, showActions: screen.hasActions(at: sel))
                     }
                 }
                 // The panel has no title bar, so this thin top margin is the only place left to grab it.
@@ -810,69 +822,27 @@ struct RootPaletteView: View {
         vm.mode == .uninstall ? Theme.Colors.destructive : .primary
     }
 
-    private static var footerIdentity: String {
-        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-        return [AppIdentity.name, version].compactMap { $0 }.joined(separator: " ")
-    }
-
-    @ViewBuilder
     private func bottomBar(
         pillLabel: String, showActionGroup: Bool, formPrimaryShortcut: Bool, showActions: Bool
     ) -> some View {
-        if vm.mode == .launcher {
-            launcherFooter(pillLabel: pillLabel, showActionGroup: showActionGroup, showActions: showActions)
-        } else {
-            HStack(spacing: 0) {
-                SettingsCircleButton { core.settingsCoordinator.showSettings() }
-                Spacer()
-                if showActionGroup {
-                    actionGroup(
-                        pillLabel: pillLabel, formPrimaryShortcut: formPrimaryShortcut,
-                        showActions: showActions)
-                }
-            }
-            .padding(.horizontal, Theme.Spacing.md)
-            .frame(height: Theme.Size.bottomBarHeight)
-            .frame(maxWidth: .infinity)
-        }
-    }
-
-    private func launcherFooter(pillLabel: String, showActionGroup: Bool, showActions: Bool) -> some View {
-        HStack(spacing: Theme.Spacing.xl) {
-            Button {
-                core.settingsCoordinator.showSettings()
-            } label: {
-                Text("⌘, \(String(localized: "Settings", bundle: .appLanguage))")
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text("Settings"))
+        // Floating controls, no bar; the edge dissolve ghosts the rows passing beneath.
+        HStack(spacing: 0) {
+            appMenuButton
             Spacer()
             if showActionGroup {
-                Text("↩ \(pillLabel)")
-                if showActions {
-                    Text("⌘K \(String(localized: "Actions", bundle: .appLanguage))")
-                }
+                actionGroup(
+                    pillLabel: pillLabel, formPrimaryShortcut: formPrimaryShortcut,
+                    showActions: showActions)
             }
         }
-        .font(Theme.Typography.launcherFooter)
-        .foregroundStyle(Theme.Colors.textSecondary)
-        .lineLimit(1)
-        .padding(.horizontal, Theme.Spacing.xxl)
-        .frame(height: Theme.Size.launcherFooterHeight)
-        .overlay {
-            Text(Self.footerIdentity)
-                .font(Theme.Typography.launcherFooter)
-                .foregroundStyle(Theme.Colors.textSecondary)
-                .lineLimit(1)
-                .frame(maxWidth: Theme.Size.menuWidth)
-                .allowsHitTesting(false)
-        }
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(Theme.Colors.separator)
-                .frame(height: Theme.Size.hairline)
-                .padding(.horizontal, Theme.Spacing.xxl)
-                .allowsHitTesting(false)
+        .padding(.horizontal, Theme.Spacing.md)
+        .frame(height: Theme.Size.bottomBarHeight)
+        .frame(maxWidth: .infinity)
+    }
+
+    private var appMenuButton: some View {
+        MenuCircleButton {
+            if openMenu == .app { closeMenus() } else { open(.app, highlighting: 0) }
         }
     }
 
@@ -1031,6 +1001,7 @@ struct RootPaletteView: View {
 
     private var menuCorner: MenuPanelController.Corner? {
         switch openMenu {
+        case .app: .bottomLeading
         case .actions: .bottomTrailing
         case .argumentOptions: .belowHeaderTrailing
         case .clipboardFilter, .aiModel, .aiReasoning, .extensionAccessory: .belowHeaderTrailing
@@ -1247,6 +1218,7 @@ private enum OpenMenu {
     case extensionAccessory
     /// An `options=` argument field's choices, hung under the header where the chip sits.
     case argumentOptions
+    case app
     case clipboardFilter
     case aiModel
     case aiReasoning
@@ -1262,22 +1234,24 @@ private struct SearchFieldHiding: ViewModifier {
     }
 }
 
-private struct SettingsCircleButton: View {
+private struct MenuCircleButton: View {
     @Environment(\.locale) private var localizationLocale
     let action: () -> Void
     @State private var hovered = false
 
     var body: some View {
         Button(action: action) {
-            SymbolImage(name: "gearshape", size: Theme.Size.settingsButtonIcon)
+            VStack(alignment: .leading, spacing: 3) {
+                Capsule().frame(width: 14, height: 1.5)
+                Capsule().frame(width: 8, height: 1.5)
+            }
             .foregroundStyle(Theme.Colors.textSecondary)
             .frame(width: Theme.Size.menuButton, height: Theme.Size.menuButton)
             .background(Circle().fill(hovered ? Theme.Colors.rowHover : Color.clear))
             .contentShape(.circle)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(Text("Settings"))
-        .help(String(localized: "Settings", bundle: .appLanguage))
+        .accessibilityLabel(Text(verbatim: AppIdentity.name))
         .onHover { hovered = $0 }
         .frosted(in: Circle())
     }

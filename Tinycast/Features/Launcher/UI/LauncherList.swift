@@ -173,11 +173,11 @@ struct LauncherList: View {
                         }
                         .padding(.horizontal, colorScheme == .light ? Theme.Spacing.launcherInset : Theme.Spacing.md)
                         .padding(.top, Theme.Spacing.xs)
-                        .padding(.bottom, colorScheme == .light ? Theme.Size.launcherFooterHeight : Theme.Spacing.md)
+                        .padding(.bottom, Theme.Spacing.md)
                         .hideNativeScrollers()
                         .scrollOriginAnchor()
                     }
-                    .modifier(LauncherListEdges())
+                    .edgeDissolve()
                     .thinScrollbar()
                     // Snap to the origin on the first row so its header shows too.
                     .scrollFollowsSelection(
@@ -358,17 +358,5 @@ private struct AppRow: View {
                 .fill(fill)
         )
         .armedHover($hovered)
-    }
-}
-
-private struct LauncherListEdges: ViewModifier {
-    @Environment(\.colorScheme) private var colorScheme
-
-    func body(content: Content) -> some View {
-        if colorScheme == .light {
-            content.modifier(EdgeDissolveMask(bottomFade: Theme.Size.launcherFooterHeight * 2))
-        } else {
-            content.edgeDissolve()
-        }
     }
 }

@@ -96,7 +96,6 @@ enum Theme {
         static let launcherRowHeight: CGFloat = 44
         static let launcherIcon: CGFloat = 18
         static let launcherShortcut: CGFloat = 32
-        static let launcherFooterHeight: CGFloat = 28
         static let rowIcon: CGFloat = 24
         static let keyCap: CGFloat = 18
         /// Settings shortcut-recorder keycap — smaller than the palette's `keyCap` chip.
@@ -118,7 +117,6 @@ enum Theme {
         static let compactKeyCap: CGFloat = 15
         static let heroKeyCap: CGFloat = 22
         static let menuButton: CGFloat = 36
-        static let settingsButtonIcon: CGFloat = 16
         static let noteGlyph: CGFloat = 16
         static let noteEmptyGlyph: CGFloat = 28
         /// Hit target for a chat message footer glyph; its caption symbol floats inside it.
@@ -265,7 +263,6 @@ enum Theme {
         static let launcherTitle = Font.system(size: 17, weight: .regular)
         static let launcherSubtitle = Font.system(size: 9, weight: .regular)
         static let launcherShortcut = Font.system(size: 14, weight: .regular)
-        static let launcherFooter = Font.system(size: 11, weight: .regular)
         static let rowTitle = Font.body
         static let rowTrailing = Font.callout
         static let sectionHeader = Font.subheadline.weight(.medium)

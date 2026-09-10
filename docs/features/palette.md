@@ -34,10 +34,10 @@ The command palette is a borderless floating `NSPanel` hosting SwiftUI; see
 The light launcher is 720×475pt; other expanded modes and Dark use 750×475pt. The compact height
 remains 64pt. `PaletteWindowController` resolves the width for placement, restoration and drag guides;
 mode or appearance changes ask it to resize at the existing top-left anchor. The search field keeps
-its structural identity while its font and available width follow the appearance. The light launcher
-places version and keyboard hints in a transparent bottom overlay. The left `⌘, Settings` hint is
-clickable and opens Settings through the same coordinator as the panel's `⌘,` shortcut. Its trailing
-content padding lets the final row scroll above the hints.
+its structural identity while its font and available width follow the appearance. The expanded launcher
+uses the shared floating footer in both appearances: an app menu on the left (About and
+Settings) and primary-action / Actions buttons on the right. A bottom safe-area inset and the shared
+edge dissolve let the final row scroll clear of those controls.
 
 ## Summoning
 

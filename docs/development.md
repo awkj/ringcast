@@ -23,7 +23,7 @@ the section below is a note for anyone who wants it, not a step.
 
 ## Build & run
 
-With [just](https://github.com/casey/just) installed (`brew install just`):
+With [just](https://github.com/casey/just) 1.52 or later installed (`brew install just`):
 
 ```sh
 just dev mac           # build Debug, quit the running Dev app, and launch the new build
@@ -34,7 +34,8 @@ just build mac Debug   # build Debug without launching
 Both commands reuse `build/DerivedData` for incremental builds. The apps are written to
 `build/DerivedData/Build/Products/Debug/RingCast Dev.app` and
 `build/DerivedData/Build/Products/Release/RingCast.app`; the launch recipe reads the name from
-`Config/AppIdentity.json`. `just` alone lists the available commands.
+`Config/AppIdentity.json`. All recipes run with `zsh -f`, without loading user startup files.
+`just` alone lists the available commands.
 
 These local shortcuts use ad-hoc signing, so they work without installing a signing certificate.
 Accessibility may need to be granted again after rebuilding. To use the stable identity from the
