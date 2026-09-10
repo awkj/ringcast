@@ -118,7 +118,7 @@ struct ExtensionFormView: View {
         case "Form.Dropdown":
             labelled(field) {
                 ExtensionPickerField(
-                    items: ExtensionFormView.items(in: field),
+                    items: ExtensionPickerItem.items(in: field),
                     chosen: [field.string("value") ?? ""].filter { !$0.isEmpty },
                     placeholder: field.string("placeholder") ?? String(localized: "Select…", bundle: .appLanguage),
                     title: field.string("title") ?? String(localized: "Dropdown", bundle: .appLanguage),
@@ -133,7 +133,7 @@ struct ExtensionFormView: View {
         case "Form.TagPicker":
             labelled(field) {
                 ExtensionPickerField(
-                    items: ExtensionFormView.items(in: field),
+                    items: ExtensionPickerItem.items(in: field),
                     chosen: field.array("value").compactMap(\.stringValue),
                     placeholder: field.string("placeholder") ?? String(localized: "Select…", bundle: .appLanguage),
                     title: field.string("title") ?? String(localized: "Tags", bundle: .appLanguage),
@@ -169,26 +169,6 @@ struct ExtensionFormView: View {
                     .foregroundStyle(.secondary)
             }
         }
-    }
-
-    /// Items may be direct children or grouped in sections.
-    static func items(in field: RenderNode) -> [ExtensionPickerItem] {
-        var items: [ExtensionPickerItem] = []
-        func walk(_ node: RenderNode, section: String?) {
-            for child in node.children {
-                if child.type.hasSuffix(".Item") {
-                    let value = child.string("value") ?? ""
-                    items.append(
-                        ExtensionPickerItem(
-                            value: value, title: child.string("title") ?? value,
-                            iconValue: child.props["icon"], section: section))
-                } else if child.type.hasSuffix(".Section") {
-                    walk(child, section: child.string("title"))
-                }
-            }
-        }
-        walk(field, section: nil)
-        return items
     }
 
     /// Labels sit left of controls without moving the control away from the palette centre.
