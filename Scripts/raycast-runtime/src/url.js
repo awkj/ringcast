@@ -1,3 +1,4 @@
+import { appIdentity } from "./app-identity.generated.js";
 // URL / URLSearchParams for JavaScriptCore, which ships neither. Covers the hierarchical http(s)-
 // style URLs extensions build and parse; it is not a full WHATWG implementation (no IDNA, no
 // percent-encoding normalization of the host).
@@ -240,7 +241,7 @@ export class URL {
   }
 }
 
-// Tinycast runs only on macOS, so Node's Windows path override is deliberately out of scope.
+// ${appIdentity.name} runs only on macOS, so Node's Windows path override is deliberately out of scope.
 export function fileURLToPath(input, options = {}) {
   let parsed;
   if (typeof input === "string") {
@@ -265,7 +266,7 @@ export function fileURLToPath(input, options = {}) {
     throw nodeTypeError("ERR_INVALID_URL", "Invalid URL");
   }
   if (options?.windows) {
-    throw new Error("Windows file paths are not supported in Tinycast extensions.");
+    throw new Error(`Windows file paths are not supported in ${appIdentity.name} extensions.`);
   }
   const hostname = decodedFileHostname(parsed.hostname);
   if (hostname !== "" && hostname.toLowerCase() !== "localhost") {

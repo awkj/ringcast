@@ -109,7 +109,7 @@ struct SnippetsSettingsView: View {
 
             LabeledContent {
                 Button("Open Folder", action: core.snippetCoordinator.revealSnippetsInFinder)
-                    .accessibilityHint("Reveals this Tinycast channel’s snippets folder in Finder.")
+                    .accessibilityHint("Reveals this \(AppIdentity.name) channel’s snippets folder in Finder.")
             } label: {
                 SettingsRowTitle(.snippetsLibrary, "Snippets Folder")
                 Text("Plain Markdown files in this channel’s Application Support folder.")
@@ -332,7 +332,7 @@ private struct SnippetEditorSheet: View {
                 )
                 .focused($isTemplateFocused)
                 .accessibilityLabel("Snippet template")
-                .accessibilityHint("Enter the text Tinycast expands.")
+                .accessibilityHint("Enter the text \(AppIdentity.name) expands.")
         }
     }
 

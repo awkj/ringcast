@@ -194,7 +194,7 @@ final class AppSettings {
         didSet { defaults.set(escapeKeyBehavior.rawValue, forKey: Key.escapeKeyBehavior.rawValue) }
     }
 
-    /// Follow macOS, or pin Tinycast to one appearance. Applied by `AppCore.applyAppearance()`.
+    /// Follow macOS, or pin the app to one appearance. Applied by `AppCore.applyAppearance()`.
     var appearance: AppAppearance {
         didSet { defaults.set(appearance.rawValue, forKey: Key.appearance.rawValue) }
     }
@@ -269,7 +269,7 @@ final class AppSettings {
         didSet { defaults.set(notesEnabled, forKey: Key.notesEnabled.rawValue) }
     }
 
-    /// Off by default: connecting a server is consent to run code Tinycast did not write.
+    /// Off by default: connecting a server is consent to run code the app did not write.
     var mcpEnabled: Bool {
         didSet { defaults.set(mcpEnabled, forKey: Key.mcpEnabled.rawValue) }
     }
@@ -294,7 +294,7 @@ final class AppSettings {
         didSet { defaults.set(snippetsEnabled, forKey: Key.snippetsEnabled.rawValue) }
     }
 
-    /// Off out of the box: on means Tinycast may read a selection anywhere and type over it.
+    /// Off out of the box: on means the app may read a selection anywhere and type over it.
     var quickActionsEnabled: Bool {
         didSet { defaults.set(quickActionsEnabled, forKey: Key.quickActionsEnabled.rawValue) }
     }
@@ -330,7 +330,7 @@ final class AppSettings {
         }
     }
 
-    /// For a toolchain Tinycast doesn't know — mise or Nix shims are the common case.
+    /// For a toolchain the app doesn't know — mise or Nix shims are the common case.
     var extensionCustomSearchPaths: [String] {
         didSet {
             defaults.set(
@@ -467,11 +467,6 @@ final class AppSettings {
             defaults.set(
                 quicklinkConfirmsBeforeDelete, forKey: Key.quicklinkConfirmsBeforeDelete.rawValue)
         }
-    }
-
-    /// Whether the support window may reopen itself; off means never ask again.
-    var supportRemindersEnabled: Bool {
-        didSet { defaults.set(supportRemindersEnabled, forKey: Key.supportReminders.rawValue) }
     }
 
     init() {
@@ -617,8 +612,5 @@ final class AppSettings {
         quicklinkConfirmsBeforeDelete =
             defaults.object(forKey: Key.quicklinkConfirmsBeforeDelete.rawValue) == nil
             || defaults.bool(forKey: Key.quicklinkConfirmsBeforeDelete.rawValue)
-        supportRemindersEnabled =
-            defaults.object(forKey: Key.supportReminders.rawValue) == nil
-            || defaults.bool(forKey: Key.supportReminders.rawValue)
     }
 }

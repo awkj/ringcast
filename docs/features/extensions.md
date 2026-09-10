@@ -1,6 +1,6 @@
 # Raycast extensions
 
-Tinycast runs Raycast extensions: the same `package.json` + prebuilt CommonJS bundles Raycast itself
+RingCast runs Raycast extensions: the same `package.json` + prebuilt CommonJS bundles Raycast itself
 produces, rendered natively into the palette. No Electron, no browser, no Node.js.
 
 - [How it works](#how-it-works) · [The JS runtime](#the-js-runtime) ·
@@ -35,7 +35,7 @@ produces, rendered natively into the palette. No Electron, no browser, no Node.j
 ## How it works
 
 A Raycast extension command is a **single prebuilt CommonJS file** that keeps `react`,
-`react/jsx-runtime`, `@raycast/api` and the Node built-ins external. Tinycast supplies exactly those,
+`react/jsx-runtime`, `@raycast/api` and the Node built-ins external. RingCast supplies exactly those,
 runs the bundle, and renders the React tree it produces:
 
 ```
@@ -78,7 +78,7 @@ timers, `fetch`, `URL`, `URLSearchParams`, `TextEncoder`/`TextDecoder`, `AbortCo
 ## The JS runtime
 
 `Tinycast/Resources/RaycastRuntime.generated.js` (~200 KB minified) is **generated and committed**, the
-same arrangement as `EmojiData.generated.swift`: building Tinycast never needs Node. Sources live in
+same arrangement as `EmojiData.generated.swift`: building RingCast never needs Node. Sources live in
 [`Scripts/raycast-runtime/`](../../Scripts/raycast-runtime):
 
 | File | What it is |
@@ -168,7 +168,7 @@ screens hold (see [palette.md](palette.md)).
   `ExtensionSearchAccessoryButton` at the header's trailing edge and drop `ExtensionPickerList` as one
   of the palette's `OpenMenu` cases, so the arrows, ↵, Escape and the click-away come from the one menu
   path and no second key handler exists to disagree with it. `PaletteFilterAction` routes ⌘P, so a
-  command's own dropdown answers before Tinycast's clipboard filter can. The list is
+  command's own dropdown answers before RingCast's clipboard filter can. The list is
   `listWidth` (240) rather than a form picker's 360: it hangs off a chip, not a field.
   **Swift owns the selection** — the runtime keeps `makeSearchDropdown` hook-free so an extension may
   call `List.Dropdown({…})` directly — so `ExtensionManager.accessoryValues` keys it by render-node id
@@ -352,7 +352,7 @@ Settings → Extensions offers three routes, under **Install New**:
 1. **Search Registries…** — searches every enabled registry and installs from any of them. See below.
 2. **Import from Raycast** — copies the already-built bundles out of a local Raycast. Nothing is
    compiled, so no Node, npm or network is involved. The pane also scans whenever it opens, and says
-   so when Raycast has something Tinycast doesn't — installing in Raycast otherwise leaves no trace
+   so when Raycast has something RingCast doesn't — installing in Raycast otherwise leaves no trace
    here. **Both channels are searched**: `~/.config/raycast` and `~/.config/raycast-x`, the latter
    being Raycast Beta v2. Checking only the first reported "no Raycast install" to every Beta user,
    whose stable directory is present but empty. The same extension in both is offered once.
@@ -494,27 +494,27 @@ commands don't run at all.
 `useNavigation`, `OAuth`, `Icon`, `Color`, `Image.Mask`, `Keyboard.Shortcut.Common`, `LaunchType`.
 
 **OAuth 2.0 PKCE** — `OAuth.PKCEClient`, `OAuth.TokenSet`, `OAuth.RedirectMethod`, with S256 challenges and
-tokens in the login Keychain (service `com.tinycast.extensions.oauth`, `kSecAttrAccessibleWhenUnlocked`),
+tokens in the login Keychain (service `io.github.awkj.ringcast.extensions.oauth`, `kSecAttrAccessibleWhenUnlocked`),
 scoped per extension and dropped on uninstall.
 
-The redirect address belongs to the extension author's OAuth app registration, so Tinycast cannot choose
-it — it can only be there to catch it. **Tinycast therefore claims `raycast`, `com.raycast` and `tinycast`
+The redirect address belongs to the extension author's OAuth app registration, so RingCast cannot choose
+it — it can only be there to catch it. **RingCast therefore claims `raycast`, `com.raycast` and `tinycast`
 as URL schemes**, which is what makes all three of Raycast's redirect methods land back in the app:
 
 | `RedirectMethod` | Registered address | How it returns |
 | --- | --- | --- |
-| `App` | `raycast://oauth?package_name=Extension` | straight to Tinycast, no server |
-| `AppURI` | `com.raycast:/oauth?package_name=Extension` | straight to Tinycast, no server |
+| `App` | `raycast://oauth?package_name=Extension` | straight to RingCast, no server |
+| `AppURI` | `com.raycast:/oauth?package_name=Extension` | straight to RingCast, no server |
 | `Web` | `https://raycast.com/redirect?packageName=Extension` | through Raycast's page, which reopens a claimed scheme |
 
-Claiming `raycast` means an installed Raycast competes with Tinycast for those links and macOS picks the
+Claiming `raycast` means an installed Raycast competes with RingCast for those links and macOS picks the
 winner. That is a deliberate trade: without it, `App` redirects have nowhere to land. `Web` additionally
 depends on a page Raycast can change at any time — `ExtensionOAuthSession` times out after five minutes so
 a redirect that never arrives cannot wedge the palette.
 
 **`raycast://` URLs** — extensions address Raycast by scheme; the most common is a bare
 `open("raycast://")` to bring the window back after something stole focus (1Password's auth flow does
-this). `ExtensionHostBridge` keeps those inside Tinycast: `raycast://extensions/<author>/<extension>/<command>`
+this). `ExtensionHostBridge` keeps those inside RingCast: `raycast://extensions/<author>/<extension>/<command>`
 runs that command when it's installed, anything else reopens the palette. Handing them to the workspace
 would launch Raycast itself.
 
@@ -538,7 +538,7 @@ than waiting for room on its readable side, so only a transform nobody reads fro
 
 `url.fileURLToPath` decodes percent-escapes the way Node does on darwin, so an asset path carrying a
 space resolves to a file the image loader can open, and it rejects an encoded separator or a non-local
-host rather than returning a wrong path. Node's `windows` override is absent: Tinycast only runs on
+host rather than returning a wrong path. Node's `windows` override is absent: RingCast only runs on
 macOS, so drive-letter and UNC output would be unreachable. `url.pathToFileURL` escapes `?` and `#`
 so a filename holding either survives the round trip.
 
@@ -597,7 +597,7 @@ node test.mjs ~/.config/raycast/extensions/<uuid> [command]
 
 # 3. the real Swift engine, against JavaScriptCore
 Scripts/run-tests.sh ext-test
-"${TMPDIR:-/tmp}"/tinycast-harness/ext-test ~/Library/Application\ Support/com.tinycast.app.dev/extensions/<name> [command]
+"${TMPDIR:-/tmp}"/tinycast-harness/ext-test ~/Library/Application\ Support/io.github.awkj.ringcast.dev/extensions/<name> [command]
 ```
 
 `ext-test` compiles the real engine sources — there is no copy to keep in sync. `EXT_TEST_VERBOSE=1`
@@ -629,7 +629,7 @@ never shares with an installed copy.
 | `LocalStorage`, `Cache`, preferences | `extension-data/<safe name>.json` | yes |
 | Command subtitle, refresh state | `extension-commands.json` | yes |
 | `environment.supportPath` | `extension-support/<safe name>/` | yes |
-| OAuth tokens | macOS Keychain (`com.tinycast.extensions.oauth`) | yes |
+| OAuth tokens | macOS Keychain (`io.github.awkj.ringcast.extensions.oauth`) | yes |
 | Icon override | `UserDefaults` → `extensionAppearances` | yes |
 | Command shortcuts | `UserDefaults` → `hotkey.extensionCommand.<entry id>` | yes |
 | Favorites, hidden items | `UserDefaults` → `favoriteApps`, `hiddenItemKeys` | yes |

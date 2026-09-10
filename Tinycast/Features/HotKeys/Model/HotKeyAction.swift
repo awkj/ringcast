@@ -1,6 +1,6 @@
 import Foundation
 
-/// Everything in Tinycast a global shortcut can be bound to.
+/// Everything in the app a global shortcut can be bound to.
 enum HotKeyAction: Hashable, Sendable {
     /// The one fixed action with no command row of its own.
     case togglePalette

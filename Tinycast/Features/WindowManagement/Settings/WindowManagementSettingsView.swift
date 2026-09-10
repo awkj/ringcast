@@ -16,7 +16,7 @@ struct WindowManagementSettingsView: View {
                 enableSubtitle:
                     String(
                         localized:
-                            "Moves the window you were last in, using the Accessibility permission Tinycast already uses to paste.",
+                            "Moves the window you were last in, using the Accessibility permission \(AppIdentity.name) already uses to paste.",
                         bundle: .appLanguage
                     ),
                 launcherSubtitle: String(localized: "Find the window commands in launcher search.", bundle: .appLanguage),
@@ -114,7 +114,7 @@ private struct WindowCommandSettingsRow: View {
     private var entry: AppEntry {
         AppEntry(
             id: command.entryID, name: command.name,
-            url: URL(string: "tinycast://window-command/" + command.id.rawValue)!, bundleID: nil,
+            url: URL(string: "\(AppIdentity.urlScheme)://window-command/" + command.id.rawValue)!, bundleID: nil,
             kind: .windowCommand)
     }
 

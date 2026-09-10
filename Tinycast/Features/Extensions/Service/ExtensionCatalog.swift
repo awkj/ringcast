@@ -87,7 +87,7 @@ enum ExtensionCatalog {
         let base =
             FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
             .first ?? FileManager.default.homeDirectoryForCurrentUser
-        let bundleID = Bundle.main.bundleIdentifier ?? "com.tinycast.app"
+        let bundleID = Bundle.main.bundleIdentifier ?? AppIdentity.bundleIdentifier
         return base.appendingPathComponent(bundleID, isDirectory: true)
     }
 
@@ -146,7 +146,7 @@ enum ExtensionCatalog {
             case .noBuiltCommands(let name):
                 return
                     String(localized: """
-                        \(name) has no built command bundles. Tinycast installs prebuilt extensions \
+                        \(name) has no built command bundles. \(AppIdentity.name) installs prebuilt extensions \
                         — run `ray build` in the extension folder first, or import one from an installed \
                         Raycast.
                         """, bundle: .appLanguage)

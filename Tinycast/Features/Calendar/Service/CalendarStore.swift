@@ -58,7 +58,7 @@ final class CalendarStore {
         calendars = []
     }
 
-    /// Tinycast's own consent dialog has already been accepted by the time this runs.
+    /// the app's own consent dialog has already been accepted by the time this runs.
     func requestAccess() async -> Bool {
         let granted = await Permissions.requestCalendarAccess()
         access = Permissions.calendarAccess()

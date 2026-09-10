@@ -11,7 +11,7 @@ struct CalendarSettingsView: View {
         Form {
             FeatureSwitchSection(
                 anchor: .calendarCalendar,
-                enableTitle: "Join meetings from Tinycast",
+                enableTitle: "Join meetings from \(AppIdentity.name)",
                 enableSubtitle:
                     String(
                         localized:
@@ -41,7 +41,7 @@ struct CalendarSettingsView: View {
                 Section {
                     SettingsRow(
                         title: "Calendar access is needed",
-                        subtitle: "Allow Tinycast to read events and find meeting links."
+                        subtitle: "Allow \(AppIdentity.name) to read events and find meeting links."
                     ) {
                         Button("Allow Calendar Access…") {
                             core.calendarCoordinator.setCalendarEnabled(true)
@@ -53,7 +53,7 @@ struct CalendarSettingsView: View {
                     SettingsRow(
                         title: String(localized: "Calendar access is off", bundle: .appLanguage),
                         subtitle: String(
-                            localized: "Turn Tinycast on under Privacy & Security ▸ Calendars.",
+                            localized: "Turn \(AppIdentity.name) on under Privacy & Security ▸ Calendars.",
                             bundle: .appLanguage)
                     ) {
                         Button("Open System Settings…") { Permissions.openCalendarSettings() }

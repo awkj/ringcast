@@ -33,6 +33,9 @@ if [ "${1:-}" = "--exec" ]; then
     exit 0
 fi
 
+node Scripts/sync-identity.mjs --check || exit 1
+node Scripts/test-identity.mjs || exit 1
+
 QUEUE="$BIN/queue"
 : > "$QUEUE"
 rm -f "$BIN"/*.failed
@@ -69,7 +72,7 @@ run() {
     if [ -n "$only" ] && [ "$name" != "$only" ]; then return 0; fi
     if [ "$index_only" -eq 1 ] && [ "$emit_db" -eq 0 ]; then return 0; fi
     ran=$((ran + 1))
-    set -- "$@" Tinycast/Platform/AppLocalization.swift
+    set -- "$@" Tinycast/Platform/AppLocalization.swift Tinycast/Platform/AppIdentity.generated.swift
     if grep -q 'localizationEnvironment(' "$@" "Tests/$name.swift"; then
         set -- "$@" Tinycast/DesignSystem/LocalizationEnvironment.swift
     fi
@@ -363,8 +366,11 @@ run settings-history-test  Tinycast/Features/Settings/SettingsTab.swift \
                            Tinycast/Features/Settings/SettingsAnchor.swift \
                            Tinycast/Features/Settings/SettingsNavigationState.swift \
                            Tinycast/Features/Settings/SettingsSearchCatalog.swift \
+                           Tinycast/Features/Updates/Model/{UpdateSource,ReleaseChannel}.swift \
                            $L/SearchRelevance.swift
-run updates-test           Tinycast/Features/Updates/Model/*.swift
+run updates-test           Tinycast/Features/Updates/Model/*.swift \
+                           Tinycast/Features/Updates/Service/{UpdateCheckStore,UpdateDownloader,UpdateFailure}.swift \
+                           Tinycast/Platform/AppPaths.swift
 run localization-test      Tinycast/Features/Settings/SettingsTab.swift \
                            Tinycast/Features/Settings/AppAppearance.swift \
                            Tinycast/Features/Settings/SettingsToolbarController.swift \
@@ -376,8 +382,8 @@ run localization-test      Tinycast/Features/Settings/SettingsTab.swift \
                            Tinycast/Features/Settings/AppSettingsKey.swift \
                            Tinycast/Features/Settings/SettingsAnchor.swift \
                            Tinycast/Features/Settings/SettingsSearchCatalog.swift \
+                           Tinycast/Features/Updates/Model/{UpdateSource,ReleaseChannel}.swift \
                            $L/SearchRelevance.swift
-run support-test           Tinycast/Features/Support/Model/*.swift
 run ai-provider-test       Tinycast/Features/Settings/AppSettingsKey.swift \
                            Tinycast/Features/AI/Model/*.swift \
                            Tinycast/Features/AI/Settings/AISettingsStore.swift

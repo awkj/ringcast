@@ -66,7 +66,7 @@ enum ShellCommandRunner {
     private static let stopGrace: DispatchTimeInterval = .seconds(2)
     /// `waitUntilExit` blocks, so it stays off the cooperative pool; concurrent, not serial.
     private static let queue = DispatchQueue(
-        label: "com.tinycast.shell-command", qos: .userInitiated, attributes: .concurrent)
+        label: "\(AppIdentity.bundleIdentifier).shell-command", qos: .userInitiated, attributes: .concurrent)
 
     /// Fire-and-forget, keeping only the error tail; shown output goes through `stream`.
     nonisolated static func run(
@@ -97,7 +97,7 @@ enum ShellCommandRunner {
             command: command, arguments: arguments,
             loadingShellEnvironment: loadingShellEnvironment)
         process.currentDirectoryURL = URL(fileURLWithPath: directory)
-        // Lets a shell config skip slow sections when Tinycast is the caller.
+        // Lets a shell config skip slow sections when the app is the caller.
         process.environment = ProcessInfo.processInfo.environment.merging(["TINYCAST": "1"]) { _, new in
             new
         }
@@ -289,7 +289,7 @@ enum ShellCommandRunner {
         command: String, arguments: [String], loadingShellEnvironment: Bool
     ) -> [String] {
         // zsh reads `.zshrc` only for interactive shells, so `-l` alone sees no aliases.
-        [loadingShellEnvironment ? "-ilc" : "-lc", command, "tinycast"] + arguments
+        [loadingShellEnvironment ? "-ilc" : "-lc", command, AppIdentity.slug] + arguments
     }
 
     /// A temp file, not a `Pipe`: nothing drains a pipe until `waitUntilExit` returns.
@@ -322,7 +322,7 @@ enum ShellCommandRunner {
 
         static func make() -> StreamCapture? {
             let template = FileManager.default.temporaryDirectory
-                .appendingPathComponent("tinycast-command-stream.XXXXXX").path
+                .appendingPathComponent("\(AppIdentity.slug)-command-stream.XXXXXX").path
             var bytes = Array(template.utf8CString)
             let descriptor = bytes.withUnsafeMutableBufferPointer { buffer in
                 mkstemp(buffer.baseAddress!)

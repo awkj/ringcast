@@ -105,7 +105,7 @@ final class MCPCoordinator {
         let index = await core.choose(
             title: String(localized: "Let \(server.title) run its tools?", bundle: .appLanguage),
             message: String(localized: """
-                The model wants to call \u{201C}\(tool)\u{201D}. Tinycast did not write \
+                The model wants to call \u{201C}\(tool)\u{201D}. \(AppIdentity.name) did not write \
                 this server and cannot vouch for what it does.
                 """, bundle: .appLanguage),
             symbol: "wrench.and.screwdriver",

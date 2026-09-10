@@ -103,7 +103,7 @@ struct AppEntry: Identifiable, Hashable, Sendable {
     /// Stable identity for learned ranking, favorites, and other per-entry preferences.
     var preferenceKey: String { bundleID ?? id }
 
-    /// Only built-in names belong to Tinycast's translation catalog.
+    /// Only built-in names belong to the app's translation catalog.
     var localizedName: String {
         switch kind {
         case .command, .systemAction, .windowCommand:
@@ -208,7 +208,7 @@ extension AppEntry {
     init(_ layout: WindowLayout) {
         self.init(
             id: layout.entryID, name: layout.name,
-            url: URL(string: "tinycast://window-layout/" + layout.id.uuidString)!,
+            url: URL(string: "\(AppIdentity.urlScheme)://window-layout/" + layout.id.uuidString)!,
             bundleID: nil, kind: .windowLayout, symbolName: layout.iconSymbol)
     }
 
@@ -216,7 +216,7 @@ extension AppEntry {
     init(_ quicklink: Quicklink) {
         self.init(
             id: quicklink.entryID, name: quicklink.name,
-            url: URL(string: "tinycast://quicklink/" + quicklink.id.uuidString)!,
+            url: URL(string: "\(AppIdentity.urlScheme)://quicklink/" + quicklink.id.uuidString)!,
             bundleID: nil, kind: .quicklink,
             symbolName: quicklink.iconSymbol
                 ?? QuicklinkDestination.detect(quicklink.link)?.defaultSymbol)
@@ -276,7 +276,7 @@ final class AppIndex {
         .map { command in
             AppEntry(
                 id: command.entryID, name: command.name,
-                url: URL(string: "tinycast://system-action/" + command.id.rawValue)!,
+                url: URL(string: "\(AppIdentity.urlScheme)://system-action/" + command.id.rawValue)!,
                 bundleID: nil, kind: .systemAction)
         }
         .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
@@ -285,7 +285,7 @@ final class AppIndex {
         .map { command in
             AppEntry(
                 id: command.entryID, name: command.name,
-                url: URL(string: "tinycast://window-command/" + command.id.rawValue)!,
+                url: URL(string: "\(AppIdentity.urlScheme)://window-command/" + command.id.rawValue)!,
                 bundleID: nil, kind: .windowCommand)
         }
         .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
@@ -339,7 +339,7 @@ final class AppIndex {
         let entries = commands.filter(\.isEnabled).map { command in
             AppEntry(
                 id: command.entryID, name: command.name,
-                url: URL(string: "tinycast://custom-command/" + command.id.uuidString)!,
+                url: URL(string: "\(AppIdentity.urlScheme)://custom-command/" + command.id.uuidString)!,
                 bundleID: nil, kind: .customCommand, symbolName: command.iconSymbol)
         }
         .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }

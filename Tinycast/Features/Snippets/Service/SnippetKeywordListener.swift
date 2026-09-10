@@ -188,7 +188,7 @@ final class SnippetKeywordListener: HealthCheckable {
         policy.reset()
     }
 
-    /// A keystroke Tinycast did not synthesize means the caret is the reader's again, not ours.
+    /// A keystroke the app did not synthesize means the caret is the reader's again, not ours.
     fileprivate func userActivity() {
         onUserActivity?()
     }
@@ -264,7 +264,7 @@ final class SnippetKeywordListener: HealthCheckable {
         guard tapController.install(listener: self) else {
             if !loggedTapFailure {
                 if logsTapFailures {
-                    NSLog("Tinycast: Failed to create snippet keyword event tap")
+                    NSLog("\(AppIdentity.name): Failed to create snippet keyword event tap")
                 }
                 loggedTapFailure = true
             }

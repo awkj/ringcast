@@ -1,0 +1,28 @@
+{
+  "name": "RingCast",
+  "author": "awkj",
+  "bundleIdentifier": "io.github.awkj.ringcast",
+  "slug": "ringcast",
+  "urlScheme": "ringcast",
+  "backupExtension": "ringcast",
+  "repository": "awkj/ringcast",
+  "signingIdentity": "Tinycast Self-Signed",
+  "channels": {
+    "stable": {
+      "nameSuffix": "",
+      "bundleSuffix": ""
+    },
+    "development": {
+      "nameSuffix": " Dev",
+      "bundleSuffix": ".dev"
+    },
+    "beta": {
+      "nameSuffix": " Beta",
+      "bundleSuffix": ".beta"
+    }
+  },
+  "updates": {
+    "enabled": false,
+    "repository": null
+  }
+}

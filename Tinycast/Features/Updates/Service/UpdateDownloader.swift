@@ -12,6 +12,10 @@ enum UpdateDownloader {
         _ release: AvailableRelease, to destination: URL
     ) -> AsyncThrowingStream<Event, any Error> {
         AsyncThrowingStream { continuation in
+            guard UpdateSource.current.allowsUpdates(on: ReleaseChannel(bundleID: Bundle.main.bundleIdentifier)) else {
+                continuation.finish(throwing: UpdateFailure.disabled)
+                return
+            }
             let config = URLSessionConfiguration.ephemeral
             // Cacheless, never `URLSession.shared`, so the only copy is the one on disk.
             config.urlCache = nil
@@ -21,7 +25,7 @@ enum UpdateDownloader {
             let session = URLSession(configuration: config, delegate: delegate, delegateQueue: nil)
 
             var request = URLRequest(url: release.assetURL)
-            request.setValue("Tinycast", forHTTPHeaderField: "User-Agent")
+            request.setValue(AppIdentity.name, forHTTPHeaderField: "User-Agent")
             let task = session.downloadTask(with: request)
             continuation.onTermination = { _ in
                 task.cancel()

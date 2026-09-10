@@ -25,7 +25,7 @@ struct GeneralSettingsView: View {
         return
             String(localized: """
                 Pressing \(settings.hyperKey.title) will trigger the left \(hyperGlyphs) \
-                modifier keys. Hyper Key shortcuts are shown in Tinycast with ✦.
+                modifier keys. Hyper Key shortcuts are shown in \(AppIdentity.name) with ✦.
                 """, bundle: .appLanguage)
     }
 
@@ -57,7 +57,7 @@ struct GeneralSettingsView: View {
                 SettingsSectionHeader(.generalSearch)
             } footer: {
                 Text(
-                    "Tinycast privately learns which results you choose for each query. Reset all learned choices to restore the default order."
+                    "\(AppIdentity.name) privately learns which results you choose for each query. Reset all learned choices to restore the default order."
                 )
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -83,7 +83,7 @@ struct GeneralSettingsView: View {
                         Button("Grant Access…") { Permissions.openAccessibilitySettings() }
                     } label: {
                         Label(
-                            "Tinycast needs Accessibility access to remap keys.",
+                            "\(AppIdentity.name) needs Accessibility access to remap keys.",
                             systemImage: "exclamationmark.triangle"
                         )
                         .foregroundStyle(.orange)
@@ -122,7 +122,7 @@ struct GeneralSettingsView: View {
                     }
                 } label: {
                     SettingsRowTitle(.generalAppearance, "Theme")
-                    Text("Match macOS, or pin Tinycast to Light or Dark.")
+                    Text("Match macOS, or pin \(AppIdentity.name) to Light or Dark.")
                 }
                 .id("Theme-\(localizationLocale.identifier)")
                 Picker(selection: $settings.language) {
@@ -164,11 +164,11 @@ struct GeneralSettingsView: View {
             Section {
                 Toggle(isOn: $settings.launchAtLogin) {
                     SettingsRowTitle(.generalGeneral, "Launch at login")
-                    Text("Start Tinycast automatically when you log in.")
+                    Text("Start \(AppIdentity.name) automatically when you log in.")
                 }
                 Toggle(isOn: $showInMenuBar) {
                     SettingsRowTitle(.generalGeneral, "Show in menu bar")
-                    Text("Keep the Tinycast icon in the menu bar. Shortcuts still work when hidden.")
+                    Text("Keep the \(AppIdentity.name) icon in the menu bar. Shortcuts still work when hidden.")
                 }
                 Picker(selection: $settings.popToRootTimeout) {
                     ForEach(PopToRootTimeout.allCases) { timeout in
@@ -216,7 +216,7 @@ struct GeneralSettingsView: View {
             }
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("Tinycast will relearn your preferred results as you use the launcher.")
+            Text("\(AppIdentity.name) will relearn your preferred results as you use the launcher.")
         }
         .onAppear(perform: refreshInputSources)
         .onReceive(

@@ -1,3 +1,4 @@
+import { appIdentity } from "./app-identity.generated.js";
 // A React host renderer whose "DOM" is a plain JSON tree that Swift renders natively.
 //
 // Two conventions make the Raycast component surface expressible:
@@ -148,7 +149,7 @@ export class Surface {
       null,
       false,
       null,
-      "tinycast",
+      appIdentity.slug,
       (error) => this.onError(error),
       (error) => this.onError(error),
       (error) => this.onError(error),

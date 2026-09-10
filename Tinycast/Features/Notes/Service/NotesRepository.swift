@@ -17,7 +17,7 @@ struct NotesRepository: Sendable {
                 return String(localized: "The note isn't valid UTF-8. (\(fileURL.lastPathComponent))", bundle: .appLanguage)
             case .invalidLocation(let fileURL):
                 return String(
-                    localized: "The note file is outside this Tinycast channel. (\(fileURL.path))",
+                    localized: "The note file is outside this \(AppIdentity.name) channel. (\(fileURL.path))",
                     bundle: .appLanguage)
             case .io(let fileURL, let message):
                 return String(localized: "Could not access \(fileURL.path): \(message)", bundle: .appLanguage)

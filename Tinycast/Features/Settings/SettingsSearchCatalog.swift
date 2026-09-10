@@ -429,7 +429,7 @@ enum SettingsSearchCatalog {
             pane: .calendar,
             keywords: ["meetings", "events", "zoom", "join", "schedule"]),
         .init(
-            .calendarCalendar, "Join meetings from Tinycast",
+            .calendarCalendar, "Join meetings from \(AppIdentity.name)",
             keywords: ["zoom", "meet", "teams", "permission"]),
         .init(
             .calendarSchedule, "Upcoming meetings in launcher",
@@ -514,10 +514,10 @@ enum SettingsSearchCatalog {
             keywords: ["export", "import", "restore", "migrate", "raycast"]),
         .init(
             .backupExport, "Export Backup",
-            keywords: ["save", "tinycast file", "archive"]),
+            keywords: ["save", "\(AppIdentity.backupExtension) file", "archive"]),
         .init(
             .backupImport, "Backup File",
-            keywords: ["restore", "choose", "tinycast file"]),
+            keywords: ["restore", "choose", "\(AppIdentity.backupExtension) file"]),
         .init(
             .backupImportFromRaycast, "Raycast Export",
             keywords: ["migrate", "rayconfig", "passphrase"])
@@ -528,13 +528,8 @@ enum SettingsSearchCatalog {
             pane: .about,
             keywords: ["version", "licence", "license", "credits"]),
         .init(
-            .aboutAbout, "Check for Updates",
-            keywords: ["version", "upgrade", "release"]),
-        .init(
             group: .aboutLinks, "Links",
-            keywords: ["github", "source", "issues", "website"]),
-        .init(
-            .aboutLinks, "Support",
-            keywords: ["donate", "sponsor", "funding"])
-    ]
+            keywords: ["github", "source", "issues", "website"])
+    ] + (UpdateSource.current.allowsUpdates(on: ReleaseChannel(bundleID: Bundle.main.bundleIdentifier))
+        ? [.init(.aboutAbout, "Check for Updates", keywords: ["version", "upgrade", "release"])] : [])
 }

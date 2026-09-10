@@ -1,14 +1,14 @@
 import SwiftUI
 
 @main
-struct TinycastApp: App {
+struct LauncherApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
     // `@AppStorage` republishes only on change, avoiding a scene ⇄ binding loop.
     @AppStorage(SettingsKey.showInMenuBar) private var showInMenuBar = true
     @AppStorage(SettingsKey.calendarMenuBarDisplay)
     private var calendarMenuBarDisplay = CalendarMenuBarDisplay.disabled.rawValue
 
-    // Channel-aware: "Tinycast", "Tinycast Dev", or "Tinycast Beta".
+    // Channel-aware: "the app", "the app Dev", or "the app Beta".
     private let appName = Bundle.main.appDisplayName
 
     /// Two independent items: one preference each, no state either can read off the other.
@@ -53,8 +53,10 @@ struct TinycastApp: App {
             Button(String(localized: "About \(appName)", bundle: .appLanguage)) {
                 AppCore.shared.settingsCoordinator.showAbout()
             }
-            Button(String(localized: "Check for Updates…", bundle: .appLanguage)) {
-                AppCore.shared.updateCoordinator.checkForUpdates()
+            if AppCore.shared.updateCoordinator.isEnabled {
+                Button(String(localized: "Check for Updates…", bundle: .appLanguage)) {
+                    AppCore.shared.updateCoordinator.checkForUpdates()
+                }
             }
         }
         CommandGroup(replacing: .appSettings) {

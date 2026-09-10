@@ -15,7 +15,7 @@ struct KeychainSecretStore: Sendable {
     static let mcpSecrets = KeychainSecretStore(scope: "mcp-secrets")
 
     init(scope: String, bundleIdentifier: String? = Bundle.main.bundleIdentifier) {
-        service = "\(bundleIdentifier ?? "com.tinycast.app").\(scope)"
+        service = "\(bundleIdentifier ?? AppIdentity.bundleIdentifier).\(scope)"
     }
 
     func secret(for account: UUID) throws -> String? {

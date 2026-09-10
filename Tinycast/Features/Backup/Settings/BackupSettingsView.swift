@@ -48,7 +48,7 @@ struct BackupSettingsView: View {
                     }
                 } label: {
                     SettingsRowTitle(.backupExport, "Export Backup")
-                    Text("Choose what to include, then save it as a single .tinycast file.")
+                    Text("Choose what to include, then save it as a single .\(AppIdentity.backupExtension) file.")
                 }
                 BackupCategorySelection(selection: $exportSelection)
                 if let backupStatus { statusRow(backupStatus) }
@@ -161,7 +161,7 @@ struct BackupSettingsView: View {
 
     private var backupFileSubtitle: String {
         guard let name = backupFile?.lastPathComponent else {
-            return String(localized: "Choose a .tinycast file exported from Tinycast.", bundle: .appLanguage)
+            return String(localized: "Choose a .\(AppIdentity.backupExtension) file exported from \(AppIdentity.name).", bundle: .appLanguage)
         }
         return openedManifest == nil ? String(localized: "\(name) — couldn't be read", bundle: .appLanguage) : name
     }

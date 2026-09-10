@@ -19,7 +19,7 @@ protocol ExtensionRuntimeDelegate: AnyObject {
 
 /// The one `JSContext` a command runs in; every touch is on `queue`, only values cross.
 final class ExtensionRuntime: @unchecked Sendable {
-    private let queue = DispatchQueue(label: "com.tinycast.extensions.js", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "\(AppIdentity.bundleIdentifier).extensions.js", qos: .userInitiated)
     private var context: JSContext?
     private var timers: [String: DispatchSourceTimer] = [:]
     private let nodeShims = ExtensionNodeShims()

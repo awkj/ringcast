@@ -1921,16 +1921,6 @@
       "executableName": null
     },
     {
-      "key": "command:support",
-      "kind": "command",
-      "name": "Support Tinycast",
-      "strongNames": [],
-      "translations": [],
-      "ownerName": null,
-      "bundleID": null,
-      "executableName": null
-    },
-    {
       "key": "command:quit",
       "kind": "command",
       "name": "Quit Tinycast",

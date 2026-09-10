@@ -9,9 +9,9 @@ struct SymbolCategory: Identifiable, Hashable, Sendable {
         String(localized: String.LocalizationValue(title), bundle: .appLanguage)
     }
 
-    static let suggested = SymbolCategory(id: "tinycast.suggested", title: "Suggested")
-    static let all = SymbolCategory(id: "tinycast.all", title: "All Symbols")
-    static let bundled = SymbolCategory(id: "tinycast.bundled", title: "Tinycast")
+    static let suggested = SymbolCategory(id: "\(AppIdentity.slug).suggested", title: "Suggested")
+    static let all = SymbolCategory(id: "\(AppIdentity.slug).all", title: "All Symbols")
+    static let bundled = SymbolCategory(id: "\(AppIdentity.slug).bundled", title: "\(AppIdentity.name)")
 }
 
 /// Read from `CoreGlyphs.bundle` at runtime; every read is optional, with a curated fallback.

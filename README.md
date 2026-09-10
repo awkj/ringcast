@@ -1,4 +1,13 @@
-# Tinycast
+# RingCast
+
+Application identity is configured in [`Config/AppIdentity.json`](Config/AppIdentity.json).
+After changing it, run `node Scripts/sync-identity.mjs`; see [identity.md](docs/identity.md).
+
+Personal fork of [Tinycast](https://github.com/abue-ammar/tinycast), maintained by
+[awkj](https://github.com/awkj). The app is `RingCast.app` (`io.github.awkj.ringcast`); Debug builds are
+`RingCast Dev.app` (`io.github.awkj.ringcast.dev`). Software updates are disabled and no update repository is configured.
+Use the [local build instructions](docs/development.md#build--run) for RingCast; the upstream
+download, Homebrew and community links below refer to the original Tinycast project.
 
 **A tiny, fully native macOS launcher. One hotkey, everything you reach for all day, under 100 MB of
 RAM.**
@@ -18,18 +27,15 @@ RAM.**
     <img alt="License: AGPL-3.0"
          src="https://img.shields.io/badge/License-AGPL--3.0-3DA639?style=flat"></a>
   <a href="https://discord.gg/v2Eeb4QQy3">
-    <img alt="Join the Tinycast Discord"
+    <img alt="Join the RingCast Discord"
          src="https://img.shields.io/badge/Discord-Join-5865F2?style=flat&logo=discord&logoColor=white"></a>
-  <a href="https://buy.polar.sh/polar_cl_NDVFC20DKQpLcNawsh97QzbARBXD3WNn8v35R0mbJmT">
-    <img alt="Support Tinycast"
-         src="https://img.shields.io/badge/Support-Tip%20the%20dev-EA4AAA?style=flat&logo=polar&logoColor=white"></a>
 </p>
 
 SwiftUI and AppKit, **zero third-party dependencies**, no Electron and no telemetry. It also **runs
 real Raycast extensions**, rendered as native SwiftUI. Free, open source, and staying that way.
 
 The native interface supports **English and Simplified Chinese**. Choose System, English or
-简体中文 in Tinycast Settings → General → Appearance → Language (below Theme). The interface
+简体中文 in RingCast Settings → General → Appearance → Language (below Theme). The interface
 updates immediately, without restarting or clearing your open views.
 Built-in commands remain searchable by their English names. Extension-authored content
 keeps the language supplied by the extension.
@@ -37,18 +43,7 @@ keeps the language supplied by the extension.
 For anything private, email [iabueammar@gmail.com](mailto:iabueammar@gmail.com).
 
 <p align="center">
-  <img src="docs/screenshot.png" alt="Tinycast command palette" width="720">
-</p>
-
-## Support
-
-Tinycast is **free, and it stays that way**. If it earns a place in your daily flow, a one-off tip helps
-keep it actively maintained. GitHub Sponsors isn't available in my country, so please support here:
-
-<p align="center">
-  <a href="https://buy.polar.sh/polar_cl_NDVFC20DKQpLcNawsh97QzbARBXD3WNn8v35R0mbJmT">
-    <img alt="Support Tinycast" width="188" height="44" src="docs/support-button.svg"></a><br>
-  <sub>Payments are handled securely by <a href="https://polar.sh">Polar.sh</a>.</sub>
+  <img src="docs/screenshot.png" alt="RingCast command palette" width="720">
 </p>
 
 ## Features
@@ -100,24 +95,24 @@ Then run the one line that matches your Mac:
 Not sure which you have? **Apple menu → About This Mac.** Homebrew checks too, and refuses the
 wrong one.
 
-Want early builds? `brew install --cask tinycast@beta` puts `Tinycast Beta.app` beside the stable
+Want early builds? `brew install --cask tinycast@beta` puts `RingCast Beta.app` beside the stable
 app, with its own settings and permissions. Apple silicon, macOS 26+.
 
 Homebrew clears the macOS quarantine flag on every install and update, so there is nothing else to
 run. Downloading a DMG from [Releases](https://github.com/abue-ammar/tinycast/releases) instead?
-Tinycast is self-signed, so clear the flag once:
-`xattr -dr com.apple.quarantine "/Applications/Tinycast.app"`.
+RingCast is self-signed, so clear the flag once:
+`xattr -dr com.apple.quarantine "/Applications/RingCast.app"`.
 
 ## Permissions
 
-**Accessibility** — needed when Tinycast pastes or expands text into another app, and the only
+**Accessibility** — needed when RingCast pastes or expands text into another app, and the only
 permission snippet keyword expansion needs. You're prompted when you first use a feature that needs
 it; grant access in **System Settings → Privacy & Security → Accessibility**. Snippets ship
 disabled, and keystrokes are matched locally, never stored and never sent anywhere.
 
 ## Using it
 
-1. Open **Settings → General** and record a global shortcut to summon Tinycast.
+1. Open **Settings → General** and record a global shortcut to summon RingCast.
 2. Press it anywhere → the palette floats in. Type to filter, **↵** to launch.
 3. **Tab** switches between Apps and Clipboard; **↑/↓** move, **Esc** dismisses.
 4. **Settings → Shortcuts** — search an app or custom command and record a global shortcut.

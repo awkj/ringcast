@@ -79,7 +79,7 @@ struct AIConnection: Codable, Equatable, Identifiable, Sendable {
     func capabilities(for model: String) -> AIModelCapabilities {
         AIModelCapabilities(
             images: provider != .openRouter || visionModels.contains(model),
-            // Only the two shapes whose bodies Tinycast writes; a gateway bills the upload first.
+            // Only the two shapes whose bodies the app writes; a gateway bills the upload first.
             documents: provider == .openAI || provider == .anthropic,
             webSearch: provider == .openRouter, tools: true)
     }

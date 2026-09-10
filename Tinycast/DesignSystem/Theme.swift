@@ -12,6 +12,8 @@ enum Theme {
         static let xxl: CGFloat = 20
         /// Calculator answer card's roomier vertical breathing room.
         static let xxxl: CGFloat = 28
+        static let launcherInset: CGFloat = 14
+        static let launcherIconGap: CGFloat = 14
         /// Gap under a category header, shared by every palette list's `SectionHeader`.
         static let sectionHeaderBottom: CGFloat = 4
         /// Clearance under the last message, so its actions row belongs to it, not to the footer.
@@ -24,6 +26,8 @@ enum Theme {
 
     enum Radius {
         static let panel: CGFloat = 26
+        static let launcherPanel: CGFloat = 18
+        static let launcherRow: CGFloat = 6
         static let row: CGFloat = 10
         static let menu: CGFloat = 6
         /// Hover highlight behind a popover menu row.
@@ -51,6 +55,7 @@ enum Theme {
 
     enum Size {
         static let panelWidth: CGFloat = 750
+        static let launcherWidth: CGFloat = 720
         static let panelHeight: CGFloat = 475
         /// Opening size on a first run and the floor: below it the title bar's own parts collide.
         static let noteWindow = CGSize(width: 440, height: 180)
@@ -88,6 +93,10 @@ enum Theme {
         static let bottomBarHeight: CGFloat = 52
         /// A `BarButton`'s hover capsule, shared by the footer group and the header's filter.
         static let barButtonHeight: CGFloat = 28
+        static let launcherRowHeight: CGFloat = 44
+        static let launcherIcon: CGFloat = 18
+        static let launcherShortcut: CGFloat = 32
+        static let launcherFooterHeight: CGFloat = 28
         static let rowIcon: CGFloat = 24
         static let keyCap: CGFloat = 18
         /// Settings shortcut-recorder keycap — smaller than the palette's `keyCap` chip.
@@ -109,6 +118,7 @@ enum Theme {
         static let compactKeyCap: CGFloat = 15
         static let heroKeyCap: CGFloat = 22
         static let menuButton: CGFloat = 36
+        static let settingsButtonIcon: CGFloat = 16
         static let noteGlyph: CGFloat = 16
         static let noteEmptyGlyph: CGFloat = 28
         /// Hit target for a chat message footer glyph; its caption symbol floats inside it.
@@ -192,7 +202,7 @@ enum Theme {
         /// The confirmation HUD's width ceiling, and its distance above the screen bottom.
         static let hudMaxWidth: CGFloat = 420
         static let hudEdgeOffset: CGFloat = 48
-        /// Tinycast's own dialog: fixed width, height measured from the SwiftUI content.
+        /// the app's own dialog: fixed width, height measured from the SwiftUI content.
         static let dialogWidth: CGFloat = 420
         /// A dialog's leading glyph, larger than a row icon: it carries the subject.
         static let dialogIcon: CGFloat = 32
@@ -248,6 +258,14 @@ enum Theme {
         @MainActor static let searchFieldNSFont = NSFont.systemFont(
             ofSize: searchFieldSize, weight: .regular)
         static let headerIcon = Font.system(size: 18, weight: .medium)
+        static let launcherSearchSize: CGFloat = 22
+        static let launcherSearch = Font.system(size: launcherSearchSize, weight: .regular)
+        @MainActor static let launcherSearchNSFont = NSFont.systemFont(
+            ofSize: launcherSearchSize, weight: .regular)
+        static let launcherTitle = Font.system(size: 17, weight: .regular)
+        static let launcherSubtitle = Font.system(size: 9, weight: .regular)
+        static let launcherShortcut = Font.system(size: 14, weight: .regular)
+        static let launcherFooter = Font.system(size: 11, weight: .regular)
         static let rowTitle = Font.body
         static let rowTrailing = Font.callout
         static let sectionHeader = Font.subheadline.weight(.medium)
@@ -289,6 +307,13 @@ enum Theme {
 
         /// The ramp's inverse: the scrim darkens the dark surface and lightens the light one.
         static let panelScrim = adaptive(dark: .srgbInk(0, alpha: 0.40), light: .srgbInk(1, alpha: 0.55))
+        static let launcherSelection = adaptive(
+            dark: .srgbInk(1, alpha: 0.10),
+            light: NSColor(srgbRed: 0.094, green: 0.427, blue: 0.812, alpha: 1))
+        static let launcherText = adaptive(dark: .white, light: .srgbInk(0.13, alpha: 1))
+        static let launcherPath = ramp(dark: 0.40, light: 0.30)
+        static let launcherSelectedText = adaptive(dark: .white, light: .white)
+        static let launcherSeparator = ramp(dark: 0, light: 0.08)
         /// Selection fill, shared by every list so they look identical.
         static let selection = ramp(dark: 0.10, light: 0.09)
         /// Mouse hover: a fainter layer, visually distinct from selection.

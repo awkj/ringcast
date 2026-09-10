@@ -53,7 +53,7 @@ struct ExtensionCommandView: View {
                         message:
                             String(
                                 localized:
-                                    "This command renders \(type), which Tinycast doesn't support yet. See docs/extensions.md.",
+                                    "This command renders \(type), which \(AppIdentity.name) doesn't support yet. See docs/extensions.md.",
                                 bundle: .appLanguage
                             )
                     )

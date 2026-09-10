@@ -11,7 +11,7 @@ enum ExtensionStoreResponse {
         components?.queryItems = [
             URLQueryItem(name: "q", value: query),
             URLQueryItem(name: "page", value: String(page)),
-            // Tinycast is macOS-only, so windows-only extensions are noise in the results.
+            // the app is macOS-only, so windows-only extensions are noise in the results.
             URLQueryItem(name: "platform", value: "macos")
         ]
         return components?.url

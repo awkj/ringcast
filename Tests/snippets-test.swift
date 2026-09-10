@@ -67,7 +67,7 @@ struct SnippetsTests {
             "Raycast import trims keywords and normalizes blanks",
             imported[0].keyword == "!email" && imported[2].keyword == nil)
         check(
-            "Raycast import uses safe Tinycast defaults",
+            "Raycast import uses safe KiKi defaults",
             imported.allSatisfy { $0.isEnabled && !$0.showsConfirmation })
     }
 
@@ -195,13 +195,13 @@ struct SnippetsTests {
 
         let channelRoot = root.appendingPathComponent("channels", isDirectory: true)
         let stable = SnippetRepository(
-            bundleIdentifier: "com.tinycast.app",
+            bundleIdentifier: "io.github.awkj.kiki",
             applicationSupportRoot: channelRoot)
         let beta = SnippetRepository(
-            bundleIdentifier: "com.tinycast.app.beta",
+            bundleIdentifier: "io.github.awkj.kiki.beta",
             applicationSupportRoot: channelRoot)
         let dev = SnippetRepository(
-            bundleIdentifier: "com.tinycast.app.dev",
+            bundleIdentifier: "io.github.awkj.kiki.dev",
             applicationSupportRoot: channelRoot)
 
         check(
@@ -524,7 +524,7 @@ struct SnippetsTests {
                 try? Data(text.utf8).write(to: fileURL, options: .atomic)
             }))
         var boundaryEdit = boundaryRecord.snippet
-        boundaryEdit.text = "Tinycast edit"
+        boundaryEdit.text = "KiKi edit"
         do {
             _ = try racingRepository.save(
                 boundaryEdit,
@@ -770,7 +770,7 @@ struct SnippetsTests {
                 && restoredItems?[0].data(forType: customType) == Data([0, 1, 2, 3])
                 && restoredItems?[1].data(forType: secondType) == Data([4, 5, 6]))
         check(
-            "pasteboard restoration leaves no Tinycast marker on the restored clipboard",
+            "pasteboard restoration leaves no KiKi marker on the restored clipboard",
             restoredItems?.allSatisfy {
                 !$0.types.contains(ClipboardManager.internalType)
             } == true)
@@ -1283,7 +1283,7 @@ struct SnippetsTests {
             "a template that reads only the clipboard declares no arguments",
             SnippetTemplateEngine.declaredArguments(in: "https://x.dev/?q={clipboard}").isEmpty)
 
-        // Raycast's snippet spelling resolves like Tinycast's.
+        // Raycast's snippet spelling resolves like KiKi's.
         let child = record("/tmp/ph-child.md", Snippet(name: "Child", text: "nested"))
         let byName = record("/tmp/ph-name.md", Snippet(name: "ByName", text: "{snippet name=\"Child\"}"))
         let byColon = record("/tmp/ph-colon.md", Snippet(name: "ByColon", text: "{snippet:Child}"))
@@ -1487,7 +1487,7 @@ struct SnippetsTests {
             hasCommandOrControl: false,
             isResetKey: false,
             isDeleteBackward: false)
-        check("synthetic Tinycast events are classified as ignored", syntheticInput == .ignored)
+        check("synthetic KiKi events are classified as ignored", syntheticInput == .ignored)
         _ = policy.process(.text("!du"), at: base.addingTimeInterval(2))
         _ = policy.process(syntheticInput, at: base.addingTimeInterval(2.5))
         let afterSynthetic = policy.process(.text("p"), at: base.addingTimeInterval(3))
@@ -1699,7 +1699,7 @@ struct SnippetsTests {
             eventUserData: 123,
             secureEventInputEnabled: false)
         check(
-            "real user input invalidates pending automatic delivery while Tinycast events do not",
+            "real user input invalidates pending automatic delivery while KiKi events do not",
             activityCount == 1)
 
         listener.start(onUserActivity: { activityCount += 1 }, onMatch: { _, _, _, _ in })
@@ -1830,9 +1830,9 @@ private final class StubPasteboard: PasteboardAccess {
 
 @MainActor
 final class ClipboardManager {
-    static let internalType = NSPasteboard.PasteboardType("com.tinycast.internal")
-    func prepareForTinycastPasteboardMutation() {}
-    func synchronizeAfterTinycastPasteboardMutation(changeCount: Int) {}
+    static let internalType = NSPasteboard.PasteboardType("\(AppIdentity.bundleIdentifier).internal")
+    func prepareForInternalPasteboardMutation() {}
+    func synchronizeAfterInternalPasteboardMutation(changeCount: Int) {}
 }
 
 @MainActor
@@ -1846,7 +1846,7 @@ enum Permissions {
 }
 
 enum Paster {
-    static let tinycastEventTag: Int64 = 0x54494E59
+    static let internalEventTag: Int64 = 0x54494E59
     @MainActor static func postCommandV(toPid pid: pid_t? = nil) {}
     @MainActor static func postCommandC(toPid pid: pid_t? = nil) {}
 }

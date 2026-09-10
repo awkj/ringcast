@@ -90,7 +90,7 @@ struct SnippetRepository: Sendable {
             case .fileNotFound(let fileURL):
                 return "The snippet file no longer exists. (\(fileURL.lastPathComponent))"
             case .invalidFileLocation(let fileURL):
-                return "The snippet file is outside this Tinycast channel. (\(fileURL.path))"
+                return "The snippet file is outside this \(AppIdentity.name) channel. (\(fileURL.path))"
             case .io(let fileURL, let message):
                 return "Could not access \(fileURL.path): \(message)"
             }
@@ -105,7 +105,7 @@ struct SnippetRepository: Sendable {
     private let mutationHooks: MutationHooks
 
     init(
-        bundleIdentifier: String = Bundle.main.bundleIdentifier ?? "com.tinycast.app",
+        bundleIdentifier: String = Bundle.main.bundleIdentifier ?? AppIdentity.bundleIdentifier,
         applicationSupportRoot: URL = FileManager.default.urls(
             for: .applicationSupportDirectory,
             in: .userDomainMask

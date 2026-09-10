@@ -1,3 +1,4 @@
+import { appIdentity } from "./app-identity.generated.js";
 // Globals JavaScriptCore doesn't ship that extension bundles (and React's scheduler) assume.
 
 import { hostCall, hostRaw, log } from "./host.js";
@@ -190,7 +191,7 @@ class TinycastResponse {
     return JSON.parse(await this.text());
   }
   async blob() {
-    throw new Error("Response.blob() is not supported in Tinycast extensions.");
+    throw new Error(`Response.blob() is not supported in ${appIdentity.name} extensions.`);
   }
 }
 

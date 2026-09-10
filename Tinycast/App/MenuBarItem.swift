@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Tinycast's own menu-bar item. It carries no feature state, so no feature can hide or reshape it.
+/// the app's own menu-bar item. It carries no feature state, so no feature can hide or reshape it.
 struct MenuBarLabel: View {
     @Environment(\.locale) private var localizationLocale
     let appName: String
@@ -27,8 +27,9 @@ struct MenuBarMenu: View {
             }
         }
         Divider()
-        Button("Check for Updates...") { AppCore.shared.updateCoordinator.checkForUpdates() }
-        Button("Support \(appName)...") { AppCore.shared.supportCoordinator.showSupport() }
+        if AppCore.shared.updateCoordinator.isEnabled {
+            Button("Check for Updates...") { AppCore.shared.updateCoordinator.checkForUpdates() }
+        }
         Button("Settings...") { AppCore.shared.settingsCoordinator.showSettings() }
             .keyboardShortcut(",")
         Divider()

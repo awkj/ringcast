@@ -1,6 +1,6 @@
 import Foundation
 
-/// How far ahead Tinycast reads, so the query's length and every sentence naming it agree.
+/// How far ahead the app reads, so the query's length and every sentence naming it agree.
 enum MeetingSpan: Sendable {
     case today
     case todayAndTomorrow

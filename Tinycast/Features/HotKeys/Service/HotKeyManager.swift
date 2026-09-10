@@ -261,7 +261,7 @@ final class HotKeyManager {
         persist(set, key: key)
     }
 
-    /// Drops bindings whose item is gone, deleted while Tinycast wasn't running.
+    /// Drops bindings whose item is gone, deleted while the app wasn't running.
     private func prune(key: String, live: Set<UUID>, action: (UUID) -> HotKeyAction) {
         let stored = Set(boundIDs(key: key))
         for id in stored.subtracting(live) {

@@ -12,7 +12,7 @@ struct CameraStage: View {
         case .live(let capture):
             CameraFeed(session: capture, mirrored: mirrored)
         case .denied:
-            unavailable(String(localized: "Tinycast has no access to the camera.", bundle: .appLanguage))
+            unavailable(String(localized: "\(AppIdentity.name) has no access to the camera.", bundle: .appLanguage))
         case .noCamera:
             unavailable(String(localized: "No camera on this Mac.", bundle: .appLanguage))
         }
@@ -31,7 +31,7 @@ struct CameraStage: View {
     }
 }
 
-/// The one place `AVCaptureVideoPreviewLayer` is hosted; everything around it is Tinycast's own.
+/// The one place `AVCaptureVideoPreviewLayer` is hosted; everything around it is the app's own.
 private struct CameraFeed: NSViewRepresentable {
     let session: AVCaptureSession
     let mirrored: Bool

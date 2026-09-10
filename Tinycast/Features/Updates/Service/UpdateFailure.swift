@@ -2,6 +2,7 @@ import Foundation
 
 /// Everything an update can fail at, phrased for the window that reports it.
 enum UpdateFailure: LocalizedError, Equatable {
+    case disabled
     case downloadFailed(String)
     case extractFailed(String)
     case noAppInArchive
@@ -13,18 +14,20 @@ enum UpdateFailure: LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
+        case .disabled:
+            return String(localized: "Software updates are disabled.", bundle: .appLanguage)
         case .downloadFailed(let detail):
             return String(localized: "The download did not finish. \(detail)", bundle: .appLanguage)
         case .extractFailed(let detail):
             return String(localized: "The downloaded archive could not be expanded. \(detail)", bundle: .appLanguage)
         case .noAppInArchive:
-            return String(localized: "The downloaded archive does not contain Tinycast.", bundle: .appLanguage)
+            return String(localized: "The downloaded archive does not contain \(AppIdentity.name).", bundle: .appLanguage)
         case .quarantined:
             return String(
-                localized: "macOS quarantined the downloaded app and Tinycast could not clear the flag.",
+                localized: "macOS quarantined the downloaded app and \(AppIdentity.name) could not clear the flag.",
                 bundle: .appLanguage)
         case .bundleMismatch:
-            return String(localized: "The downloaded app is not this build of Tinycast.", bundle: .appLanguage)
+            return String(localized: "The downloaded app is not this build of \(AppIdentity.name).", bundle: .appLanguage)
         case .identityMismatch:
             return String(
                 localized: "The downloaded app is not signed by the identity this copy was signed with.",
@@ -32,7 +35,7 @@ enum UpdateFailure: LocalizedError, Equatable {
         case .versionMismatch(let expected, let found):
             return String(localized: "The downloaded app is version \(found), not \(expected).", bundle: .appLanguage)
         case .replaceFailed(let detail):
-            return String(localized: "Tinycast could not be replaced. \(detail)", bundle: .appLanguage)
+            return String(localized: "\(AppIdentity.name) could not be replaced. \(detail)", bundle: .appLanguage)
         }
     }
 

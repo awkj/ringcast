@@ -90,7 +90,7 @@ final class CalendarCoordinator {
                     message:
                         String(
                             localized:
-                                "Tinycast reads \(String(localized: String.LocalizationValue(span.possessivePhrase), bundle: .appLanguage)) events to find join links. Nothing leaves this Mac.",
+                                "\(AppIdentity.name) reads \(String(localized: String.LocalizationValue(span.possessivePhrase), bundle: .appLanguage)) events to find join links. Nothing leaves this Mac.",
                             bundle: .appLanguage
                         ),
                     symbol: "calendar", confirmTitle: String(localized: "Continue", bundle: .appLanguage), tone: .neutral,
@@ -186,7 +186,7 @@ final class CalendarCoordinator {
         AppEntry(
             id: meeting.entryID, name: meeting.title,
             url: URL(
-                string: "tinycast://meeting/"
+                string: "\(AppIdentity.urlScheme)://meeting/"
                     + (meeting.id.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
                         ?? ""))!,
             bundleID: nil, kind: .meeting,

@@ -20,13 +20,13 @@ provider protocol and the connections behind it.
   backups — an import must never arm it.
 - **One funnel, whichever way an action started.** A shortcut and a launcher row both land on
   `QuickActionCoordinator.run(_:)`, which reads `paletteCoordinator.targetApp` **before** hiding the
-  palette — once the palette is gone, the frontmost app is Tinycast, and the action would read its
+  palette — once the palette is gone, the frontmost app is RingCast, and the action would read its
   own window. Hiding there rather than at each caller is what keeps the two paths identical.
 - **Enabling is consent, and it is the only place Accessibility is requested.** The toggle confirms
   through `DialogController` first and then calls `Permissions.ensureAccessibility()`, the pattern
   `SnippetCoordinator.setSnippetsEnabled` established. Everything else — a shortcut press, a
   delivery — uses `isAccessibilityTrusted()` and degrades to a HUD.
-- **Tinycast is never the target.** `QuickActionRunner.selection(in:using:)` refuses our own bundle
+- **RingCast is never the target.** `QuickActionRunner.selection(in:using:)` refuses our own bundle
   identifier, and `TextInjector.targetAcceptsInjection` refuses it again before every event post,
   along with anything raised while Secure Event Input is up. A shortcut pressed with Settings
   frontmost, or in a password field, does nothing and says so.
@@ -108,7 +108,7 @@ replaced once a download the reader never saw has finished.
 
 ## The panel
 
-`QuickActionPanel` is Tinycast's **fourth borderless surface**, beside the dialog, the notes panel
+`QuickActionPanel` is RingCast's **fourth borderless surface**, beside the dialog, the notes panel
 and the join preview. It takes the same recipe — `panelScrim`, then `VisualEffectView`, then the
 clip — and sits at `.floating` like the join preview, so a failure report still lands on top of it.
 Its buttons are the system's own — `Button` with `.borderedProminent` on Replace — not a copy of
@@ -127,8 +127,8 @@ reused from chat; neither takes palette state.
 
 The body is a `ScrollView` with its height **set** rather than capped: a scroll view has no ideal
 height, so `NSHostingView.fittingSize` measures it as nothing and the body collapses to a slot. The
-content's ideal height is measured with `fixedSize` + `onGeometryChange`, the way the Support and
-Updates windows size themselves.
+content's ideal height is measured with `fixedSize` + `onGeometryChange`, the way the Updates
+window sizes itself.
 
 The scroll view owns the **whole** panel and the bars are overlays on top, so a result dissolves
 beneath them rather than stopping at a line. The mask is clear for each bar's height, ramps over
@@ -180,7 +180,7 @@ The Accessibility tier replaces the live selection atomically, under the five-ru
 in [snippets.md](snippets.md#text-delivery-and-pasteboard-safety) — Quick Actions simply enter it with
 no keyword, so rule 2 never applies. The event tiers behind it type or paste over the selection, which
 every app treats as replacing it — but that is the target app's behaviour rather than something
-Tinycast asserts, so it is the part worth checking by hand.
+RingCast asserts, so it is the part worth checking by hand.
 
 **A replacement that never lands says so, and keeps the reply.** Every tier can decline, and a shortcut
 that quietly did nothing is indistinguishable from a shortcut that is not bound. `DeliveryCompletion`
@@ -197,9 +197,9 @@ failure handler, so automatic expansion stays silent as before.
 - Replace mode, with a slow route selected: the message pill says `Fixing Grammar…` with a blue
   spinner while the model works, and the result message takes its place.
 - Run one from the launcher (⌘Space → "Fix Grammar") with text selected behind it: the palette
-  closes and the selection in the displaced app is what gets acted on, not Tinycast's own field.
+  closes and the selection in the displaced app is what gets acted on, not RingCast's own field.
 - Uncheck an action's launcher checkbox: the row leaves ⌘Space, and its shortcut still works.
-- Press a shortcut with Tinycast's own Settings window frontmost: refused, with a HUD.
+- Press a shortcut with RingCast's own Settings window frontmost: refused, with a HUD.
 - Press one in a password field: refused.
 - Summarize a long selection: the panel streams, grows without the title drifting, and scrolls past
   `quickActionPanelBody`.

@@ -29,6 +29,16 @@ The command palette is a borderless floating `NSPanel` hosting SwiftUI; see
   source it applied, so a switch made since, by the user or another app, stands. Never applied globally:
   the panel does not activate, so a global switch would land on whichever app is still frontmost.
 
+## Appearance and size
+
+The light launcher is 720×475pt; other expanded modes and Dark use 750×475pt. The compact height
+remains 64pt. `PaletteWindowController` resolves the width for placement, restoration and drag guides;
+mode or appearance changes ask it to resize at the existing top-left anchor. The search field keeps
+its structural identity while its font and available width follow the appearance. The light launcher
+places version and keyboard hints in a transparent bottom overlay. The left `⌘, Settings` hint is
+clickable and opens Settings through the same coordinator as the panel's `⌘,` shortcut. Its trailing
+content padding lets the final row scroll above the hints.
+
 ## Summoning
 
 ```
@@ -277,7 +287,7 @@ rows land in the half-open interval `(minY, maxY]`: the topmost row is exactly `
 excludes, while that same value is the `minY` of the display stacked above. `contains` would therefore
 hand a pointer parked at the top of one display to its neighbour. `NSMouseInRect` exists for this.
 
-## The placeholder is Tinycast's, not the field's
+## The placeholder is RingCast's, not the field's
 
 The search field is a SwiftUI `TextField` with **no `prompt`**; `RootPaletteView` draws the
 placeholder itself as a leading-aligned background `Text`.

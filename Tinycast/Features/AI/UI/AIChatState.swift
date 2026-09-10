@@ -311,10 +311,10 @@ enum ChatAttachmentRefusal: Equatable, Sendable {
         case .textTooLong:
             let limit = AIAttachmentBudget.maxInlinedTextBytes / 1_024
             return String(localized: "That text file is too big to attach — \(limit) KB is the limit.", bundle: .appLanguage)
-        case .undecodable: return String(localized: "That file isn't text Tinycast can read.", bundle: .appLanguage)
+        case .undecodable: return String(localized: "That file isn't text \(AppIdentity.name) can read.", bundle: .appLanguage)
         case .unreadable: return String(localized: "That file could not be read.", bundle: .appLanguage)
         case .unsupported(let ext):
-            return String(localized: "Tinycast can attach images, PDFs and text files, not .\(ext) files.", bundle: .appLanguage)
+            return String(localized: "\(AppIdentity.name) can attach images, PDFs and text files, not .\(ext) files.", bundle: .appLanguage)
         case .imagesUnsupported: return String(
             localized: "This model can't read images. Switch model to attach one.",
             bundle: .appLanguage)

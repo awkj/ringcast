@@ -1,3 +1,4 @@
+import { appIdentity } from "../app-identity.generated.js";
 // The non-visual half of @raycast/api: clipboard, storage, cache, preferences, app lookup and the
 // window/feedback calls. Everything here is an async host call answered by Swift on the main actor.
 
@@ -14,7 +15,7 @@ export function configureSystem(info) {
 
 export function unsupported(what) {
   return Promise.reject(
-    new Error(`${what} is not supported in Tinycast extensions yet. See docs/extensions.md.`),
+    new Error(`${what} is not supported in ${appIdentity.name} extensions yet. See docs/extensions.md.`),
   );
 }
 

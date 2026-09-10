@@ -3,7 +3,7 @@ import AppKit
 @MainActor
 final class ClipboardManager {
     /// Marker we attach to the pasteboard when *we* write to it, so polling ignores our own pastes.
-    static let internalType = NSPasteboard.PasteboardType("com.tinycast.internal")
+    static let internalType = NSPasteboard.PasteboardType("\(AppIdentity.bundleIdentifier).internal")
 
     /// Longest text captured; bigger copies are skipped, truncation losing the tail.
     static let maxTextLength = 32_000
@@ -86,13 +86,13 @@ final class ClipboardManager {
     }
 
     // Drain first: the real copy must reach history before we overwrite the pasteboard.
-    func prepareForTinycastPasteboardMutation() {
+    func prepareForInternalPasteboardMutation() {
         guard isCapturing else { return }
         poll()
     }
 
     // Load-bearing: a mismatched count means a foreign write the next poll must still see.
-    func synchronizeAfterTinycastPasteboardMutation(changeCount: Int) {
+    func synchronizeAfterInternalPasteboardMutation(changeCount: Int) {
         guard NSPasteboard.general.changeCount == changeCount else { return }
         lastChangeCount = changeCount
     }

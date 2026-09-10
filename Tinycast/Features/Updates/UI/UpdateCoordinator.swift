@@ -33,12 +33,13 @@ final class UpdateCoordinator {
         self.core = core
     }
 
+    var isEnabled: Bool { store.isEnabled }
     var channel: ReleaseChannel { store.channel }
     var runningVersion: String { store.runningVersion?.description ?? "unknown" }
 
     /// A local build has no release stream, so it does not advertise the command either.
     func applyEnabled() {
-        core.appIndex.setCommandsVisible([.checkForUpdates], store.channel.updatesItself)
+        core.appIndex.setCommandsVisible([.checkForUpdates], store.isEnabled)
     }
 
     func focusExisting() -> Bool {
@@ -52,13 +53,9 @@ final class UpdateCoordinator {
 
     // MARK: - Entry points
 
-    /// The manual action: always opens the window and always asks GitHub.
+    /// Disabled builds cannot reach the remote check, even through a saved hotkey.
     func checkForUpdates() {
-        guard store.channel.updatesItself else {
-            stage = .localBuild
-            present()
-            return
-        }
+        guard isEnabled else { return }
         if case .installing = stage {
             present()
             return
@@ -74,13 +71,14 @@ final class UpdateCoordinator {
             } else if answered {
                 stage = .upToDate
             } else {
-                stage = .failed(.downloadFailed(String(localized: "Tinycast could not reach GitHub.", bundle: .appLanguage)))
+                stage = .failed(.downloadFailed(String(localized: "\(AppIdentity.name) could not reach GitHub.", bundle: .appLanguage)))
             }
         }
     }
 
     /// The automatic path: `false` answers that it withheld the prompt, so the store re-offers it.
     func presentIfAvailable(_ release: AvailableRelease) -> Bool {
+        guard isEnabled else { return false }
         switch stage {
         // Already in hand: re-offering would throw away a download or the relaunch it earned.
         case .installing, .readyToRelaunch:
@@ -96,7 +94,7 @@ final class UpdateCoordinator {
     // MARK: - Actions
 
     func install() {
-        guard let release = pendingRelease else { return }
+        guard isEnabled, let release = pendingRelease else { return }
         // Re-asked at the moment of the click, never read from a flag that could have gone stale.
         if let blocker = UpdateReadiness.evaluate(core.currentActivity) {
             stage = .blocked(blocker, release)
@@ -134,7 +132,7 @@ final class UpdateCoordinator {
     }
 
     func retry() {
-        guard let release = pendingRelease else { return }
+        guard isEnabled, let release = pendingRelease else { return }
         stage = .available(release)
     }
 

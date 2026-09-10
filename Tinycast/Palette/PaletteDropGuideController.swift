@@ -9,9 +9,11 @@ final class PaletteDropGuideController {
     private var screenFrame: CGRect = .zero
     private var home: CGPoint = .zero
     private var armed = false
+    private var width: CGFloat = 0
 
     /// Reveal the guides, with `home` the default placement's top-left in screen coordinates.
-    func show(home: CGPoint, screenFrame: CGRect, armed: Bool) {
+    func show(width: CGFloat, home: CGPoint, screenFrame: CGRect, armed: Bool) {
+        self.width = width
         self.home = home
         self.screenFrame = screenFrame
         self.armed = armed
@@ -66,7 +68,7 @@ final class PaletteDropGuideController {
     private var guides: PaletteDropGuideView {
         PaletteDropGuideView(
             topLeft: CGPoint(x: home.x - screenFrame.minX, y: screenFrame.maxY - home.y),
-            width: Theme.Size.panelWidth,
+            width: width,
             armed: armed)
     }
 }

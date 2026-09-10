@@ -13,7 +13,7 @@ enum ExtensionCommandMode: String, Sendable, Codable {
 
     var unsupportedReason: String? {
         self == .menuBar
-            ? "Menu bar commands aren't supported yet — Tinycast only runs view and no-view commands."
+            ? "Menu bar commands aren't supported yet — \(AppIdentity.name) only runs view and no-view commands."
             : nil
     }
 }
@@ -113,7 +113,7 @@ enum ExtensionPreferenceValue: Sendable, Hashable {
                 CFGetTypeID(value) == CFBooleanGetTypeID()
                 ? .bool(value.boolValue) : .number(value.doubleValue)
         case let value as [String: Any]:
-            // Platform-keyed default; Tinycast is macOS-only.
+            // Platform-keyed default; the app is macOS-only.
             guard let macOS = value["macOS"] else { return nil }
             self.init(manifestDefault: macOS)
         default:
@@ -184,7 +184,7 @@ struct ExtensionCommand: Sendable, Hashable, Identifiable {
     }
 }
 
-/// A Raycast extension's `package.json`, reduced to what Tinycast uses.
+/// A Raycast extension's `package.json`, reduced to what the app uses.
 struct ExtensionManifest: Sendable, Hashable {
     let name: String
     let title: String

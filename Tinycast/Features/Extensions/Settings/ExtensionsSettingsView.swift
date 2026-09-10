@@ -72,7 +72,7 @@ struct ExtensionsSettingsView: View {
         .sheet(isPresented: $editingRegistries) {
             ExtensionRegistriesSheet(onClose: { editingRegistries = false })
         }
-        .onReceive(NotificationCenter.default.publisher(for: .tinycastSelectExtension)) { note in
+        .onReceive(NotificationCenter.default.publisher(for: .selectExtension)) { note in
             if let name = note.object as? String { expanded = name }
         }
         .onChange(of: core.extensions.installed.count) { Task { await measureReclaimable() } }
@@ -684,7 +684,7 @@ private struct ExtensionIconRow: View {
                 ? String(
                     localized: "The icon this extension ships.",
                     bundle: .appLanguage) : String(
-                    localized: "Replaced with a Tinycast icon.",
+                    localized: "Replaced with a \(AppIdentity.name) icon.",
                     bundle: .appLanguage)
         ) {
             HStack(spacing: Theme.Spacing.md) {

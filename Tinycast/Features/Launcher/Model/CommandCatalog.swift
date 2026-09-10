@@ -38,6 +38,6 @@ enum CommandCatalog {
     }
 
     nonisolated private static func placeholderURL(_ id: CommandID) -> URL {
-        URL(string: "tinycast://" + id.rawValue.replacingOccurrences(of: ":", with: "/"))!
+        URL(string: "\(AppIdentity.urlScheme)://" + id.rawValue.replacingOccurrences(of: ":", with: "/"))!
     }
 }

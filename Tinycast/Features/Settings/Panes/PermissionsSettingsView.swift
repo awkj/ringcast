@@ -23,7 +23,7 @@ struct PermissionsSettingsView: View {
                     .foregroundStyle(accessibilityTrusted ? Color.green : Color.orange)
                 } label: {
                     SettingsRowTitle(.permissionsAccessibility, "Accessibility")
-                    Text("Lets Tinycast paste a clipboard item into the app you were using.")
+                    Text("Lets \(AppIdentity.name) paste a clipboard item into the app you were using.")
                 }
 
                 LabeledContent {
@@ -44,7 +44,7 @@ struct PermissionsSettingsView: View {
             } header: {
                 SettingsSectionHeader(.permissionsAccessibility)
             } footer: {
-                Text("Access Tinycast needs to work with other apps.")
+                Text("Access \(AppIdentity.name) needs to work with other apps.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -55,7 +55,7 @@ struct PermissionsSettingsView: View {
                         .foregroundStyle(calendarStatus.tint)
                 } label: {
                     SettingsRowTitle(.permissionsCalendars, "Calendars")
-                    Text("Lets Tinycast find the join link for the meeting you are about to be in.")
+                    Text("Lets \(AppIdentity.name) find the join link for the meeting you are about to be in.")
                 }
 
                 LabeledContent {

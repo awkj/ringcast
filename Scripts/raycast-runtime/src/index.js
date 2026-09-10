@@ -1,3 +1,4 @@
+import { appIdentity } from "./app-identity.generated.js";
 // Entry point. Installs the polyfills and the module registry, then exposes `__tinycast` — the only
 // thing Swift calls into.
 
@@ -22,7 +23,7 @@ defineModule("@raycast/api", raycastApi);
 // react-dom only appears in bundles defensively; make the import resolve and the calls explain.
 defineModule("react-dom", {
   render: () => {
-    throw new Error("react-dom is not available — Tinycast renders extensions natively.");
+    throw new Error(`react-dom is not available — ${appIdentity.name} renders extensions natively.`);
   },
   createPortal: (children) => children,
   flushSync: (fn) => fn?.(),

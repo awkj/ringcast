@@ -1,6 +1,6 @@
 import Foundation
 
-/// A guard, not a routine step: an archive Tinycast fetched itself is not quarantined.
+/// A guard, not a routine step: an archive the app fetched itself is not quarantined.
 enum Quarantine {
     private static let attribute = "com.apple.quarantine"
 

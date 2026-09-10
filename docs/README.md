@@ -1,4 +1,4 @@
-# Tinycast documentation
+# RingCast documentation
 
 Start with [`AGENTS.md`](../AGENTS.md) at the repo root — it is the short version, and it links here for
 anything that needs more than a line.
@@ -43,8 +43,7 @@ open with an `## Invariants` section; read it before changing anything in that a
 [backup](features/backup.md) ·
 [Raycast import](features/raycast-import.md) ·
 [Raycast extensions](features/extensions.md) ·
-[updates](features/updates.md) ·
-[support](features/support.md)
+[updates](features/updates.md)
 
 ## Contributing
 

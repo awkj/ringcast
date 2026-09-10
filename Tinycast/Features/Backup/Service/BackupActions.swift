@@ -3,7 +3,7 @@ import UniformTypeIdentifiers
 
 extension UTType {
     /// Not per-channel: a UTI names an interchange format, so Dev must read stable's exports.
-    static let tinycastBackup = UTType(exportedAs: "com.tinycast.backup")
+    static let appBackup = UTType(exportedAs: "\(AppIdentity.bundleIdentifier).backup")
 }
 
 /// The backup flows' entry points, shared by the Settings pane and the commands.
@@ -21,7 +21,7 @@ enum BackupActions {
         var missingImages: Int
     }
 
-    // MARK: - Tinycast native (own file panels; dialogs come from `AppCore`)
+    // MARK: - the app native (own file panels; dialogs come from `AppCore`)
 
     /// The shared save panel; an accessory app must activate first or it opens behind.
     static func chooseSaveLocation(named base: String, type: UTType = .json) -> URL? {
@@ -37,7 +37,7 @@ enum BackupActions {
 
     static func chooseJSONFile() -> URL? { chooseFile(ofType: .json) }
 
-    static func chooseBackupFile() -> URL? { chooseFile(ofType: .tinycastBackup) }
+    static func chooseBackupFile() -> URL? { chooseFile(ofType: .appBackup) }
 
     private static func chooseFile(ofType type: UTType) -> URL? {
         let panel = NSOpenPanel()
@@ -48,7 +48,7 @@ enum BackupActions {
         return panel.url
     }
 
-    // MARK: - Tinycast backups
+    // MARK: - the app backups
 
     /// Composes off-main, then seals — a clipboard history runs to gigabytes.
     static func exportBackup(
@@ -56,7 +56,7 @@ enum BackupActions {
     ) async throws
         -> BackupComposer.Result
     {
-        guard let destination = chooseSaveLocation(named: "Tinycast", type: .tinycastBackup) else {
+        guard let destination = chooseSaveLocation(named: "\(AppIdentity.name)", type: .appBackup) else {
             throw CancellationError()
         }
         let plan = BackupComposer.plan(categories, from: core)

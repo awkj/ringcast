@@ -10,7 +10,7 @@ final class OnboardingCoordinator {
     init(core: AppCore) {
         self.core = core
         window = AppWindowController(
-            title: String(localized: "Welcome to Tinycast", bundle: .appLanguage), contentSize: OnboardingView.windowSize,
+            title: String(localized: "Welcome to \(AppIdentity.name)", bundle: .appLanguage), contentSize: OnboardingView.windowSize,
             activation: core.activationPolicy)
     }
 

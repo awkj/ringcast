@@ -1,5 +1,6 @@
 import AppKit
 
+@MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var terminationRequestInFlight = false
 
@@ -38,6 +39,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         AppCore.shared.handleReopen()
         return true
+    }
+
+    func applicationDockMenu(_ sender: NSApplication) -> NSMenu? {
+        let menu = NSMenu()
+        let search = menu.addItem(
+            withTitle: String(localized: "Search", bundle: .appLanguage),
+            action: #selector(openSearch), keyEquivalent: "")
+        search.target = self
+        let settings = menu.addItem(
+            withTitle: String(localized: "Settings…", bundle: .appLanguage),
+            action: #selector(openSettings), keyEquivalent: "")
+        settings.target = self
+        return menu
+    }
+
+    @objc private func openSearch() {
+        AppCore.shared.paletteCoordinator.showPalette(mode: .launcher)
+    }
+
+    @objc private func openSettings() {
+        AppCore.shared.settingsCoordinator.showSettings()
     }
 
     /// The palette and Settings each close on their own; the agent outlives both.

@@ -100,7 +100,7 @@ struct MCPStdioTests {
         await connection.start()
         expect(
             connection.status.isReady,
-            "a server asking Tinycast for something is declined without derailing the handshake")
+            "a server asking KiKi for something is declined without derailing the handshake")
         connection.stop()
     }
 

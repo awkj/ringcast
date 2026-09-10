@@ -23,4 +23,6 @@ if ! node Scripts/check-settings-search.js; then
     exit 1
 fi
 
+node Scripts/sync-identity.mjs --check || exit 1
+
 echo "✓ lint-clean"

@@ -230,7 +230,7 @@ enum SnippetTemplateEngine {
         case trim
         case percentEncode = "percent-encode"
         case jsonStringify = "json-stringify"
-        /// Opts out of automatic formatting; Tinycast applies none, so it does nothing.
+        /// Opts out of automatic formatting; the app applies none, so it does nothing.
         case raw
     }
 

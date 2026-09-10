@@ -69,19 +69,36 @@
         }
       }
     },
-    " Hyper Key shortcuts are shown in Tinycast with ✦.": {
+    " Hyper Key shortcuts are shown in %@ with ✦.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": " Hyper Key shortcuts are shown in Tinycast with ✦."
+            "value": " Hyper Key shortcuts are shown in %1$@ with ✦."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinycast 用 ✦ 表示 Hyper Key 快捷键。"
+            "value": "%1$@ 用 ✦ 表示 Hyper Key 快捷键。"
+          }
+        }
+      }
+    },
+    " Hyper Key shortcuts are shown in RingCast with ✦.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " Hyper Key shortcuts are shown in RingCast with ✦."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 用 ✦ 表示 Hyper Key 快捷键。"
           }
         }
       }
@@ -205,6 +222,23 @@
         }
       }
     },
+    "%@ Needs Accessibility Access": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ Needs Accessibility Access"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限"
+          }
+        }
+      }
+    },
     "%@ applied": {
       "extractionState": "manual",
       "localizations": {
@@ -222,6 +256,57 @@
         }
       }
     },
+    "%@ can attach images, PDFs and text files, not .%@ files.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ can attach images, PDFs and text files, not .%2$@ files."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 支持图片、PDF 和文本附件，不支持 .%2$@ 文件。"
+          }
+        }
+      }
+    },
+    "%@ can't read your selection until it is granted.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ can't read your selection until it is granted."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授权前 %1$@ 无法读取所选文本。"
+          }
+        }
+      }
+    },
+    "%@ can’t uninstall this app.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ can’t uninstall this app."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 无法卸载此应用。"
+          }
+        }
+      }
+    },
     "%@ check failed": {
       "extractionState": "manual",
       "localizations": {
@@ -235,6 +320,91 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ 检查失败"
+          }
+        }
+      }
+    },
+    "%@ contacts only the selected provider when an AI feature runs.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ contacts only the selected provider when an AI feature runs."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 仅在运行 AI 功能时连接所选服务商。"
+          }
+        }
+      }
+    },
+    "%@ could not be replaced. %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ could not be replaced. %2$@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法替换 %1$@。%2$@"
+          }
+        }
+      }
+    },
+    "%@ could not find the %@ command.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ could not find the %2$@ command."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 找不到 %2$@ 命令。"
+          }
+        }
+      }
+    },
+    "%@ could not prepare its private AI workspace.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ could not prepare its private AI workspace."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 无法准备专用的 AI 工作区。"
+          }
+        }
+      }
+    },
+    "%@ could not reach GitHub.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ could not reach GitHub."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 无法连接到 GitHub。"
           }
         }
       }
@@ -341,6 +511,40 @@
         }
       }
     },
+    "%@ has no access to the camera.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ has no access to the camera."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 无权访问摄像头。"
+          }
+        }
+      }
+    },
+    "%@ has no access to your calendar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ has no access to your calendar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 无权访问你的日历"
+          }
+        }
+      }
+    },
     "%@ has no built bundle — reinstall the extension.": {
       "extractionState": "manual",
       "localizations": {
@@ -358,19 +562,36 @@
         }
       }
     },
-    "%@ has no built command bundles. Tinycast installs prebuilt extensions — run `ray build` in the extension folder first, or import one from an installed Raycast.": {
+    "%@ has no built command bundles. %@ installs prebuilt extensions — run `ray build` in the extension folder first, or import one from an installed Raycast.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ has no built command bundles. Tinycast installs prebuilt extensions — run `ray build` in the extension folder first, or import one from an installed Raycast."
+            "value": "%1$@ has no built command bundles. %2$@ installs prebuilt extensions — run `ray build` in the extension folder first, or import one from an installed Raycast."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ 没有已构建的命令包。Tinycast 安装的是预构建扩展，请先在扩展文件夹中运行 `ray build`，或从已安装的 Raycast 中导入。"
+            "value": "%1$@ 没有已构建的命令包。%2$@ 安装的是预构建扩展，请先在扩展文件夹中运行 `ray build`，或从已安装的 Raycast 中导入。"
+          }
+        }
+      }
+    },
+    "%@ has no built command bundles. RingCast installs prebuilt extensions — run `ray build` in the extension folder first, or import one from an installed Raycast.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ has no built command bundles. RingCast installs prebuilt extensions — run `ray build` in the extension folder first, or import one from an installed Raycast."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 没有已构建的命令包。RingCast 安装的是预构建扩展，请先在扩展文件夹中运行 `ray build`，或从已安装的 Raycast 中导入。"
           }
         }
       }
@@ -422,6 +643,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ 已不可用，请在设置中选择其他模型。"
+          }
+        }
+      }
+    },
+    "%@ is ready. Set a shortcut in Settings to summon it.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ is ready. Set a shortcut in Settings to summon it."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 已就绪，请在设置中指定唤出快捷键。"
           }
         }
       }
@@ -494,6 +732,125 @@
         }
       }
     },
+    "%@ needs Accessibility access to remap keys.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ needs Accessibility access to remap keys."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限才能重新映射按键。"
+          }
+        }
+      }
+    },
+    "%@ needs the Accessibility permission to read the selected text.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ needs the Accessibility permission to read the selected text."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限才能读取所选文本。"
+          }
+        }
+      }
+    },
+    "%@ needs the Accessibility permission to read the text you have ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ needs the Accessibility permission to read the text you have "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限，才能读取你在其他应用中"
+          }
+        }
+      }
+    },
+    "%@ needs the Accessibility permission to read the text you have selected and replace it. If %@ is already listed, switch it off ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ needs the Accessibility permission to read the text you have selected and replace it. If %2$@ is already listed, switch it off "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。如果列表中已有 %2$@，请先关闭"
+          }
+        }
+      }
+    },
+    "%@ needs the Accessibility permission to read the text you have selected and replace it. If %@ is already listed, switch it off and on again — a rebuilt app keeps a stale entry.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ needs the Accessibility permission to read the text you have selected and replace it. If %2$@ is already listed, switch it off and on again — a rebuilt app keeps a stale entry."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。如果列表中已有 %2$@，请先关闭再重新开启；重新构建的应用可能保留旧的权限记录。"
+          }
+        }
+      }
+    },
+    "%@ needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。只有在你按下"
+          }
+        }
+      }
+    },
+    "%@ needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press a shortcut.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press a shortcut."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。只有在你按下快捷键后才会读取。"
+          }
+        }
+      }
+    },
     "%@ needs to be downloaded before it can be used.": {
       "extractionState": "manual",
       "localizations": {
@@ -528,6 +885,40 @@
         }
       }
     },
+    "%@ privately learns which results you choose for each query. Reset all learned choices to restore the default order.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ privately learns which results you choose for each query. Reset all learned choices to restore the default order."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 仅在本机学习你对每次搜索结果的选择。重置全部学习记录可恢复默认顺序。"
+          }
+        }
+      }
+    },
+    "%@ reads %@ events to find join links. Nothing leaves this Mac.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ reads %2$@ events to find join links. Nothing leaves this Mac."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 读取%2$@日程以查找会议链接。数据不会离开此 Mac。"
+          }
+        }
+      }
+    },
     "%@ tokens": {
       "extractionState": "manual",
       "localizations": {
@@ -541,6 +932,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ 个 token"
+          }
+        }
+      }
+    },
+    "%@ uses the Codex, Claude and OpenCode commands already installed and signed ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ uses the Codex, Claude and OpenCode commands already installed and signed "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 使用此 Mac 上已安装并登录的 Codex、Claude 和 OpenCode 命令。"
+          }
+        }
+      }
+    },
+    "%@ uses the Codex, Claude and OpenCode commands already installed and signed in on this Mac. %@ never stores or asks for their API keys.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ uses the Codex, Claude and OpenCode commands already installed and signed in on this Mac. %2$@ never stores or asks for their API keys."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 使用此 Mac 上已安装并登录的 Codex、Claude 和 OpenCode 命令。%2$@ 不会保存或索取它们的 API 密钥。"
+          }
+        }
+      }
+    },
+    "%@ will relearn your preferred results as you use the launcher.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ will relearn your preferred results as you use the launcher."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 将在你使用启动器时重新学习偏好的结果。"
           }
         }
       }
@@ -2432,53 +2874,19 @@
         }
       }
     },
-    "About Tinycast": {
+    "About RingCast": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "About Tinycast"
+            "value": "About RingCast"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "关于 Tinycast"
-          }
-        }
-      }
-    },
-    "About once a month. Turn this off and": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "About once a month. Turn this off and"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "大约每月一次。关闭后，"
-          }
-        }
-      }
-    },
-    "About once a month. Turn this off and %@ won't ask again.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "About once a month. Turn this off and %@ won't ask again."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "大约每月一次。关闭后，%1$@ 将不再询问。"
+            "value": "关于 RingCast"
           }
         }
       }
@@ -2500,19 +2908,36 @@
         }
       }
     },
-    "Access Tinycast needs to work with other apps.": {
+    "Access %@ needs to work with other apps.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Access Tinycast needs to work with other apps."
+            "value": "Access %1$@ needs to work with other apps."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinycast 与其他应用配合工作所需的权限。"
+            "value": "%1$@ 与其他应用配合工作所需的权限。"
+          }
+        }
+      }
+    },
+    "Access RingCast needs to work with other apps.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Access RingCast needs to work with other apps."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 与其他应用配合工作所需的权限。"
           }
         }
       }
@@ -3248,6 +3673,142 @@
         }
       }
     },
+    "Allow %@ to control Finder in System Settings › Privacy & Security ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow %1$@ to control Finder in System Settings › Privacy & Security "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在「系统设置 › 隐私与安全性"
+          }
+        }
+      }
+    },
+    "Allow %@ to control Finder in System Settings › Privacy & Security › Automation, then try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow %1$@ to control Finder in System Settings › Privacy & Security › Automation, then try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在「系统设置 › 隐私与安全性› 自动化」中允许 %1$@ 控制访达，然后重试。"
+          }
+        }
+      }
+    },
+    "Allow %@ to control the requested app in Automation settings, then try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow %1$@ to control the requested app in Automation settings, then try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在自动化设置中允许 %1$@ 控制相应应用，然后重试。"
+          }
+        }
+      }
+    },
+    "Allow %@ to control your Mac in Accessibility settings, then try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow %1$@ to control your Mac in Accessibility settings, then try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在辅助功能设置中允许 %1$@ 控制你的 Mac，然后重试。"
+          }
+        }
+      }
+    },
+    "Allow RingCast to control Finder in System Settings › Privacy & Security ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow RingCast to control Finder in System Settings › Privacy & Security "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在「系统设置 › 隐私与安全性"
+          }
+        }
+      }
+    },
+    "Allow RingCast to control Finder in System Settings › Privacy & Security › Automation, then try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow RingCast to control Finder in System Settings › Privacy & Security › Automation, then try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在「系统设置 › 隐私与安全性› 自动化」中允许 RingCast 控制访达，然后重试。"
+          }
+        }
+      }
+    },
+    "Allow RingCast to control the requested app in Automation settings, then try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow RingCast to control the requested app in Automation settings, then try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在自动化设置中允许 RingCast 控制相应应用，然后重试。"
+          }
+        }
+      }
+    },
+    "Allow RingCast to control your Mac in Accessibility settings, then try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow RingCast to control your Mac in Accessibility settings, then try again."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在辅助功能设置中允许 RingCast 控制你的 Mac，然后重试。"
+          }
+        }
+      }
+    },
     "Allow This Chat": {
       "extractionState": "manual",
       "localizations": {
@@ -3261,74 +3822,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "允许本次对话"
-          }
-        }
-      }
-    },
-    "Allow Tinycast to control Finder in System Settings › Privacy & Security ": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allow Tinycast to control Finder in System Settings › Privacy & Security "
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请在「系统设置 › 隐私与安全性"
-          }
-        }
-      }
-    },
-    "Allow Tinycast to control Finder in System Settings › Privacy & Security › Automation, then try again.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allow Tinycast to control Finder in System Settings › Privacy & Security › Automation, then try again."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请在「系统设置 › 隐私与安全性› 自动化」中允许 Tinycast 控制访达，然后重试。"
-          }
-        }
-      }
-    },
-    "Allow Tinycast to control the requested app in Automation settings, then try again.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allow Tinycast to control the requested app in Automation settings, then try again."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请在自动化设置中允许 Tinycast 控制相应应用，然后重试。"
-          }
-        }
-      }
-    },
-    "Allow Tinycast to control your Mac in Accessibility settings, then try again.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allow Tinycast to control your Mac in Accessibility settings, then try again."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请在辅助功能设置中允许 Tinycast 控制你的 Mac，然后重试。"
           }
         }
       }
@@ -4625,19 +5118,36 @@
         }
       }
     },
-    "Bluetooth did not change state. Check Tinycast’s Bluetooth permission.": {
+    "Bluetooth did not change state. Check %@’s Bluetooth permission.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bluetooth did not change state. Check Tinycast’s Bluetooth permission."
+            "value": "Bluetooth did not change state. Check %1$@’s Bluetooth permission."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "蓝牙状态未改变，请检查 Tinycast 的蓝牙权限。"
+            "value": "蓝牙状态未改变，请检查 %1$@ 的蓝牙权限。"
+          }
+        }
+      }
+    },
+    "Bluetooth did not change state. Check RingCast’s Bluetooth permission.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bluetooth did not change state. Check RingCast’s Bluetooth permission."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "蓝牙状态未改变，请检查 RingCast 的蓝牙权限。"
           }
         }
       }
@@ -4825,23 +5335,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在构建…"
-          }
-        }
-      }
-    },
-    "Built with love.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Built with love."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "用心打造。"
           }
         }
       }
@@ -5594,6 +6087,23 @@
         }
       }
     },
+    "Choose a .%@ file exported from %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a .%1$@ file exported from %2$@."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请选择从 %2$@ 导出的 .%1$@ 文件。"
+          }
+        }
+      }
+    },
     "Choose a .rayconfig file exported from Raycast.": {
       "extractionState": "manual",
       "localizations": {
@@ -5611,19 +6121,19 @@
         }
       }
     },
-    "Choose a .tinycast file exported from Tinycast.": {
+    "Choose a .ringcast file exported from RingCast.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choose a .tinycast file exported from Tinycast."
+            "value": "Choose a .ringcast file exported from RingCast."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "请选择从 Tinycast 导出的 .tinycast 文件。"
+            "value": "请选择从 RingCast 导出的 .ringcast 文件。"
           }
         }
       }
@@ -5815,19 +6325,36 @@
         }
       }
     },
-    "Choose what to include, then save it as a single .tinycast file.": {
+    "Choose what to include, then save it as a single .%@ file.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choose what to include, then save it as a single .tinycast file."
+            "value": "Choose what to include, then save it as a single .%1$@ file."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "选择要包含的内容，然后保存为一个 .tinycast 文件。"
+            "value": "选择要包含的内容，然后保存为一个 .%1$@ 文件。"
+          }
+        }
+      }
+    },
+    "Choose what to include, then save it as a single .ringcast file.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose what to include, then save it as a single .ringcast file."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择要包含的内容，然后保存为一个 .ringcast 文件。"
           }
         }
       }
@@ -6257,6 +6784,40 @@
         }
       }
     },
+    "Close %@'s window first.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close %1$@'s window first."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请先关闭 %1$@ 窗口。"
+          }
+        }
+      }
+    },
+    "Close RingCast's window first.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close RingCast's window first."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请先关闭 RingCast 窗口。"
+          }
+        }
+      }
+    },
     "Close Settings": {
       "extractionState": "manual",
       "localizations": {
@@ -6270,23 +6831,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "关闭设置"
-          }
-        }
-      }
-    },
-    "Close Tinycast's window first.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Close Tinycast's window first."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请先关闭 Tinycast 窗口。"
           }
         }
       }
@@ -9895,19 +10439,36 @@
         }
       }
     },
-    "Enter the text Tinycast expands.": {
+    "Enter the text %@ expands.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Enter the text Tinycast expands."
+            "value": "Enter the text %1$@ expands."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "输入 Tinycast 展开时使用的文本。"
+            "value": "输入 %1$@ 展开时使用的文本。"
+          }
+        }
+      }
+    },
+    "Enter the text RingCast expands.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter the text RingCast expands."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "输入 RingCast 展开时使用的文本。"
           }
         }
       }
@@ -10473,13 +11034,13 @@
         }
       }
     },
-    "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect Tinycast ": {
+    "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect %@ ": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect Tinycast "
+            "value": "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect %1$@ "
           }
         },
         "zh-Hans": {
@@ -10490,19 +11051,53 @@
         }
       }
     },
-    "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect Tinycast to use noticeably more RAM while one is open.": {
+    "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect %@ to use noticeably more RAM while one is open.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect Tinycast to use noticeably more RAM while one is open."
+            "value": "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect %1$@ to use noticeably more RAM while one is open."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "扩展是在此 Mac 上运行的第三方 JavaScript。运行命令时，JavaScript 引擎会一直驻留内存，直到退出命令。因此，打开扩展时 Tinycast 的内存用量会明显增加。"
+            "value": "扩展是在此 Mac 上运行的第三方 JavaScript。运行命令时，JavaScript 引擎会一直驻留内存，直到退出命令。因此，打开扩展时 %1$@ 的内存用量会明显增加。"
+          }
+        }
+      }
+    },
+    "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect RingCast ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect RingCast "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩展是在此 Mac 上运行的第三方 JavaScript。运行命令时，JavaScript 引擎会一直驻留内存，直到退出命令。"
+          }
+        }
+      }
+    },
+    "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect RingCast to use noticeably more RAM while one is open.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extensions are third-party JavaScript, run on this Mac. A running command holds a JavaScript engine in memory until you leave it — expect RingCast to use noticeably more RAM while one is open."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扩展是在此 Mac 上运行的第三方 JavaScript。运行命令时，JavaScript 引擎会一直驻留内存，直到退出命令。因此，打开扩展时 RingCast 的内存用量会明显增加。"
           }
         }
       }
@@ -11336,23 +11931,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "四等分"
-          }
-        }
-      }
-    },
-    "Free and open source, funded out of pocket.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Free and open source, funded out of pocket."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "免费开源，由开发者自费维护。"
           }
         }
       }
@@ -13312,36 +13890,70 @@
         }
       }
     },
-    "Join meetings from Tinycast": {
+    "Join meetings from %@": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Join meetings from Tinycast"
+            "value": "Join meetings from %1$@"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "通过 Tinycast 加入会议"
+            "value": "通过 %1$@ 加入会议"
           }
         }
       }
     },
-    "Join the Tinycast community": {
+    "Join meetings from RingCast": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Join the Tinycast community"
+            "value": "Join meetings from RingCast"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "加入 Tinycast 社区"
+            "value": "通过 RingCast 加入会议"
+          }
+        }
+      }
+    },
+    "Join the %@ community": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Join the %1$@ community"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入 %1$@ 社区"
+          }
+        }
+      }
+    },
+    "Join the RingCast community": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Join the RingCast community"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "加入 RingCast 社区"
           }
         }
       }
@@ -13448,19 +14060,36 @@
         }
       }
     },
-    "Keep the Tinycast icon in the menu bar. Shortcuts still work when hidden.": {
+    "Keep the %@ icon in the menu bar. Shortcuts still work when hidden.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keep the Tinycast icon in the menu bar. Shortcuts still work when hidden."
+            "value": "Keep the %1$@ icon in the menu bar. Shortcuts still work when hidden."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在菜单栏中保留 Tinycast 图标，隐藏后快捷键仍然有效。"
+            "value": "在菜单栏中保留 %1$@ 图标，隐藏后快捷键仍然有效。"
+          }
+        }
+      }
+    },
+    "Keep the RingCast icon in the menu bar. Shortcuts still work when hidden.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep the RingCast icon in the menu bar. Shortcuts still work when hidden."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在菜单栏中保留 RingCast 图标，隐藏后快捷键仍然有效。"
           }
         }
       }
@@ -13873,6 +14502,23 @@
         }
       }
     },
+    "Let %@ paste items back into the app you were using.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let %1$@ paste items back into the app you were using."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许 %1$@ 将内容粘贴回你正在使用的应用。"
+          }
+        }
+      }
+    },
     "Let %@ run its tools?": {
       "extractionState": "manual",
       "localizations": {
@@ -13890,53 +14536,87 @@
         }
       }
     },
-    "Let Tinycast paste items back into the app you were using.": {
+    "Let RingCast paste items back into the app you were using.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Let Tinycast paste items back into the app you were using."
+            "value": "Let RingCast paste items back into the app you were using."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "允许 Tinycast 将内容粘贴回你正在使用的应用。"
+            "value": "允许 RingCast 将内容粘贴回你正在使用的应用。"
           }
         }
       }
     },
-    "Lets Tinycast find the join link for the meeting you are about to be in.": {
+    "Lets %@ find the join link for the meeting you are about to be in.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lets Tinycast find the join link for the meeting you are about to be in."
+            "value": "Lets %1$@ find the join link for the meeting you are about to be in."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "允许 Tinycast 查找你即将参加的会议链接。"
+            "value": "允许 %1$@ 查找你即将参加的会议链接。"
           }
         }
       }
     },
-    "Lets Tinycast paste a clipboard item into the app you were using.": {
+    "Lets %@ paste a clipboard item into the app you were using.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lets Tinycast paste a clipboard item into the app you were using."
+            "value": "Lets %1$@ paste a clipboard item into the app you were using."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "允许 Tinycast 将剪贴板内容粘贴到你正在使用的应用。"
+            "value": "允许 %1$@ 将剪贴板内容粘贴到你正在使用的应用。"
+          }
+        }
+      }
+    },
+    "Lets RingCast find the join link for the meeting you are about to be in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lets RingCast find the join link for the meeting you are about to be in."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许 RingCast 查找你即将参加的会议链接。"
+          }
+        }
+      }
+    },
+    "Lets RingCast paste a clipboard item into the app you were using.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lets RingCast paste a clipboard item into the app you were using."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "允许 RingCast 将剪贴板内容粘贴到你正在使用的应用。"
           }
         }
       }
@@ -14485,19 +15165,36 @@
         }
       }
     },
-    "Match macOS, or pin Tinycast to Light or Dark.": {
+    "Match macOS, or pin %@ to Light or Dark.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Match macOS, or pin Tinycast to Light or Dark."
+            "value": "Match macOS, or pin %1$@ to Light or Dark."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "跟随 macOS，或将 Tinycast 固定为浅色或深色。"
+            "value": "跟随 macOS，或将 %1$@ 固定为浅色或深色。"
+          }
+        }
+      }
+    },
+    "Match macOS, or pin RingCast to Light or Dark.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Match macOS, or pin RingCast to Light or Dark."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟随 macOS，或将 RingCast 固定为浅色或深色。"
           }
         }
       }
@@ -15284,19 +15981,36 @@
         }
       }
     },
-    "Moves the window you were last in, using the Accessibility permission Tinycast already uses to paste.": {
+    "Moves the window you were last in, using the Accessibility permission %@ already uses to paste.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moves the window you were last in, using the Accessibility permission Tinycast already uses to paste."
+            "value": "Moves the window you were last in, using the Accessibility permission %1$@ already uses to paste."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "移动你上次使用的窗口，使用与 Tinycast 粘贴功能相同的辅助功能权限。"
+            "value": "移动你上次使用的窗口，使用与 %1$@ 粘贴功能相同的辅助功能权限。"
+          }
+        }
+      }
+    },
+    "Moves the window you were last in, using the Accessibility permission RingCast already uses to paste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moves the window you were last in, using the Accessibility permission RingCast already uses to paste."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移动你上次使用的窗口，使用与 RingCast 粘贴功能相同的辅助功能权限。"
           }
         }
       }
@@ -17630,19 +18344,36 @@
         }
       }
     },
-    "Off sends nothing ahead of your message, not even what Tinycast says about itself.": {
+    "Off sends nothing ahead of your message, not even what %@ says about itself.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Off sends nothing ahead of your message, not even what Tinycast says about itself."
+            "value": "Off sends nothing ahead of your message, not even what %1$@ says about itself."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "关闭后，不会在消息前发送任何指令，包括 Tinycast 的自我介绍。"
+            "value": "关闭后，不会在消息前发送任何指令，包括 %1$@ 的自我介绍。"
+          }
+        }
+      }
+    },
+    "Off sends nothing ahead of your message, not even what RingCast says about itself.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off sends nothing ahead of your message, not even what RingCast says about itself."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭后，不会在消息前发送任何指令，包括 RingCast 的自我介绍。"
           }
         }
       }
@@ -19211,53 +19942,104 @@
         }
       }
     },
-    "Press %@ anytime to start using Tinycast.": {
+    "Press %@ anytime to start using %@.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Press %@ anytime to start using Tinycast."
+            "value": "Press %1$@ anytime to start using %2$@."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "随时按下 %1$@ 开始使用 Tinycast。"
+            "value": "随时按下 %1$@ 开始使用 %2$@。"
           }
         }
       }
     },
-    "Press this shortcut to open Tinycast.": {
+    "Press %@ anytime to start using RingCast.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Press this shortcut to open Tinycast."
+            "value": "Press %@ anytime to start using RingCast."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "按此快捷键打开 Tinycast。"
+            "value": "随时按下 %1$@ 开始使用 RingCast。"
           }
         }
       }
     },
-    "Pressing %@ will trigger the left %@ modifier keys. Hyper Key shortcuts are shown in Tinycast with ✦.": {
+    "Press this shortcut to open %@.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pressing %@ will trigger the left %@ modifier keys. Hyper Key shortcuts are shown in Tinycast with ✦."
+            "value": "Press this shortcut to open %1$@."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "按下 %1$@ 将触发左侧的 %2$@ 修饰键。Tinycast 用 ✦ 表示 Hyper Key 快捷键。"
+            "value": "按此快捷键打开 %1$@。"
+          }
+        }
+      }
+    },
+    "Press this shortcut to open RingCast.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press this shortcut to open RingCast."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按此快捷键打开 RingCast。"
+          }
+        }
+      }
+    },
+    "Pressing %@ will trigger the left %@ modifier keys. Hyper Key shortcuts are shown in %@ with ✦.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressing %1$@ will trigger the left %2$@ modifier keys. Hyper Key shortcuts are shown in %3$@ with ✦."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按下 %1$@ 将触发左侧的 %2$@ 修饰键。%3$@ 用 ✦ 表示 Hyper Key 快捷键。"
+          }
+        }
+      }
+    },
+    "Pressing %@ will trigger the left %@ modifier keys. Hyper Key shortcuts are shown in RingCast with ✦.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressing %@ will trigger the left %@ modifier keys. Hyper Key shortcuts are shown in RingCast with ✦."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按下 %1$@ 将触发左侧的 %2$@ 修饰键。RingCast 用 ✦ 表示 Hyper Key 快捷键。"
           }
         }
       }
@@ -19670,19 +20452,19 @@
         }
       }
     },
-    "Quit Tinycast": {
+    "Quit RingCast": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quit Tinycast"
+            "value": "Quit RingCast"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "退出 Tinycast"
+            "value": "退出 RingCast"
           }
         }
       }
@@ -20146,23 +20928,6 @@
         }
       }
     },
-    "Remind me occasionally": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remind me occasionally"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "偶尔提醒我"
-          }
-        }
-      }
-    },
     "Remote AI providers require an HTTPS base URL.": {
       "extractionState": "manual",
       "localizations": {
@@ -20537,36 +21302,70 @@
         }
       }
     },
-    "Replaced with a Tinycast icon.": {
+    "Replaced with a %@ icon.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Replaced with a Tinycast icon."
+            "value": "Replaced with a %1$@ icon."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "已替换为 Tinycast 图标。"
+            "value": "已替换为 %1$@ 图标。"
           }
         }
       }
     },
-    "Replacing Tinycast…": {
+    "Replaced with a RingCast icon.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Replacing Tinycast…"
+            "value": "Replaced with a RingCast icon."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "正在替换 Tinycast…"
+            "value": "已替换为 RingCast 图标。"
+          }
+        }
+      }
+    },
+    "Replacing %@…": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replacing %1$@…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在替换 %1$@…"
+          }
+        }
+      }
+    },
+    "Replacing RingCast…": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replacing RingCast…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在替换 RingCast…"
           }
         }
       }
@@ -20928,19 +21727,36 @@
         }
       }
     },
-    "Reveals this Tinycast channel’s snippets folder in Finder.": {
+    "Reveals this %@ channel’s snippets folder in Finder.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reveals this Tinycast channel’s snippets folder in Finder."
+            "value": "Reveals this %1$@ channel’s snippets folder in Finder."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在访达中显示当前版本 Tinycast 的文本片段文件夹。"
+            "value": "在访达中显示当前版本 %1$@ 的文本片段文件夹。"
+          }
+        }
+      }
+    },
+    "Reveals this RingCast channel’s snippets folder in Finder.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveals this RingCast channel’s snippets folder in Finder."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在访达中显示当前版本 RingCast 的文本片段文件夹。"
           }
         }
       }
@@ -21077,6 +21893,414 @@
           "stringUnit": {
             "state": "translated",
             "value": "右 Shift（⇧）"
+          }
+        }
+      }
+    },
+    "RingCast Needs Accessibility Access": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast Needs Accessibility Access"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限"
+          }
+        }
+      }
+    },
+    "RingCast can attach images, PDFs and text files, not .%@ files.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast can attach images, PDFs and text files, not .%@ files."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 支持图片、PDF 和文本附件，不支持 .%1$@ 文件。"
+          }
+        }
+      }
+    },
+    "RingCast can't read your selection until it is granted.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast can't read your selection until it is granted."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授权前 RingCast 无法读取所选文本。"
+          }
+        }
+      }
+    },
+    "RingCast can’t uninstall this app.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast can’t uninstall this app."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 无法卸载此应用。"
+          }
+        }
+      }
+    },
+    "RingCast contacts only the selected provider when an AI feature runs.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast contacts only the selected provider when an AI feature runs."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 仅在运行 AI 功能时连接所选服务商。"
+          }
+        }
+      }
+    },
+    "RingCast could not be replaced. %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast could not be replaced. %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法替换 RingCast。%1$@"
+          }
+        }
+      }
+    },
+    "RingCast could not find the %@ command.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast could not find the %@ command."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 找不到 %1$@ 命令。"
+          }
+        }
+      }
+    },
+    "RingCast could not prepare its private AI workspace.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast could not prepare its private AI workspace."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 无法准备专用的 AI 工作区。"
+          }
+        }
+      }
+    },
+    "RingCast could not reach GitHub.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast could not reach GitHub."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 无法连接到 GitHub。"
+          }
+        }
+      }
+    },
+    "RingCast has no access to the camera.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast has no access to the camera."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 无权访问摄像头。"
+          }
+        }
+      }
+    },
+    "RingCast has no access to your calendar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast has no access to your calendar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 无权访问你的日历"
+          }
+        }
+      }
+    },
+    "RingCast is ready. Set a shortcut in Settings to summon it.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast is ready. Set a shortcut in Settings to summon it."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 已就绪，请在设置中指定唤出快捷键。"
+          }
+        }
+      }
+    },
+    "RingCast needs Accessibility access to remap keys.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast needs Accessibility access to remap keys."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限才能重新映射按键。"
+          }
+        }
+      }
+    },
+    "RingCast needs the Accessibility permission to read the selected text.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast needs the Accessibility permission to read the selected text."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限才能读取所选文本。"
+          }
+        }
+      }
+    },
+    "RingCast needs the Accessibility permission to read the text you have ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast needs the Accessibility permission to read the text you have "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限，才能读取你在其他应用中"
+          }
+        }
+      }
+    },
+    "RingCast needs the Accessibility permission to read the text you have selected and replace it. If RingCast is already listed, switch it off ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast needs the Accessibility permission to read the text you have selected and replace it. If RingCast is already listed, switch it off "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。如果列表中已有 RingCast，请先关闭"
+          }
+        }
+      }
+    },
+    "RingCast needs the Accessibility permission to read the text you have selected and replace it. If RingCast is already listed, switch it off and on again — a rebuilt app keeps a stale entry.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast needs the Accessibility permission to read the text you have selected and replace it. If RingCast is already listed, switch it off and on again — a rebuilt app keeps a stale entry."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。如果列表中已有 RingCast，请先关闭再重新开启；重新构建的应用可能保留旧的权限记录。"
+          }
+        }
+      }
+    },
+    "RingCast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。只有在你按下"
+          }
+        }
+      }
+    },
+    "RingCast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press a shortcut.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press a shortcut."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。只有在你按下快捷键后才会读取。"
+          }
+        }
+      }
+    },
+    "RingCast privately learns which results you choose for each query. Reset all learned choices to restore the default order.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast privately learns which results you choose for each query. Reset all learned choices to restore the default order."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 仅在本机学习你对每次搜索结果的选择。重置全部学习记录可恢复默认顺序。"
+          }
+        }
+      }
+    },
+    "RingCast reads %@ events to find join links. Nothing leaves this Mac.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast reads %@ events to find join links. Nothing leaves this Mac."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 读取%1$@日程以查找会议链接。数据不会离开此 Mac。"
+          }
+        }
+      }
+    },
+    "RingCast uses the Codex, Claude and OpenCode commands already installed and signed ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast uses the Codex, Claude and OpenCode commands already installed and signed "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 使用此 Mac 上已安装并登录的 Codex、Claude 和 OpenCode 命令。"
+          }
+        }
+      }
+    },
+    "RingCast uses the Codex, Claude and OpenCode commands already installed and signed in on this Mac. RingCast never stores or asks for their API keys.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast uses the Codex, Claude and OpenCode commands already installed and signed in on this Mac. RingCast never stores or asks for their API keys."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 使用此 Mac 上已安装并登录的 Codex、Claude 和 OpenCode 命令。RingCast 不会保存或索取它们的 API 密钥。"
+          }
+        }
+      }
+    },
+    "RingCast will relearn your preferred results as you use the launcher.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast will relearn your preferred results as you use the launcher."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 将在你使用启动器时重新学习偏好的结果。"
           }
         }
       }
@@ -22199,23 +23423,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "次级额度"
-          }
-        }
-      }
-    },
-    "Secure checkout on Polar.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Secure checkout on Polar."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "通过 Polar 安全付款。"
           }
         }
       }
@@ -23444,6 +24651,23 @@
         }
       }
     },
+    "Software updates are disabled.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Software updates are disabled."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "软件更新已关闭。"
+          }
+        }
+      }
+    },
     "Some Items Weren’t Moved": {
       "extractionState": "manual",
       "localizations": {
@@ -23614,19 +24838,36 @@
         }
       }
     },
-    "Start Tinycast automatically when you log in.": {
+    "Start %@ automatically when you log in.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Start Tinycast automatically when you log in."
+            "value": "Start %1$@ automatically when you log in."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "登录时自动启动 Tinycast。"
+            "value": "登录时自动启动 %1$@。"
+          }
+        }
+      }
+    },
+    "Start RingCast automatically when you log in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start RingCast automatically when you log in."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时自动启动 RingCast。"
           }
         }
       }
@@ -23903,91 +25144,6 @@
         }
       }
     },
-    "Support": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支持"
-          }
-        }
-      }
-    },
-    "Support %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support %@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支持 %1$@"
-          }
-        }
-      }
-    },
-    "Support %@...": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support %@..."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支持 %1$@..."
-          }
-        }
-      }
-    },
-    "Support Tinycast": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support Tinycast"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支持 Tinycast"
-          }
-        }
-      }
-    },
-    "Support…": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support…"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支持…"
-          }
-        }
-      }
-    },
     "Switch AI model": {
       "extractionState": "manual",
       "localizations": {
@@ -24243,13 +25399,30 @@
         }
       }
     },
-    "Tell Tinycast how you want %@ to handle your selected text.": {
+    "Tell %@ how you want %@ to handle your selected text.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tell Tinycast how you want %@ to handle your selected text."
+            "value": "Tell %1$@ how you want %2$@ to handle your selected text."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "指定%2$@应如何处理所选文本。"
+          }
+        }
+      }
+    },
+    "Tell RingCast how you want %@ to handle your selected text.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tell RingCast how you want %@ to handle your selected text."
           }
         },
         "zh-Hans": {
@@ -24481,19 +25654,36 @@
         }
       }
     },
-    "That file isn't text Tinycast can read.": {
+    "That file isn't text %@ can read.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "That file isn't text Tinycast can read."
+            "value": "That file isn't text %1$@ can read."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinycast 无法将该文件读取为文本。"
+            "value": "%1$@ 无法将该文件读取为文本。"
+          }
+        }
+      }
+    },
+    "That file isn't text RingCast can read.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That file isn't text RingCast can read."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 无法将该文件读取为文本。"
           }
         }
       }
@@ -24821,19 +26011,36 @@
         }
       }
     },
-    "The downloaded app is not this build of Tinycast.": {
+    "The downloaded app is not this build of %@.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The downloaded app is not this build of Tinycast."
+            "value": "The downloaded app is not this build of %1$@."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "下载的应用与此 Tinycast 构建不匹配。"
+            "value": "下载的应用与此 %1$@ 构建不匹配。"
+          }
+        }
+      }
+    },
+    "The downloaded app is not this build of RingCast.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The downloaded app is not this build of RingCast."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下载的应用与此 RingCast 构建不匹配。"
           }
         }
       }
@@ -24872,19 +26079,36 @@
         }
       }
     },
-    "The downloaded archive does not contain Tinycast.": {
+    "The downloaded archive does not contain %@.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The downloaded archive does not contain Tinycast."
+            "value": "The downloaded archive does not contain %1$@."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "下载的压缩包不包含 Tinycast。"
+            "value": "下载的压缩包不包含 %1$@。"
+          }
+        }
+      }
+    },
+    "The downloaded archive does not contain RingCast.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The downloaded archive does not contain RingCast."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下载的压缩包不包含 RingCast。"
           }
         }
       }
@@ -25076,19 +26300,36 @@
         }
       }
     },
-    "The model wants to call “%@”. Tinycast did not write this server and cannot vouch for what it does.": {
+    "The model wants to call “%@”. %@ did not write this server and cannot vouch for what it does.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The model wants to call “%@”. Tinycast did not write this server and cannot vouch for what it does."
+            "value": "The model wants to call “%1$@”. %2$@ did not write this server and cannot vouch for what it does."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "模型想要调用“%1$@”。此服务器并非由 Tinycast 编写，Tinycast 无法保证其行为。"
+            "value": "模型想要调用“%1$@”。此服务器并非由 %2$@ 编写，%2$@ 无法保证其行为。"
+          }
+        }
+      }
+    },
+    "The model wants to call “%@”. RingCast did not write this server and cannot vouch for what it does.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model wants to call “%@”. RingCast did not write this server and cannot vouch for what it does."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型想要调用“%1$@”。此服务器并非由 RingCast 编写，RingCast 无法保证其行为。"
           }
         }
       }
@@ -25127,19 +26368,36 @@
         }
       }
     },
-    "The note file is outside this Tinycast channel. (%@)": {
+    "The note file is outside this %@ channel. (%@)": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The note file is outside this Tinycast channel. (%@)"
+            "value": "The note file is outside this %1$@ channel. (%2$@)"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "笔记文件位于当前版本 Tinycast 的目录之外。（%1$@）"
+            "value": "笔记文件位于当前版本 %1$@ 的目录之外。（%2$@）"
+          }
+        }
+      }
+    },
+    "The note file is outside this RingCast channel. (%@)": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The note file is outside this RingCast channel. (%@)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "笔记文件位于当前版本 RingCast 的目录之外。（%1$@）"
           }
         }
       }
@@ -25671,36 +26929,70 @@
         }
       }
     },
-    "The server rejected Tinycast's credentials.": {
+    "The server rejected %@'s credentials.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The server rejected Tinycast's credentials."
+            "value": "The server rejected %1$@'s credentials."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "服务器拒绝了 Tinycast 的凭据。"
+            "value": "服务器拒绝了 %1$@ 的凭据。"
           }
         }
       }
     },
-    "The server sent a response Tinycast could not read.": {
+    "The server rejected RingCast's credentials.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The server sent a response Tinycast could not read."
+            "value": "The server rejected RingCast's credentials."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "服务器发送了 Tinycast 无法读取的响应。"
+            "value": "服务器拒绝了 RingCast 的凭据。"
+          }
+        }
+      }
+    },
+    "The server sent a response %@ could not read.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The server sent a response %1$@ could not read."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服务器发送了 %1$@ 无法读取的响应。"
+          }
+        }
+      }
+    },
+    "The server sent a response RingCast could not read.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The server sent a response RingCast could not read."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服务器发送了 RingCast 无法读取的响应。"
           }
         }
       }
@@ -26011,19 +27303,36 @@
         }
       }
     },
-    "This command renders %@, which Tinycast doesn't support yet. See docs/extensions.md.": {
+    "This command renders %@, which %@ doesn't support yet. See docs/extensions.md.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This command renders %@, which Tinycast doesn't support yet. See docs/extensions.md."
+            "value": "This command renders %1$@, which %2$@ doesn't support yet. See docs/extensions.md."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此命令渲染 %1$@，Tinycast 尚不支持。请参阅 docs/extensions.md。"
+            "value": "此命令渲染 %1$@，%2$@ 尚不支持。请参阅 docs/extensions.md。"
+          }
+        }
+      }
+    },
+    "This command renders %@, which RingCast doesn't support yet. See docs/extensions.md.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This command renders %@, which RingCast doesn't support yet. See docs/extensions.md."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此命令渲染 %1$@，RingCast 尚不支持。请参阅 docs/extensions.md。"
           }
         }
       }
@@ -26147,36 +27456,70 @@
         }
       }
     },
-    "This file isn't a Tinycast backup, or it's damaged.": {
+    "This file isn't a %@ backup, or it's damaged.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This file isn't a Tinycast backup, or it's damaged."
+            "value": "This file isn't a %1$@ backup, or it's damaged."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此文件不是 Tinycast 备份，或文件已损坏。"
+            "value": "此文件不是 %1$@ 备份，或文件已损坏。"
           }
         }
       }
     },
-    "This file isn't a Tinycast quicklinks export.": {
+    "This file isn't a %@ quicklinks export.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This file isn't a Tinycast quicklinks export."
+            "value": "This file isn't a %1$@ quicklinks export."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此文件不是 Tinycast 快捷链接导出文件。"
+            "value": "此文件不是 %1$@ 快捷链接导出文件。"
+          }
+        }
+      }
+    },
+    "This file isn't a RingCast backup, or it's damaged.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file isn't a RingCast backup, or it's damaged."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此文件不是 RingCast 备份，或文件已损坏。"
+          }
+        }
+      }
+    },
+    "This file isn't a RingCast quicklinks export.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file isn't a RingCast quicklinks export."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此文件不是 RingCast 快捷链接导出文件。"
           }
         }
       }
@@ -26368,19 +27711,36 @@
         }
       }
     },
-    "This version of Notification Center exposes no dismiss control Tinycast can use.": {
+    "This version of Notification Center exposes no dismiss control %@ can use.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This version of Notification Center exposes no dismiss control Tinycast can use."
+            "value": "This version of Notification Center exposes no dismiss control %1$@ can use."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "此版本的通知中心未提供 Tinycast 可用的清除控件。"
+            "value": "此版本的通知中心未提供 %1$@ 可用的清除控件。"
+          }
+        }
+      }
+    },
+    "This version of Notification Center exposes no dismiss control RingCast can use.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This version of Notification Center exposes no dismiss control RingCast can use."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此版本的通知中心未提供 RingCast 可用的清除控件。"
           }
         }
       }
@@ -26449,414 +27809,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "时间间隔"
-          }
-        }
-      }
-    },
-    "Tinycast Needs Accessibility Access": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast Needs Accessibility Access"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限"
-          }
-        }
-      }
-    },
-    "Tinycast can attach images, PDFs and text files, not .%@ files.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast can attach images, PDFs and text files, not .%@ files."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 支持图片、PDF 和文本附件，不支持 .%1$@ 文件。"
-          }
-        }
-      }
-    },
-    "Tinycast can't read your selection until it is granted.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast can't read your selection until it is granted."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "授权前 Tinycast 无法读取所选文本。"
-          }
-        }
-      }
-    },
-    "Tinycast can’t uninstall this app.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast can’t uninstall this app."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 无法卸载此应用。"
-          }
-        }
-      }
-    },
-    "Tinycast contacts only the selected provider when an AI feature runs.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast contacts only the selected provider when an AI feature runs."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 仅在运行 AI 功能时连接所选服务商。"
-          }
-        }
-      }
-    },
-    "Tinycast could not be replaced. %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast could not be replaced. %@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无法替换 Tinycast。%1$@"
-          }
-        }
-      }
-    },
-    "Tinycast could not find the %@ command.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast could not find the %@ command."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 找不到 %1$@ 命令。"
-          }
-        }
-      }
-    },
-    "Tinycast could not prepare its private AI workspace.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast could not prepare its private AI workspace."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 无法准备专用的 AI 工作区。"
-          }
-        }
-      }
-    },
-    "Tinycast could not reach GitHub.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast could not reach GitHub."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 无法连接到 GitHub。"
-          }
-        }
-      }
-    },
-    "Tinycast has no access to the camera.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast has no access to the camera."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 无权访问摄像头。"
-          }
-        }
-      }
-    },
-    "Tinycast has no access to your calendar": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast has no access to your calendar"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 无权访问你的日历"
-          }
-        }
-      }
-    },
-    "Tinycast is ready. Set a shortcut in Settings to summon it.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast is ready. Set a shortcut in Settings to summon it."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 已就绪，请在设置中指定唤出快捷键。"
-          }
-        }
-      }
-    },
-    "Tinycast needs Accessibility access to remap keys.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast needs Accessibility access to remap keys."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限才能重新映射按键。"
-          }
-        }
-      }
-    },
-    "Tinycast needs the Accessibility permission to read the selected text.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast needs the Accessibility permission to read the selected text."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限才能读取所选文本。"
-          }
-        }
-      }
-    },
-    "Tinycast needs the Accessibility permission to read the text you have ": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast needs the Accessibility permission to read the text you have "
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限，才能读取你在其他应用中"
-          }
-        }
-      }
-    },
-    "Tinycast needs the Accessibility permission to read the text you have selected and replace it. If Tinycast is already listed, switch it off ": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast needs the Accessibility permission to read the text you have selected and replace it. If Tinycast is already listed, switch it off "
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。如果列表中已有 Tinycast，请先关闭"
-          }
-        }
-      }
-    },
-    "Tinycast needs the Accessibility permission to read the text you have selected and replace it. If Tinycast is already listed, switch it off and on again — a rebuilt app keeps a stale entry.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast needs the Accessibility permission to read the text you have selected and replace it. If Tinycast is already listed, switch it off and on again — a rebuilt app keeps a stale entry."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。如果列表中已有 Tinycast，请先关闭再重新开启；重新构建的应用可能保留旧的权限记录。"
-          }
-        }
-      }
-    },
-    "Tinycast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press ": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press "
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。只有在你按下"
-          }
-        }
-      }
-    },
-    "Tinycast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press a shortcut.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast needs the Accessibility permission to read the text you have selected in other apps and replace it. Nothing is read until you press a shortcut."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 需要辅助功能权限，才能读取你在其他应用中选中的文本并进行替换。只有在你按下快捷键后才会读取。"
-          }
-        }
-      }
-    },
-    "Tinycast privately learns which results you choose for each query. Reset all learned choices to restore the default order.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast privately learns which results you choose for each query. Reset all learned choices to restore the default order."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 仅在本机学习你对每次搜索结果的选择。重置全部学习记录可恢复默认顺序。"
-          }
-        }
-      }
-    },
-    "Tinycast reads %@ events to find join links. Nothing leaves this Mac.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast reads %@ events to find join links. Nothing leaves this Mac."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 读取%1$@日程以查找会议链接。数据不会离开此 Mac。"
-          }
-        }
-      }
-    },
-    "Tinycast uses the Codex, Claude and OpenCode commands already installed and signed ": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast uses the Codex, Claude and OpenCode commands already installed and signed "
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 使用此 Mac 上已安装并登录的 Codex、Claude 和 OpenCode 命令。"
-          }
-        }
-      }
-    },
-    "Tinycast uses the Codex, Claude and OpenCode commands already installed and signed in on this Mac. Tinycast never stores or asks for their API keys.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast uses the Codex, Claude and OpenCode commands already installed and signed in on this Mac. Tinycast never stores or asks for their API keys."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 使用此 Mac 上已安装并登录的 Codex、Claude 和 OpenCode 命令。Tinycast 不会保存或索取它们的 API 密钥。"
-          }
-        }
-      }
-    },
-    "Tinycast will relearn your preferred results as you use the launcher.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast will relearn your preferred results as you use the launcher."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tinycast 将在你使用启动器时重新学习偏好的结果。"
           }
         }
       }
@@ -27456,6 +28408,23 @@
         }
       }
     },
+    "Turn %@ on under Privacy & Security ▸ Calendars.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn %1$@ on under Privacy & Security ▸ Calendars."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在「隐私与安全性 ▸ 日历」中开启 %1$@。"
+          }
+        }
+      }
+    },
     "Turn Calendar on in Settings first": {
       "extractionState": "manual",
       "localizations": {
@@ -27473,19 +28442,19 @@
         }
       }
     },
-    "Turn Tinycast on under Privacy & Security ▸ Calendars.": {
+    "Turn RingCast on under Privacy & Security ▸ Calendars.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn Tinycast on under Privacy & Security ▸ Calendars."
+            "value": "Turn RingCast on under Privacy & Security ▸ Calendars."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "请在「隐私与安全性 ▸ 日历」中开启 Tinycast。"
+            "value": "请在「隐私与安全性 ▸ 日历」中开启 RingCast。"
           }
         }
       }
@@ -28068,19 +29037,36 @@
         }
       }
     },
-    "Used by Tinycast features unless they ask you to choose another model.": {
+    "Used by %@ features unless they ask you to choose another model.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Used by Tinycast features unless they ask you to choose another model."
+            "value": "Used by %1$@ features unless they ask you to choose another model."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "供 Tinycast 的各项功能使用，除非该功能另行指定模型。"
+            "value": "供 %1$@ 的各项功能使用，除非该功能另行指定模型。"
+          }
+        }
+      }
+    },
+    "Used by RingCast features unless they ask you to choose another model.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Used by RingCast features unless they ask you to choose another model."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "供 RingCast 的各项功能使用，除非该功能另行指定模型。"
           }
         }
       }
@@ -28374,19 +29360,36 @@
         }
       }
     },
-    "Welcome to Tinycast": {
+    "Welcome to %@": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Welcome to Tinycast"
+            "value": "Welcome to %1$@"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "欢迎使用 Tinycast"
+            "value": "欢迎使用 %1$@"
+          }
+        }
+      }
+    },
+    "Welcome to RingCast": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to RingCast"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "欢迎使用 RingCast"
           }
         }
       }
@@ -28561,13 +29564,30 @@
         }
       }
     },
-    "Where Tinycast looks when you search for an extension to install.": {
+    "Where %@ looks when you search for an extension to install.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Where Tinycast looks when you search for an extension to install."
+            "value": "Where %1$@ looks when you search for an extension to install."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索安装扩展时使用的来源。"
+          }
+        }
+      }
+    },
+    "Where RingCast looks when you search for an extension to install.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where RingCast looks when you search for an extension to install."
           }
         },
         "zh-Hans": {
@@ -28884,36 +29904,70 @@
         }
       }
     },
-    "Your text is sent ahead of every message in every chat, after what Tinycast ": {
+    "Your text is sent ahead of every message in every chat, after what %@ ": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your text is sent ahead of every message in every chat, after what Tinycast "
+            "value": "Your text is sent ahead of every message in every chat, after what %1$@ "
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "每条消息前都会发送你的提示词，位于 Tinycast 的内置介绍之后。"
+            "value": "每条消息前都会发送你的提示词，位于 %1$@ 的内置介绍之后。"
           }
         }
       }
     },
-    "Your text is sent ahead of every message in every chat, after what Tinycast already tells the model about itself. Both are billed again on each turn.": {
+    "Your text is sent ahead of every message in every chat, after what %@ already tells the model about itself. Both are billed again on each turn.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your text is sent ahead of every message in every chat, after what Tinycast already tells the model about itself. Both are billed again on each turn."
+            "value": "Your text is sent ahead of every message in every chat, after what %1$@ already tells the model about itself. Both are billed again on each turn."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "每条消息前都会发送你的提示词，位于 Tinycast 的内置介绍之后。两者都会在每轮对话中重新计费。"
+            "value": "每条消息前都会发送你的提示词，位于 %1$@ 的内置介绍之后。两者都会在每轮对话中重新计费。"
+          }
+        }
+      }
+    },
+    "Your text is sent ahead of every message in every chat, after what RingCast ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your text is sent ahead of every message in every chat, after what RingCast "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每条消息前都会发送你的提示词，位于 RingCast 的内置介绍之后。"
+          }
+        }
+      }
+    },
+    "Your text is sent ahead of every message in every chat, after what RingCast already tells the model about itself. Both are billed again on each turn.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your text is sent ahead of every message in every chat, after what RingCast already tells the model about itself. Both are billed again on each turn."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每条消息前都会发送你的提示词，位于 RingCast 的内置介绍之后。两者都会在每轮对话中重新计费。"
           }
         }
       }
@@ -29360,13 +30414,30 @@
         }
       }
     },
-    "holds a JavaScript engine in memory until you leave it — expect Tinycast ": {
+    "holds a JavaScript engine in memory until you leave it — expect %@ ": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "holds a JavaScript engine in memory until you leave it — expect Tinycast "
+            "value": "holds a JavaScript engine in memory until you leave it — expect %1$@ "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "JavaScript 引擎会一直驻留内存，直到退出命令。"
+          }
+        }
+      }
+    },
+    "holds a JavaScript engine in memory until you leave it — expect RingCast ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "holds a JavaScript engine in memory until you leave it — expect RingCast "
           }
         },
         "zh-Hans": {
@@ -29394,19 +30465,36 @@
         }
       }
     },
-    "in on this Mac. Tinycast never stores or asks for their API keys.": {
+    "in on this Mac. %@ never stores or asks for their API keys.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "in on this Mac. Tinycast never stores or asks for their API keys."
+            "value": "in on this Mac. %1$@ never stores or asks for their API keys."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinycast 不会保存或索取它们的 API 密钥。"
+            "value": "%1$@ 不会保存或索取它们的 API 密钥。"
+          }
+        }
+      }
+    },
+    "in on this Mac. RingCast never stores or asks for their API keys.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in on this Mac. RingCast never stores or asks for their API keys."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RingCast 不会保存或索取它们的 API 密钥。"
           }
         }
       }
@@ -29530,19 +30618,36 @@
         }
       }
     },
-    "macOS quarantined the downloaded app and Tinycast could not clear the flag.": {
+    "macOS quarantined the downloaded app and %@ could not clear the flag.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS quarantined the downloaded app and Tinycast could not clear the flag."
+            "value": "macOS quarantined the downloaded app and %1$@ could not clear the flag."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS 已隔离下载的应用，Tinycast 无法清除该标记。"
+            "value": "macOS 已隔离下载的应用，%1$@ 无法清除该标记。"
+          }
+        }
+      }
+    },
+    "macOS quarantined the downloaded app and RingCast could not clear the flag.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS quarantined the downloaded app and RingCast could not clear the flag."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS 已隔离下载的应用，RingCast 无法清除该标记。"
           }
         }
       }
@@ -29734,19 +30839,36 @@
         }
       }
     },
-    "selected and replace it. If Tinycast is already listed, switch it off ": {
+    "selected and replace it. If %@ is already listed, switch it off ": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "selected and replace it. If Tinycast is already listed, switch it off "
+            "value": "selected and replace it. If %1$@ is already listed, switch it off "
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "选中的文本并进行替换。如果列表中已有 Tinycast，请先关闭"
+            "value": "选中的文本并进行替换。如果列表中已有 %1$@，请先关闭"
+          }
+        }
+      }
+    },
+    "selected and replace it. If RingCast is already listed, switch it off ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "selected and replace it. If RingCast is already listed, switch it off "
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选中的文本并进行替换。如果列表中已有 RingCast，请先关闭"
           }
         }
       }
@@ -29780,7 +30902,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinycast 无法保证其行为。"
+            "value": "RingCast 无法保证其行为。"
           }
         }
       }
@@ -29814,7 +30936,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "因此，打开扩展时 Tinycast 的内存用量会明显增加。"
+            "value": "因此，打开扩展时 RingCast 的内存用量会明显增加。"
           }
         }
       }
@@ -29972,19 +31094,36 @@
         }
       }
     },
-    "© 2026 Abue Ammar · Released under AGPL-3.0": {
+    "© 2026 %@ · Released under AGPL-3.0": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "© 2026 Abue Ammar · Released under AGPL-3.0"
+            "value": "© 2026 %1$@ · Released under AGPL-3.0"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "© 2026 Abue Ammar · 基于 AGPL-3.0 发布"
+            "value": "© 2026 %1$@ · 基于 AGPL-3.0 发布"
+          }
+        }
+      }
+    },
+    "© 2026 awkj · Released under AGPL-3.0": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "© 2026 awkj · Released under AGPL-3.0"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "© 2026 awkj · 基于 AGPL-3.0 发布"
           }
         }
       }
@@ -30052,7 +31191,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "› 自动化」中允许 Tinycast 控制访达，然后重试。"
+            "value": "› 自动化」中允许 RingCast 控制访达，然后重试。"
           }
         }
       }

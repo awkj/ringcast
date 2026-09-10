@@ -358,7 +358,7 @@ enum SystemActionRunner {
         guard Permissions.ensureAccessibility() else {
             throw SystemActionFailure(
                 String(
-                    localized: "Allow Tinycast to control your Mac in Accessibility settings, then try again.",
+                    localized: "Allow \(AppIdentity.name) to control your Mac in Accessibility settings, then try again.",
                     bundle: .appLanguage),
                 settings: .accessibility)
         }
@@ -376,7 +376,7 @@ enum SystemActionRunner {
         guard Permissions.ensureAccessibility() else {
             throw SystemActionFailure(
                 String(
-                    localized: "Allow Tinycast to control your Mac in Accessibility settings, then try again.",
+                    localized: "Allow \(AppIdentity.name) to control your Mac in Accessibility settings, then try again.",
                     bundle: .appLanguage),
                 settings: .accessibility)
         }
@@ -499,7 +499,7 @@ enum SystemActionRunner {
         guard Permissions.ensureAccessibility() else {
             throw SystemActionFailure(
                 String(
-                    localized: "Allow Tinycast to control your Mac in Accessibility settings, then try again.",
+                    localized: "Allow \(AppIdentity.name) to control your Mac in Accessibility settings, then try again.",
                     bundle: .appLanguage),
                 settings: .accessibility)
         }
@@ -518,7 +518,7 @@ enum SystemActionRunner {
             else {
                 throw SystemActionFailure(
                     String(
-                        localized: "This version of Notification Center exposes no dismiss control Tinycast can use.",
+                        localized: "This version of Notification Center exposes no dismiss control \(AppIdentity.name) can use.",
                         bundle: .appLanguage))
             }
             let result = AXUIElementPerformAction(button, kAXPressAction as CFString)
@@ -617,7 +617,7 @@ enum SystemActionRunner {
             if getPower() == requested { return requested == 1 }
         }
         throw SystemActionFailure(
-            String(localized: "Bluetooth did not change state. Check Tinycast’s Bluetooth permission.", bundle: .appLanguage),
+            String(localized: "Bluetooth did not change state. Check \(AppIdentity.name)’s Bluetooth permission.", bundle: .appLanguage),
             settings: .bluetooth)
     }
 
@@ -647,7 +647,7 @@ enum SystemActionRunner {
             if number == -1743 {
                 throw SystemActionFailure(
                     String(
-                        localized: "Allow Tinycast to control the requested app in Automation settings, then try again.",
+                        localized: "Allow \(AppIdentity.name) to control the requested app in Automation settings, then try again.",
                         bundle: .appLanguage),
                     settings: .automation)
             }

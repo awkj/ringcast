@@ -133,7 +133,7 @@ final class WindowLayoutCoordinator {
     private func report(_ outcome: WindowLayoutRunner.Outcome, for layout: WindowLayout) async {
         if outcome.isBlockedOnPermission {
             let openSettings = await core.reportFailure(
-                title: String(localized: "Tinycast Needs Accessibility Access", bundle: .appLanguage),
+                title: String(localized: "\(AppIdentity.name) Needs Accessibility Access", bundle: .appLanguage),
                 message: String(localized: "Arranging windows uses the same permission as pasting.", bundle: .appLanguage),
                 symbol: layout.symbol, recovery: String(localized: "Open Settings", bundle: .appLanguage))
             if openSettings { Permissions.openAccessibilitySettings() }

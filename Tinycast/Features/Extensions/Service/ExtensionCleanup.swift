@@ -65,7 +65,7 @@ enum ExtensionCleanup {
 
     // MARK: - What counts as a stray
 
-    private static let workspacePrefix = "tinycast-install-"
+    private static let workspacePrefix = "\(AppIdentity.slug)-install-"
 
     /// Narrow by construction: three roots, and inside them only what names itself ours or nothing.
     private nonisolated static func strays(installed: Set<String>, in roots: Roots) -> [URL] {

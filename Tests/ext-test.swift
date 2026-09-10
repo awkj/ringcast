@@ -266,7 +266,7 @@ struct ExtensionTests {
         check("dropdown options", prefs["mode"]?.options.count == 2)
         check("dropdown default", prefs["mode"]?.effectiveDefault == .string("b"))
 
-        // A manifest with no commands isn't an extension Tinycast can run.
+        // A manifest with no commands isn't an extension KiKi can run.
         check("rejects a manifest with no commands", ExtensionManifest(json: ["name": "x"]) == nil)
         check(
             "rejects a Windows-only manifest",
@@ -608,7 +608,7 @@ struct ExtensionTests {
             ExtensionOAuthSession.handleCallbackURL(nonOAuthURL) == .ignored)
 
         // A callback with nothing waiting for it is reported, not silently dropped.
-        let strayURL = URL(string: "tinycast://oauth?code=abc&state=xyz")!
+        let strayURL = URL(string: "\(AppIdentity.urlScheme)://oauth?code=abc&state=xyz")!
         check(
             "handleCallbackURL reports an expired callback",
             ExtensionOAuthSession.handleCallbackURL(strayURL) == .expired)
@@ -661,7 +661,7 @@ struct ExtensionTests {
                 try { callback(); return "none"; } catch (error) { return error.code; }
               };
               const filePaths = [
-                fileURLToPath("file:///Applications/Tinycast%20Beta.app"),
+                fileURLToPath("file:///Applications/KiKi%20Beta.app"),
                 fileURLToPath(pathToFileURL("/tmp/a#b.png")),
                 pathToFileURL("/tmp/My Image.png").href,
                 errorCode(() => fileURLToPath("file:///tmp/a%2Fb")),
@@ -715,7 +715,7 @@ struct ExtensionTests {
         check(
             "fileURLToPath decodes a path and rejects an unusable URL",
             ExtensionAccessoriesView_labelForTest(screen.items.first?.node.array("accessories").last)
-                == "/Applications/Tinycast Beta.app\n/tmp/a#b.png\n"
+                == "/Applications/KiKi Beta.app\n/tmp/a#b.png\n"
                 + "file:///tmp/My%20Image.png\n"
                 + "ERR_INVALID_FILE_URL_PATH\nERR_INVALID_FILE_URL_HOST\n"
                 + "ERR_INVALID_URL_SCHEME",

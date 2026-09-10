@@ -18,7 +18,7 @@ struct LocalizationTests {
         }
         let files = FileManager.default
         let root = files.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-        let domain = "com.tinycast.localization-test.\(UUID().uuidString)"
+        let domain = "io.github.awkj.kiki.localization-test.\(UUID().uuidString)"
         defer { UserDefaults.standard.removePersistentDomain(forName: domain) }
         defer { try? files.removeItem(at: root) }
         let contents = root.appendingPathComponent("Localization.app/Contents")
@@ -165,7 +165,7 @@ struct LocalizationTests {
     }
 
     static func checkPreferences() {
-        let domain = "com.tinycast.language-test.\(UUID().uuidString)"
+        let domain = "io.github.awkj.kiki.language-test.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: domain)!
         defer { defaults.removePersistentDomain(forName: domain) }
         defaults.register(defaults: ["AppleLanguages": ["zh-Hans"]])
@@ -206,6 +206,23 @@ struct LocalizationTests {
         precondition(
             String(localized: "Open \(name)") == (chinese ? "打开 Clipboard History" : "Open Clipboard History")
         )
+        let appName = AppIdentity.name
+        let shortcut = "⌘Space"
+        precondition(
+            String(localized: "Welcome to \(appName)")
+                == (chinese ? "欢迎使用 \(appName)" : "Welcome to \(appName)"))
+        precondition(
+            String(localized: "Press \(shortcut) anytime to start using \(appName).")
+                == (chinese ? "随时按下 \(shortcut) 开始使用 \(appName)。"
+                    : "Press \(shortcut) anytime to start using \(appName)."))
+        let backupExtension = AppIdentity.backupExtension
+        precondition(
+            String(localized: "Choose a .\(backupExtension) file exported from \(appName).")
+                == (chinese ? "请选择从 \(appName) 导出的 .\(backupExtension) 文件。"
+                    : "Choose a .\(backupExtension) file exported from \(appName)."))
+        precondition(
+            String(localized: String.LocalizationValue("About \(appName)"))
+                == (chinese ? "关于 \(appName)" : "About \(appName)"))
         let permission = Bundle.main.object(forInfoDictionaryKey: "NSCameraUsageDescription") as? String
         precondition(permission?.contains(chinese ? "摄像头" : "camera") == true)
         for tab in SettingsTab.allCases {

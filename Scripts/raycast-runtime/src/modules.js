@@ -1,3 +1,4 @@
+import { appIdentity } from "./app-identity.generated.js";
 // The `require` an extension bundle sees. Bundles are single-file CJS with `react`,
 // `react/jsx-runtime`, `@raycast/api` and the Node builtins left external — exactly the set below.
 
@@ -19,7 +20,7 @@ export function requireModule(name) {
   const root = key.startsWith("@") ? key.split("/").slice(0, 2).join("/") : key.split("/")[0];
   if (registry.has(root)) return registry.get(root);
   throw new Error(
-    `Cannot find module '${key}'. Tinycast provides React, @raycast/api and a subset of Node builtins — see docs/extensions.md.`,
+    `Cannot find module '${key}'. ${appIdentity.name} provides React, @raycast/api and a subset of Node builtins — see docs/extensions.md.`,
   );
 }
 

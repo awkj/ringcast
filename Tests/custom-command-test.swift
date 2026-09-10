@@ -5,7 +5,7 @@ import Foundation
 struct CustomCommandTests {
     @MainActor
     static func main() async {
-        let suiteName = "com.tinycast.custom-command-tests"
+        let suiteName = "io.github.awkj.kiki.custom-command-tests"
         let defaults = isolatedDefaults(suiteName)
 
         var failures = 0

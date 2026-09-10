@@ -283,7 +283,23 @@ struct LauncherScreen: PaletteScreen {
         return true
     }
 
-    /// ⌘1–⌘9/⌘0 — launch a favorite by position, in either palette size.
+    private static let resultShortcutCount = 9
+
+    private var resultSlots: [String: Character] {
+        Dictionary(uniqueKeysWithValues: results.prefix(Self.resultShortcutCount).enumerated().map {
+            ($0.element.id, Character(String($0.offset + 1)))
+        })
+    }
+
+    func selectResultSlot(at index: Int) -> Bool {
+        guard index >= 0, index < Self.resultShortcutCount, results.indices.contains(index),
+            let selection = rows.firstIndex(of: .entry(results[index]))
+        else { return false }
+        vm.selection = selection
+        return true
+    }
+
+    /// Compact mode keeps its favorite slots even though the full launcher addresses results.
     func launchFavorite(at index: Int) -> Bool {
         guard let app = pinnedFavorites.dropFirst(index).first else { return false }
         core.launcherCoordinator.launch(app)
@@ -366,6 +382,7 @@ struct LauncherScreen: PaletteScreen {
     private func content(selection: Int, scroll: ScrollIntent) -> some View {
         LauncherList(
             results: results,
+            resultSlots: resultSlots,
             selectedRowID: row(at: selection)?.id,
             favoriteCount: favoriteCount,
             showSections: showSections,

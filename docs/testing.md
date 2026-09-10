@@ -1,6 +1,6 @@
 # Testing and verification
 
-How to check that a change holds up. Tinycast has no XCTest target and no UI tests: the automated half
+How to check that a change holds up. RingCast has no XCTest target and no UI tests: the automated half
 is a set of standalone harnesses, and the manual half is the sweep at the bottom of this file.
 
 ## Definition of done
@@ -18,6 +18,10 @@ The mechanical bar, in one place so it cannot drift. All five pass before a chan
 CI runs the first two and does not build the app at all — so the build, the purity grep and the docs
 are on you. Each is expanded below; the manual sweep at the end of this file is the sixth, judged by
 what you touched.
+
+Identity synchronization is checked by both lint and the test runner. `Scripts/test-identity.mjs`
+generates a different name and storage identity in a temporary directory, verifies channel separation
+and translated format argument positions, and confirms stale generated files are rejected.
 
 ## The harnesses
 
@@ -53,7 +57,7 @@ assertion, and it is the more important one.
 
 A harness also runs in your own login session against the real system, with no sandbox and no fixture
 world, so it must never mutate state the machine shares with the apps you use. `NSPasteboard.general`
-is the trap: a running Tinycast records every write to it as a genuine copy, so a fixture left there
+is the trap: a running RingCast records every write to it as a genuine copy, so a fixture left there
 lands in clipboard history looking like something the user copied. `notes-editor-test` seeded one on
 every run from #232 onward by calling the native `copy:`/`cut:`/`paste:` actions; it now drives the
 `writeSelection(to:types:)` and `readSelection(from:)` primitives those actions delegate to, against
@@ -120,7 +124,6 @@ If a change touches anything in the right column, the harness on the left is man
 | `localization-test` | Compiled catalogs, saved and live language selection, mounted SwiftUI state retention, native picker labels, AppKit titles, system reset, interpolation and bilingual Settings navigation |
 | `backup-archive-test` | all of `Backup/Model/`, plus `Backup/Service/BackupStaging.swift` |
 | `updates-test` | `Updates/Model/` — version precedence, channel filtering, install route, readiness |
-| `support-test` | `Support/Model/` — when the support reminder comes due, and a clock moved backwards |
 | `mcp-test` | `MCP/Model/` and `MCPSettingsStore` — JSON-RPC framing, handles, tool names, output flattening, trust, `@server` addressing |
 | `mcp-stdio-test` | `MCP/Service/` against a stub server — handshake, listing, calling, and every way one can go away |
 
@@ -160,11 +163,11 @@ A clean build is part of the bar; CI does not build the app, so this is on you.
 
 ```sh
 xcodegen generate                 # only after editing project.yml
-xcodebuild build -project Tinycast.xcodeproj -scheme Tinycast -configuration Debug \
+xcodebuild build -project Launcher.xcodeproj -scheme Launcher -configuration Debug \
   CODE_SIGNING_ALLOWED=NO
-xcodebuild build -project Tinycast.xcodeproj -scheme Tinycast -configuration Release \
+xcodebuild build -project Launcher.xcodeproj -scheme Launcher -configuration Release \
   CODE_SIGNING_ALLOWED=NO
-find ~/Library/Developer/Xcode/DerivedData -name "Tinycast*.app" -maxdepth 6 -print -quit
+find ~/Library/Developer/Xcode/DerivedData -name "RingCast*.app" -maxdepth 6 -print -quit
 ```
 
 - Zero **new** warnings. Pre-existing ones are not your problem; new ones are.
@@ -191,7 +194,7 @@ search result that navigates and then sits there.
 
 ## Performance measurement
 
-`Platform/Signposts.swift` emits eight intervals on the `com.tinycast.perf` subsystem: `AppCore.start`,
+`Platform/Signposts.swift` emits eight intervals on the `io.github.awkj.ringcast.perf` subsystem: `AppCore.start`,
 `AppIndex.scan`, `AppIndex.rank`, `PaletteWindowController.show`, `UninstallScanner.discover` and
 `UninstallScanner.measure`, `FileSearchService.search`, and `Notes.search`. Open the Time Profiler or
 `os_signpost` instrument in Instruments and filter to that subsystem; nothing needs recompiling.
@@ -203,7 +206,7 @@ file resolves. Keep the entry's source list matching the command beside it.
 Run the real Spotlight-backed file-search benchmark separately from the deterministic harnesses:
 
 ```sh
-swiftc -O -swift-version 6 Tinycast/Platform/Signposts.swift \
+swiftc -O -swift-version 6 Tinycast/Platform/AppIdentity.generated.swift Tinycast/Platform/Signposts.swift \
     Tinycast/Features/Launcher/Model/SearchRelevance.swift \
     Tinycast/Features/FileSearch/Model/*.swift \
     Tinycast/Features/FileSearch/Service/FileSearchService.swift \
@@ -218,7 +221,7 @@ The calculator benchmark is deterministic — an injected clock, calendar and ra
 timing harness rather than an assertion one, and stays out of `run-tests.sh` for that reason:
 
 ```sh
-swiftc -O -swift-version 6 Tinycast/Features/Calculator/Model/*.swift \
+swiftc -O -swift-version 6 Tinycast/Platform/AppIdentity.generated.swift Tinycast/Features/Calculator/Model/*.swift \
     Tests/calc-performance.swift -o /tmp/calc-performance
 /tmp/calc-performance          # µs per query, by grammar
 /tmp/calc-performance --probe  # every answer as JSON, to diff two builds
@@ -236,7 +239,7 @@ the attachment path against the bounded reader it now delegates to. Compare thre
 per build with identical `-O` settings:
 
 ```sh
-swiftc -O -swift-version 6 Tinycast/Platform/PasteboardFiles.swift \
+swiftc -O -swift-version 6 Tinycast/Platform/AppIdentity.generated.swift Tinycast/Platform/PasteboardFiles.swift \
     Tinycast/Features/Clipboard/Model/{ClipboardStore,ClipboardFilter,ColorValue,ColorFormat,ColorSpaces}.swift \
     Tinycast/Features/Clipboard/Service/ClipboardManager.swift \
     Tests/clipboard-file-performance.swift -o /tmp/clipboard-file-performance
@@ -277,11 +280,12 @@ There is no UI test suite, so this is it. Run the core sweep for any change that
 run the scoped section for whatever feature you touched. Budget about five minutes plus three per
 section.
 
-Run against the **Debug channel** (`Tinycast Dev.app`, `com.tinycast.app.dev`). It has its own prefs,
+Run against the **Debug channel** (`RingCast Dev.app`, `io.github.awkj.ringcast.dev`). It has its own prefs,
 caches, TCC grants and login item, so this cannot disturb an installed copy.
 
 ### Core
 
+- Launcher footer shows `⌘, Settings` in the app language; clicking it or pressing ⌘, opens Settings
 - Palette hotkey opens the launcher; pressing it again closes it; Escape clears a non-empty query,
   then hides on a second press; clicking away closes it
 - Search a mode command (Clipboard History, Search Emoji, Search Quicklinks, Search Files, AI Chat)
@@ -304,14 +308,21 @@ caches, TCC grants and login item, so this cannot disturb an installed copy.
 - ⌃N/⌃P move the highlight as ↓/↑ do; ⌃F/⌃B step the emoji grid's selection, and the caret elsewhere
 - The highlight always sits on the row the footer pill describes
 - With a calculation typed, the calculator card is first and is selected first
-- Section headers appear in order: Favorites, Applications, System Settings, Quicklinks, Snippets,
+- Section headers appear in order (Light omits Applications and Results): Favorites, Applications, System Settings, Quicklinks, Snippets,
   System Actions, Window Management, Custom Commands, Commands
 - With a non-ASCII input source active, ⌘K opens Actions; ↑/↓ move it, ↵ activates, Escape closes it
 - While a menu is open, typing does **not** change the query and the caret is hidden
 - Tab toggles launcher ↔ clipboard; bare Backspace on an empty query backs out of a sub-screen
 - Launching an app focuses it; escaping the palette returns focus to the app you came from
-- Paste from clipboard history lands in that app, not in Tinycast
-- No flash, flicker or reflow on open, and row metrics unchanged
+- Paste from clipboard history lands in that app, not in RingCast
+- No flash, flicker or reflow on open; Light launcher rows show paths, blue selection and separators
+- Launcher footer contains only version and contextual keyboard hints; ⌘, still opens Settings
+- Other modes retain their Settings gear and glass action capsule
+- Launcher footer has an inset top hairline, centered app name/version, and right-aligned keyboard hints
+- ⌘1–⌘9 open matching numbered results after a search; argument commands still prompt for missing fields
+- Compact ⌘-digits still launch favorites and Clipboard ⌘-digits still address pinned entries
+- In Light, scroll through the footer text: rows pass beneath without a reserved bar
+- Switching to Dark restores shared rows while retaining the launcher’s text-only footer
 
 ### Clipboard
 
@@ -321,7 +332,7 @@ caches, TCC grants and login item, so this cannot disturb an installed copy.
 - ⌘C copies the selected history entry and closes the palette with either default action; check
   text, images, files, filtered results, selected search text and an empty list. Other screens copy normally
 - ⌃X deletes the selected entry and ⌃⇧X clears the history, from the list and from an open ⌘K menu
-- ⌃⇧X asks first, through Tinycast's own dialog; Cancel and Esc both leave every entry in place
+- ⌃⇧X asks first, through RingCast's own dialog; Cancel and Esc both leave every entry in place
 - ↵ pastes into the previous app; ⌥↵ pastes without closing the palette
 - A copy from an excluded app (Settings ▸ Clipboard ▸ Disabled Applications) is **not** recorded
 - Password-manager copies are still not recorded
@@ -399,7 +410,7 @@ caches, TCC grants and login item, so this cannot disturb an installed copy.
   autosave — in the browse list; naming it replaces that, and clearing the name brings it back
 - Inline rename updates the Markdown filename without changing source, and starts from that filename
   even where the row shows a derived title; collisions receive a suffix
-- Delete confirms through Tinycast, moves the file to Trash, and selecting another note never loses an
+- Delete confirms through RingCast, moves the file to Trash, and selecting another note never loses an
   unsaved edit
 - An existing `Floating Note.md` appears as an ordinary note without conversion
 - Markdown source remains completely literal: markers stay visible, links are not activated, and task
@@ -416,7 +427,7 @@ caches, TCC grants and login item, so this cannot disturb an installed copy.
 - Dragging the title bar moves the window and dragging an edge resizes it; both survive relaunch
 - Clicking another app leaves the panel visible; Escape, Command-W, and the red light hide it
 - Command-Q does nothing anywhere; with Settings in front, Command-W closes Settings
-- Hiding restores the previous external app or Tinycast window
+- Hiding restores the previous external app or RingCast window
 - Open Notes Folder opens Finder with the active Markdown file selected, or the folder with no note
 - Deleting every note closes the browse list and leaves one clean empty state with no character count;
   Command-N from there creates and selects one note
@@ -457,7 +468,7 @@ caches, TCC grants and login item, so this cannot disturb an installed copy.
 - Adding or deleting an event in Calendar.app updates an open palette without a reopen
 - A meeting with no link is listed and searchable, and answers Open in Calendar rather than Join
 - Import a backup taken with Calendar on: it comes back **off**, and no calendar toggle travels
-- Calendar in Menu Bar on Disabled: the calendar item is gone and Tinycast's own item is unaffected;
+- Calendar in Menu Bar on Disabled: the calendar item is gone and RingCast's own item is unaffected;
   turning `Show in menu bar` off leaves an enabled calendar item in place, and both off leaves neither
 - On Meeting Title with Show Upcoming Events at 5 minutes, the title and countdown appear at T-5 and
   step on the minute boundary, not on a keystroke
@@ -495,14 +506,17 @@ caches, TCC grants and login item, so this cannot disturb an installed copy.
 
 ### Settings and backup
 
+- With the Dock icon visible, right-click → Search opens and focuses the launcher; repeating it
+  keeps search open. Settings opens or restores the existing Settings window, including from minimized.
+- Change the app language and reopen the Dock menu: both custom actions use the selected language.
 - Every pane renders and the sidebar switches without flicker
 - A feature switch takes effect in the launcher immediately; every setting survives relaunch
-- Export produces a `.tinycast`; import applies it and reports a per-category summary
+- Export produces a `.ringcast`; import applies it and reports a per-category summary
 - Untick a category on export, and the import picker greys that row out rather than offering it
 - Untick a category on **import** and confirm it did not arrive, while the ticked ones did
 - An image clip round-trips and still renders; the archive can then be deleted without breaking it
 - A file whose `manifest.json` `format` was hand-edited is refused **with a message naming it**
-- Cancelling the save panel leaves nothing in `~/Library/Caches/com.tinycast.app.dev/backup-staging/`
+- Cancelling the save panel leaves nothing in `~/Library/Caches/io.github.awkj.ringcast.dev/backup-staging/`
 - **`snippetsEnabled` is not in the exported file**, and importing does not enable snippets
 - Nothing in the extracted tree names a Keychain item, an extension, or an AI conversation
 
@@ -512,10 +526,10 @@ The realistic storage failure is a store that crashes on an absent file rather t
 Wipe the Dev channel and check that path directly:
 
 ```sh
-rm -rf ~/Library/Caches/com.tinycast.app.dev
-rm -rf "$HOME/Library/Application Support/com.tinycast.app.dev"
-defaults delete com.tinycast.app.dev 2>/dev/null || true
-tccutil reset Accessibility com.tinycast.app.dev 2>/dev/null || true
+rm -rf ~/Library/Caches/io.github.awkj.ringcast.dev
+rm -rf "$HOME/Library/Application Support/io.github.awkj.ringcast.dev"
+defaults delete io.github.awkj.ringcast.dev 2>/dev/null || true
+tccutil reset Accessibility io.github.awkj.ringcast.dev 2>/dev/null || true
 ```
 
 - Launches with every store directory absent — no crash, no hang; onboarding runs
@@ -525,5 +539,5 @@ tccutil reset Accessibility com.tinycast.app.dev 2>/dev/null || true
 - **Every setting shows its intended default.** Walk the panes: this is what catches a broken
   absence-versus-`false` read
 - Quit and relaunch: everything created above persisted
-- Nothing was written outside `com.tinycast.app.dev/`. Channel isolation is not negotiable — a Dev build
+- Nothing was written outside `io.github.awkj.ringcast.dev/`. Channel isolation is not negotiable — a Dev build
   writing into the stable app's directory is a defect even though the data is disposable

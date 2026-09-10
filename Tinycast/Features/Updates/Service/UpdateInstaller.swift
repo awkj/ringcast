@@ -14,7 +14,7 @@ struct UpdateInstaller: Sendable {
                 return "Downloading… \(Self.size(received)) of \(Self.size(expected))"
             case .extracting: return String(localized: "Expanding…", bundle: .appLanguage)
             case .verifying: return String(localized: "Verifying…", bundle: .appLanguage)
-            case .replacing: return String(localized: "Replacing Tinycast…", bundle: .appLanguage)
+            case .replacing: return String(localized: "Replacing \(AppIdentity.name)…", bundle: .appLanguage)
             }
         }
 
@@ -37,6 +37,9 @@ struct UpdateInstaller: Sendable {
     func install(
         _ release: AvailableRelease, onProgress: @escaping @Sendable (Phase) -> Void
     ) async throws {
+        guard UpdateSource.current.allowsUpdates(on: ReleaseChannel(bundleID: Bundle.main.bundleIdentifier)) else {
+            throw UpdateFailure.disabled
+        }
         try? FileManager.default.createDirectory(
             at: stagingDirectory, withIntermediateDirectories: true)
         let archive = stagingDirectory.appendingPathComponent("\(release.tag).zip")
@@ -74,7 +77,7 @@ struct UpdateInstaller: Sendable {
         guard result.succeeded else { throw UpdateFailure.extractFailed(result.tail) }
         let contents = try? FileManager.default.contentsOfDirectory(
             at: directory, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
-        // Named for its channel — "Tinycast Beta.app", not "Tinycast.app".
+        // Named for its channel — "the app Beta.app", not "the app.app".
         guard let app = contents?.first(where: { $0.pathExtension == "app" }) else {
             throw UpdateFailure.noAppInArchive
         }

@@ -106,7 +106,7 @@ final class UninstallCoordinator {
                 title: String(localized: "Couldn’t Open Get Info", bundle: .appLanguage),
                 message: String(
                     localized:
-                        "Allow Tinycast to control Finder in System Settings › Privacy & Security › Automation, then try again.",
+                        "Allow \(AppIdentity.name) to control Finder in System Settings › Privacy & Security › Automation, then try again.",
                     bundle: .appLanguage
                 ),
                 symbol: "info.circle", tone: .danger)

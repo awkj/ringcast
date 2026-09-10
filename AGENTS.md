@@ -1,4 +1,4 @@
-# Tinycast
+# RingCast
 
 A native macOS menu-bar launcher — a minimal Raycast: fuzzy app launcher, global and per-app hotkeys, a
 text/image clipboard history, an inline calculator, a floating note, snippets, quicklinks, window
@@ -8,7 +8,7 @@ dependencies.
 
 ## Posture: latest-only, always
 
-**Tinycast targets one macOS — the current stable release — and nothing else.** macOS 26+, the Xcode 26
+**RingCast targets one macOS — the current stable release — and nothing else.** macOS 26+, the Xcode 26
 toolchain, Swift 6 language mode. There is no compatibility floor to defend, no shim layer and no
 deprecation debt, and that is the single largest reason the codebase stays as small as it does.
 
@@ -72,7 +72,7 @@ feature's doc, under its own `## Invariants`.
   the forced-dark build shipped, restated rather than re-derived. Retune a light branch freely — change
   a dark one only when the task is to change Dark. `AppAppearance` drives `NSApp.appearance`, and
   `.system` maps to `nil` so AppKit follows macOS on its own.
-- **Tinycast presents its own dialogs — never `NSAlert`, `NSSlider` or a system popover.** A question
+- **RingCast presents its own dialogs — never `NSAlert`, `NSSlider` or a system popover.** A question
   goes through `DialogController`, a report through a HUD via `HUDPresenter`.
 - **A networked feature fetches on a private `.ephemeral`, `urlCache = nil` session**, never
   `URLSession.shared`, so its own cache file stays the only copy on disk. `CurrencyRateStore` is the
@@ -100,6 +100,14 @@ feature's doc, under its own `## Invariants`.
   tuned by eye against the palette's floating bars, so any edit is a visual regression. Needing to touch
   one to fix a scroll bug means the real fix belongs elsewhere.
 
+## Application identity
+
+`Config/AppIdentity.json` owns branding and bundle namespaces. Run `node Scripts/sync-identity.mjs`
+after editing it. Do not edit `AppIdentity.generated.swift`, `Config/Identity.generated.yml`,
+`Tinycast/Resources/{Localizable,InfoPlist}.xcstrings`, `.vscode/{launch,tasks}.json` or
+`Scripts/raycast-runtime/src/app-identity.generated.js` directly. Localization sources live under
+`Config/Localization/`; IDE templates live under `Config/`. Details: [identity.md](docs/identity.md).
+
 ## Conventions worth knowing up front
 
 - **A type's suffix says what it *is*** — `Store`, `Coordinator`, `Controller`, `Manager`, `Engine`,
@@ -112,10 +120,10 @@ feature's doc, under its own `## Invariants`.
   constant or type instead. Cap 100 characters, delete rather than update, and never comment a change
   you just made. Nothing lints this; get it right the first time.
   Full rules: [standards.md#comments](docs/standards.md#comments).
-- **Debug builds are their own channel** — `Tinycast Dev.app` / `com.tinycast.app.dev` — so a local run
+- **Debug builds are their own channel** — `RingCast Dev.app` / `io.github.awkj.ringcast.dev` — so a local run
   never shares prefs, caches, TCC grants or the login item with an installed copy. Anything newly
   persisted must stay keyed by `Bundle.main.bundleIdentifier`.
-- **XcodeGen owns the project.** `Tinycast.xcodeproj` is committed but generated from `project.yml`;
+- **XcodeGen owns the project.** `Launcher.xcodeproj` is committed but generated from `project.yml`;
   after editing it, run `xcodegen generate` and commit both. No SwiftPM, and never `Bundle.module`.
 
 ## Before you finish

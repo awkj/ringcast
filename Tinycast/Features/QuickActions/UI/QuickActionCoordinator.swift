@@ -60,7 +60,7 @@ final class QuickActionCoordinator {
                     title: String(localized: "Enable Quick Actions?", bundle: .appLanguage),
                     message:
                         String(localized: """
-                            Tinycast needs the Accessibility permission to read the text you have selected \
+                            \(AppIdentity.name) needs the Accessibility permission to read the text you have selected \
                             in other apps and replace it. Nothing is read until you press a shortcut.
                             """, bundle: .appLanguage),
                     symbol: "wand.and.sparkles", confirmTitle: String(
@@ -131,8 +131,8 @@ final class QuickActionCoordinator {
                     title: String(localized: "Quick Actions can't read your selection", bundle: .appLanguage),
                     message:
                         String(localized: """
-                            Tinycast needs the Accessibility permission to read the text you have selected \
-                            and replace it. If Tinycast is already listed, switch it off and on again \
+                            \(AppIdentity.name) needs the Accessibility permission to read the text you have selected \
+                            and replace it. If \(AppIdentity.name) is already listed, switch it off and on again \
                             — a rebuilt app keeps a stale entry.
                             """, bundle: .appLanguage),
                     symbol: "wand.and.sparkles", recovery: String(localized: "Open System Settings", bundle: .appLanguage))

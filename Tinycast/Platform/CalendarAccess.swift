@@ -1,6 +1,6 @@
 import Foundation
 
-/// What the Mac will let Tinycast read of the user's calendar.
+/// What the Mac will let the app read of the user's calendar.
 enum CalendarAccess: Sendable {
     case notDetermined
     case granted

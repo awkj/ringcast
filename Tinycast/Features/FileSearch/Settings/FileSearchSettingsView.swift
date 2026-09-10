@@ -123,7 +123,7 @@ private struct FileSearchScopesSection: View {
         panel.allowsMultipleSelection = true
         panel.prompt = String(localized: "Add", bundle: .appLanguage)
         panel.message = String(localized: "Choose folders to include when searching for files.", bundle: .appLanguage)
-        // Tinycast is an accessory app, so the panel opens behind the frontmost app without this.
+        // the app is an accessory app, so the panel opens behind the frontmost app without this.
         NSApp.activate(ignoringOtherApps: true)
         guard panel.runModal() == .OK else { return }
         settings.fileSearchScopes = FileSearchScope.normalize(

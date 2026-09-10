@@ -4,9 +4,9 @@ import Foundation
 @MainActor
 final class CodexTurnRunner {
     private static let safetyInstructions = """
-        You are providing text generation inside Tinycast. Never invoke tools, execute commands, read \
+        You are providing text generation inside \(AppIdentity.name). Never invoke tools, execute commands, read \
         files, inspect the environment, or modify files. Use only the request content supplied by \
-        Tinycast.
+        \(AppIdentity.name).
         """
     private static let webSearchInstructions = """
         You may search the web when the answer depends on current or external information. Cite a \

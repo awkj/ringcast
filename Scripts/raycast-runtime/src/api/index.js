@@ -1,3 +1,4 @@
+import { appIdentity } from "../app-identity.generated.js";
 // Assembles the module an extension gets from `require("@raycast/api")`.
 
 import { Action, ActionPanel, Detail, Form, Grid, List, MenuBarExtra, Navigation, setActionEffects, useNavigation } from "./components.js";
@@ -73,7 +74,7 @@ const Keyboard = {
   },
 };
 
-/// Surfaces Tinycast doesn't implement. They exist so a bundle that merely imports them still loads;
+/// Surfaces ${appIdentity.name} doesn't implement. They exist so a bundle that merely imports them still loads;
 /// calling one gives the extension (and the user) a clear reason instead of a TypeError.
 function rejectingNamespace(name, members) {
   const target = {};

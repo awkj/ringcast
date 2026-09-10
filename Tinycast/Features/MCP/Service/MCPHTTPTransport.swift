@@ -92,7 +92,7 @@ final class MCPHTTPTransport: MCPTransport {
         case 200...299: return
         case 401, 403:
             throw MCPTransportError.requestFailed(String(
-                localized: "The server rejected Tinycast's credentials.",
+                localized: "The server rejected \(AppIdentity.name)'s credentials.",
                 bundle: .appLanguage))
         // A dropped session is the server's to end; the next request opens a fresh one.
         case 404 where sessionID != nil:

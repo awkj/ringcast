@@ -151,7 +151,7 @@ final class TextInjector {
         }
     }
 
-    /// A hotkey's target comes from `frontmostApplication`, which can be Tinycast itself.
+    /// A hotkey's target comes from `frontmostApplication`, which can be the app itself.
     private func targetAcceptsInjection(_ targetApp: NSRunningApplication?) -> Bool {
         guard let targetApp,
             !targetApp.isTerminated,
@@ -214,7 +214,7 @@ final class TextInjector {
     func copySelection(
         from targetApp: NSRunningApplication?, pasteboard: any PasteboardAccess
     ) async -> String? {
-        clipboardManager.prepareForTinycastPasteboardMutation()
+        clipboardManager.prepareForInternalPasteboardMutation()
         guard let original = PasteboardSnapshot(pasteboard: pasteboard) else { return nil }
         defer { restore(original, to: pasteboard) }
 
@@ -234,7 +234,7 @@ final class TextInjector {
         guard let items = snapshot.pasteboardItems() else { return }
         pasteboard.clearContents()
         guard pasteboard.writeObjects(items) else { return }
-        clipboardManager.synchronizeAfterTinycastPasteboardMutation(
+        clipboardManager.synchronizeAfterInternalPasteboardMutation(
             changeCount: pasteboard.changeCount)
     }
 
@@ -448,12 +448,12 @@ final class TextInjector {
     }
 
     private func beginTemporaryPasteboardLease(_ text: String) -> TemporaryPasteboardLease? {
-        clipboardManager.prepareForTinycastPasteboardMutation()
+        clipboardManager.prepareForInternalPasteboardMutation()
         return TemporaryPasteboardLease.begin(
             text: text,
             pasteboard: NSPasteboard.general
         ) { [clipboardManager] changeCount in
-            clipboardManager.synchronizeAfterTinycastPasteboardMutation(
+            clipboardManager.synchronizeAfterInternalPasteboardMutation(
                 changeCount: changeCount)
         }
     }
@@ -469,7 +469,7 @@ final class TextInjector {
         switch lease.restoreIfOwned() {
         case .restored(let changeCount):
             // Keeps the poller from recording the restored original as a second copy.
-            clipboardManager.synchronizeAfterTinycastPasteboardMutation(changeCount: changeCount)
+            clipboardManager.synchronizeAfterInternalPasteboardMutation(changeCount: changeCount)
         case .superseded:
             break
         case .failed:
@@ -867,7 +867,7 @@ final class TextInjector {
     private func tag(_ event: CGEvent) {
         event.setIntegerValueField(
             .eventSourceUserData,
-            value: Paster.tinycastEventTag)
+            value: Paster.internalEventTag)
     }
 
     private func post(_ events: [CGEvent], targetApp: NSRunningApplication?) {

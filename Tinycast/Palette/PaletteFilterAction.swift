@@ -1,7 +1,7 @@
 import Foundation
 
 /// Which type filter ⌘P opens. The header shows at most one, so this says which — and a running
-/// command's own dropdown answers first, so Tinycast's clipboard filter can never open over it.
+/// command's own dropdown answers first, so the app's clipboard filter can never open over it.
 enum PaletteFilterAction: Equatable {
     /// A running command's `searchBarAccessory` dropdown.
     case extensionAccessory

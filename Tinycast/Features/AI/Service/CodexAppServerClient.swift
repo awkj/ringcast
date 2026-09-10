@@ -140,8 +140,8 @@ final class CodexAppServerClient {
                 method: "initialize",
                 params: [
                     "clientInfo": [
-                        "name": "tinycast",
-                        "title": "Tinycast",
+                        "name": AppIdentity.slug,
+                        "title": "\(AppIdentity.name)",
                         "version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
                             ?? "0"
                     ],
@@ -252,7 +252,7 @@ final class CodexAppServerClient {
         default:
             try? send(
                 CodexAppServerProtocol.errorResponse(
-                    id: id, message: "Tinycast does not expose Codex tools."))
+                    id: id, message: "\(AppIdentity.name) does not expose Codex tools."))
             return
         }
         try? send(CodexAppServerProtocol.response(id: id, result: result))

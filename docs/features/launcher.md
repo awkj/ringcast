@@ -32,6 +32,13 @@ earliest scope wins).
 - **`Model/SearchScopes.swift` and `Model/LauncherRankingStore.swift` are pure too** — the ranking store
   takes its clock via `now` and its path via `fileURL`, for `scopes-test` and `ranking-test`.
 
+## Light appearance
+
+The light launcher uses a compact two-line list: application names include `.app` and show the bundle
+path underneath; other entries show their subtitle or category. The selected row is blue with white
+text and a return glyph. Thin rules separate unselected rows. Application and Results headers are
+omitted without changing the flat selection order. The first nine results carry working ⌘-digit shortcuts. Dark keeps the shared single-line rows.
+
 ## Search scopes
 
 `SearchScopes` (`Launcher/Model/SearchScopes.swift`) owns the paths; the list is user-editable in
@@ -55,7 +62,7 @@ lives — `/Applications/Safari.app` is a symlink flagged hidden, so `.skipsHidd
 Finder ships as an individual bundle scope rather than by adding `/System/Library/CoreServices`, which
 holds ~120 background-agent bundles. There is no reliable way to filter those: `LSUIElement`,
 `LSBackgroundOnly` and "declares no icon" each also exclude legitimately launchable apps — Raycast,
-Stats, Tinycast itself, Mission Control, Siri, Time Machine, Screenshot, System Information, Font
+Stats, RingCast itself, Mission Control, Siri, Time Machine, Screenshot, System Information, Font
 Book. Don't reintroduce such a heuristic.
 
 `AppIndex.start(settings:)` observes `$searchScopes`, so an edit re-indexes immediately; overlapping
@@ -86,7 +93,7 @@ next naming demand is a new producer, not a new rung.
 
 | Role | What lands in it | Looseness |
 | --- | --- | --- |
-| `.userAlias` | the alias the user typed in Tinycast, for any entry kind | literal |
+| `.userAlias` | the alias the user typed in RingCast, for any entry kind | literal |
 | `.name` | display name, a snippet's keyword, an `.app` bundle the user renamed on disk | fuzzy |
 | `.translation` | localizations, Spotlight alternate names, romanizations | fuzzy |
 | `.owner` | the extension a command came from | literal |
@@ -246,7 +253,7 @@ handler through `AppLauncher.open`.
 The shape a query has to have is `QuicklinkDestination.detect` returning `.web`, reused rather than
 re-written so `github.com` and `https://…` mean the same thing here as they do in a quicklink. The
 entry is an ordinary `.command`, so `VisibilityStore` still gates it — Commands off hides the row —
-and its `url` carries the destination instead of the catalog's `tinycast://` placeholder. Nothing
+and its `url` carries the destination instead of the catalog's `kiki://` placeholder. Nothing
 learns from it and nothing pins it: `LauncherCoordinator.launch` skips `LauncherRankingStore` for a
 contextual row, the way it already skips a category listing, since a pasted URL is not a term any
 row should rank under; and ⇧⌘F is refused, because a favorite the empty query can never resolve is
@@ -412,7 +419,7 @@ other `z…` pick, so its override budget collapses on its own.
 
 ## System actions
 
-`SystemActionCatalog` is a Foundation-only inventory of the macOS actions Tinycast exposes. Its
+`SystemActionCatalog` is a Foundation-only inventory of the macOS actions RingCast exposes. Its
 stable entry IDs, labels, symbols and confirmation policy are covered by
 `Tests/system-action-test.swift`; platform side effects live separately in `SystemActionRunner`.
 `SystemActionCoordinator.runSystemAction(id:)` remains the one execution funnel — shared by palette activation and a
@@ -432,14 +439,14 @@ Public AppKit, CoreAudio and workspace APIs are preferred. Actions without a sta
 use fixed system tools, Apple Events, Accessibility, or a dynamically resolved Bluetooth power API.
 Those routes run only on explicit activation. Automation, Accessibility or Bluetooth permission is
 requested at first use, and denial produces an alert linking to the relevant System Settings pane.
-Toggle System Appearance changes macOS; Tinycast follows it only while its own Appearance is System.
+Toggle System Appearance changes macOS; RingCast follows it only while its own Appearance is System.
 
 Restart, Shut Down, Log Out, Empty Trash and Quit All Applications confirm before execution: ↵ runs
-the action, Escape cancels. Every dialog is Tinycast's own: confirmations, failure reports and the Set
+the action, Escape cancels. Every dialog is RingCast's own: confirmations, failure reports and the Set
 Volume slider all render through `DialogController` rather than an `NSAlert`
 (see [ui.md](../ui.md#dialogs--hud)). Each confirmation carries the action's own icon — Restart shows
 `arrow.clockwise`, Empty Trash `trash.slash` — so the dialog is recognizably about the row that
-opened it. Volume and mute actions also show Tinycast's transient volume HUD, since macOS only draws
+opened it. Volume and mute actions also show RingCast's transient volume HUD, since macOS only draws
 its own for real media keys. Volume Up/Down walk a 5% grid (`VolumeLevel.stepped`, covered by
 `Tests/volume-test.swift`): an off-grid level snaps to the next line rather than past it, so from 37%
 up lands on 40% and down on 35%, and repeated presses stay on round numbers.
@@ -517,7 +524,7 @@ fifth action cannot reach the launcher without one.
 
 Activation hands the action to `QuickActionCoordinator.run(_:)` **without** hiding the palette first:
 the coordinator reads the displaced app and then hides, because after the hide the frontmost app is
-Tinycast. See [quick-actions.md](quick-actions.md).
+RingCast. See [quick-actions.md](quick-actions.md).
 
 ## Notes commands
 
@@ -574,19 +581,19 @@ across the list — the top of Favorites on add, the neighbour above the one tha
 
 ### ⌘-digit slots
 
-`FavoriteSlots` (`Launcher/Model/FavoriteSlots.swift`) defines ten local palette slots: **⌘1…⌘9 then
-⌘0**. They match the physical number row, not the character produced by the current keyboard layout,
-so the same positions work on QWERTY and AZERTY. The same slots address pinned Clipboard entries in
-that screen; the eleventh favorite is still listed and reorderable, and simply has no slot.
+In the expanded launcher, **⌘1…⌘9** activate the first nine current results. The digits follow the
+result order after each query or favorite reorder; lead cards and fallback rows do not consume a
+slot. `LauncherScreen.resultSlots` supplies the row labels, and `selectResultSlot` selects from the
+same result array before the palette runs its normal activation path. Required arguments therefore
+still receive focus instead of launching an incomplete command. Missing slots and ⌘0 do nothing.
+Light shows the digits continuously, with a return glyph on the selected row.
 
-Both palette sizes serve the chords from the same prefix, because `paletteIsCollapsed` already
-requires an empty query: **compact implies empty implies `favoriteCount` is the pinned prefix**. That
-is why `LauncherScreen.pinnedFavorites` feeds the strip, the chords and the numbered rows alike,
-rather than the compact bar re-deriving an empty-query order of its own. In compact the strip draws
-the first five; ⌘6–⌘0 still launch favorites it has no room for, and the "…" is a button after them
-rather than a slot, so no favorite loses its digit to the overflow.
+`FavoriteSlots` (`Launcher/Model/FavoriteSlots.swift`) resolves physical number-row keys, so slots
+work across keyboard layouts. Compact mode retains its ten favorite slots, **⌘1…⌘9 then ⌘0**;
+its first five icons and all ten shortcuts share `pinnedFavorites`. The overflow button consumes no
+slot. Clipboard continues to use these ten chords for pinned entries.
 
-Holding ⌘ swaps each numbered row's kind label for its chord. `PalettePanel` publishes the modifier
+In Dark, holding ⌘ swaps each numbered row's kind label for its chord. `PalettePanel` publishes the modifier
 into `PaletteState.commandHeld` from `.flagsChanged` and clears it in `resignKey` — not in `prepare`,
 which a re-show that preserves state skips entirely. The flag flips **400 ms after** the press, not
 on it: every ⌘ chord in the palette starts as a ⌘ press, so revealing on the down edge flashed the
@@ -594,7 +601,7 @@ numbering under ⌘↵ and ⌘K. `noteCommandHeld` schedules the reveal and any 
 chord's own tap never outlives its keystroke while a deliberate hold still lights every row. **`AppRow` observes that flag itself**: reading
 it any higher would attach it to `RootPaletteView`'s body and rebuild the whole palette on every ⌘
 press, where a row-level read re-runs only the handful of rows the `LazyVStack` has realized. The
-digit each row shows is carried on its `Row` case from the section build, so no row searches for its
+digit each row shows comes from the screen’s result-slot dictionary, so no row searches for its
 own position.
 
 ## Reveal in Finder
@@ -626,7 +633,7 @@ running dot and the availability of the running-only actions:
   moment the quit is asked for and never restores focus — either the relaunch takes it, or the app
   that refused the quit is the one asking for it.
 - **Quit All Applications** a system action. `AppLauncher.quitAllTargets()` is the
-  policy (every `.regular` app except Finder — `terminate()` only relaunches it — and Tinycast,
+  policy (every `.regular` app except Finder — `terminate()` only relaunches it — and RingCast,
   excluded by PID because About/Settings temporarily flips it to `.regular`). `SystemActionCoordinator.quitAllApps()`
   resolves that list **once**, confirms it with an `NSAlert`, then terminates exactly what was
   confirmed. The palette hides before the alert — it is a floating panel and would sit above it.

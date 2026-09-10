@@ -1,6 +1,6 @@
 import Foundation
 
-/// What the Mac will let Tinycast see through the camera.
+/// What the Mac will let the app see through the camera.
 enum CameraAccess: Sendable {
     case notDetermined
     case granted

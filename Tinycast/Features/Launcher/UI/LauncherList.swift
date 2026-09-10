@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct LauncherList: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.locale) private var localizationLocale
     let results: [AppEntry]
+    let resultSlots: [String: Character]
     /// The flat row id the screen has selected, not an entry id: a fallback can repeat a result.
     let selectedRowID: String?
     let favoriteCount: Int
@@ -57,15 +59,14 @@ struct LauncherList: View {
         /// Its own case, because only this header carries a gear.
         case fallbackHeader(String)
         case card(LeadCard)
-        /// `slot` is the row's ⌘-digit, carried from the section build rather than searched.
-        case app(AppEntry, slot: Character?)
+        case app(AppEntry)
         case fallback(AppEntry, index: Int)
         var id: String {
             switch self {
             case .header(let title): return "header-" + title
             case .fallbackHeader: return "fallback-header"
             case .card(let card): return card.rowID
-            case .app(let app, _): return app.id
+            case .app(let app): return app.id
             case .fallback(let app, _): return "fallback-" + app.id
             }
         }
@@ -88,7 +89,8 @@ struct LauncherList: View {
         if let card { cardRows = [.header(card.sectionTitle), .card(card)] }
         guard showSections else {
             guard !results.isEmpty else { return cardRows + fallbackRows }
-            return cardRows + [.header(String(localized: "Results", bundle: .appLanguage))] + results.map { .app($0, slot: nil) }
+            let headers: [Row] = colorScheme == .light ? [] : [.header(String(localized: "Results", bundle: .appLanguage))]
+            return cardRows + headers + results.map { .app($0) }
                 + fallbackRows
         }
         var rows: [Row] = cardRows
@@ -99,9 +101,7 @@ struct LauncherList: View {
         if !favorites.isEmpty {
             rows.append(.header(String(localized: "Favorites", bundle: .appLanguage)))
             rows.append(
-                contentsOf: favorites.enumerated().map {
-                    .app($1, slot: FavoriteSlots.digit(at: $0))
-                })
+                contentsOf: favorites.map { .app($0) })
         }
         // Publication order, so rows match the flat index.
         let kinds: [AppEntry.Kind] = [
@@ -110,8 +110,10 @@ struct LauncherList: View {
         ]
         for kind in kinds {
             guard let group = grouped[kind], !group.isEmpty else { continue }
-            rows.append(.header(kind.descriptor.sectionTitle))
-            rows.append(contentsOf: group.map { .app($0, slot: nil) })
+            if colorScheme != .light || kind != .application {
+                rows.append(.header(kind.descriptor.sectionTitle))
+            }
+            rows.append(contentsOf: group.map { .app($0) })
         }
         // A missing kind would make every later row activate its neighbour: assert instead.
         assert(
@@ -146,12 +148,12 @@ struct LauncherList: View {
                                         .onRightClick(perform: onCardActions)
                                         .padding(.bottom, Theme.Spacing.xs)
                                         .selectionFrame(cardSelected)
-                                case .app(let app, let slot):
+                                case .app(let app):
                                     AppRow(
                                         app: app,
                                         selected: app.id == selectedRowID,
                                         running: runningApps.isRunning(app),
-                                        slot: slot
+                                        slot: resultSlots[app.id]
                                     )
                                     .contentShape(Rectangle())
                                     .onTapGesture { onActivate(app) }
@@ -169,13 +171,13 @@ struct LauncherList: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, Theme.Spacing.md)
+                        .padding(.horizontal, colorScheme == .light ? Theme.Spacing.launcherInset : Theme.Spacing.md)
                         .padding(.top, Theme.Spacing.xs)
-                        .padding(.bottom, Theme.Spacing.md)
+                        .padding(.bottom, colorScheme == .light ? Theme.Size.launcherFooterHeight : Theme.Spacing.md)
                         .hideNativeScrollers()
                         .scrollOriginAnchor()
                     }
-                    .edgeDissolve()
+                    .modifier(LauncherListEdges())
                     .thinScrollbar()
                     // Snap to the origin on the first row so its header shows too.
                     .scrollFollowsSelection(
@@ -204,6 +206,7 @@ private struct LeadCardView: View {
 }
 
 private struct AppRow: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.locale) private var localizationLocale
     let app: AppEntry
     let selected: Bool
@@ -232,6 +235,67 @@ private struct AppRow: View {
     }
 
     var body: some View {
+        if colorScheme == .light {
+            detailedRow
+        } else {
+            standardRow
+        }
+    }
+
+    private var detailedRow: some View {
+        HStack(spacing: Theme.Spacing.launcherIconGap) {
+            AppIconView(app: app)
+                .frame(width: Theme.Size.launcherIcon, height: Theme.Size.launcherIcon)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(app.localizedName + (app.kind == .application ? ".app" : ""))
+                    .font(Theme.Typography.launcherTitle)
+                    .foregroundStyle(selected ? Theme.Colors.launcherSelectedText : Theme.Colors.launcherText)
+                Text(app.kind == .application ? app.url.path : app.subtitle ?? app.kindLabel)
+                    .font(Theme.Typography.launcherSubtitle)
+                    .foregroundStyle(selected ? Theme.Colors.launcherSelectedText : Theme.Colors.launcherPath)
+                    .truncationMode(.middle)
+            }
+            .lineLimit(1)
+            if let alias = aliases.alias(for: app.preferenceKey) {
+                Text(alias)
+                    .font(Theme.Typography.rowTrailing)
+            }
+            Spacer(minLength: Theme.Spacing.md)
+            if let refresh = app.backgroundRefresh {
+                ExtensionRefreshIndicator(state: refresh)
+            }
+            if let caps = shortcutCaps {
+                Text(caps.joined())
+                    .font(Theme.Typography.rowTrailing)
+            }
+            Group {
+                if selected {
+                    Text("↩")
+                } else if let slot {
+                    Text("⌘" + String(slot))
+                }
+            }
+            .font(Theme.Typography.launcherShortcut)
+            .frame(width: Theme.Size.launcherShortcut, alignment: .trailing)
+        }
+        .foregroundStyle(selected ? Theme.Colors.launcherSelectedText : Theme.Colors.textSecondary)
+        .padding(.horizontal, Theme.Spacing.xl)
+        .frame(height: Theme.Size.launcherRowHeight)
+        .background(
+            RoundedRectangle(cornerRadius: Theme.Radius.launcherRow, style: .continuous)
+                .fill(selected ? Theme.Colors.launcherSelection : fill))
+        .overlay(alignment: .bottom) {
+            if !selected {
+                Rectangle()
+                    .fill(Theme.Colors.launcherSeparator)
+                    .frame(height: Theme.Size.hairline)
+                    .padding(.horizontal, Theme.Spacing.sm)
+            }
+        }
+        .armedHover($hovered)
+    }
+
+    private var standardRow: some View {
         HStack(spacing: Theme.Spacing.lg) {
             AppIconView(app: app)
                 .frame(width: Theme.Size.rowIcon, height: Theme.Size.rowIcon)
@@ -294,5 +358,17 @@ private struct AppRow: View {
                 .fill(fill)
         )
         .armedHover($hovered)
+    }
+}
+
+private struct LauncherListEdges: ViewModifier {
+    @Environment(\.colorScheme) private var colorScheme
+
+    func body(content: Content) -> some View {
+        if colorScheme == .light {
+            content.modifier(EdgeDissolveMask(bottomFade: Theme.Size.launcherFooterHeight * 2))
+        } else {
+            content.edgeDissolve()
+        }
     }
 }

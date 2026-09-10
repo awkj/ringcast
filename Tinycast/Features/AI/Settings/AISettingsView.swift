@@ -78,7 +78,7 @@ struct AISettingsView: View {
                 select: { $0.map(settings.select) },
                 modelLabel: {
                     SettingsRowTitle(.aiDefault, "Default model")
-                    Text("Used by Tinycast features unless they ask you to choose another model.")
+                    Text("Used by \(AppIdentity.name) features unless they ask you to choose another model.")
                 },
                 effortLabel: {
                     SettingsRowTitle(.aiDefault, "Reasoning effort")
@@ -102,7 +102,7 @@ struct AISettingsView: View {
         }
         return settings.defaultModel == nil
             ? String(localized: "Turn on Apple Intelligence, or add a provider above.", bundle: .appLanguage)
-            : String(localized: "Tinycast contacts only the selected provider when an AI feature runs.", bundle: .appLanguage)
+            : String(localized: "\(AppIdentity.name) contacts only the selected provider when an AI feature runs.", bundle: .appLanguage)
     }
 
     /// Why the on-device route is missing from the picker, or `nil` when it is there.
@@ -190,7 +190,7 @@ struct AISettingsView: View {
         return Section {
             Toggle(isOn: $settings.systemPromptEnabled) {
                 SettingsRowTitle(.aiSystemPrompt, "Send a system prompt")
-                Text("Off sends nothing ahead of your message, not even what Tinycast says about itself.")
+                Text("Off sends nothing ahead of your message, not even what \(AppIdentity.name) says about itself.")
             }
             SystemPromptEditor(text: $settings.systemPrompt)
                 .settingsEnabled(settings.systemPromptEnabled)
@@ -199,7 +199,7 @@ struct AISettingsView: View {
         } footer: {
             Text(
                 String(localized: """
-                    Your text is sent ahead of every message in every chat, after what Tinycast \
+                    Your text is sent ahead of every message in every chat, after what \(AppIdentity.name) \
                     already tells the model about itself. Both are billed again on each turn.
                     """, bundle: .appLanguage)
             )
@@ -280,8 +280,8 @@ struct AISettingsView: View {
         } footer: {
             Text(
                 String(localized: """
-                    Tinycast uses the Codex, Claude and OpenCode commands already installed \
-                    and signed in on this Mac. Tinycast never stores or asks for their API keys.
+                    \(AppIdentity.name) uses the Codex, Claude and OpenCode commands already installed \
+                    and signed in on this Mac. \(AppIdentity.name) never stores or asks for their API keys.
                     """, bundle: .appLanguage)
             )
             .font(.caption)
@@ -421,7 +421,7 @@ struct AISettingsView: View {
                     }
                 } label: {
                     Text("\(kind.title) · Not installed")
-                    Text("Tinycast could not find the \(kind.command) command.")
+                    Text("\(AppIdentity.name) could not find the \(kind.command) command.")
                 }
             case .failed(let message):
                 LabeledContent {

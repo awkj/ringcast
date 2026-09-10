@@ -32,7 +32,7 @@ struct QuickActionsSettingsView: View {
                     SettingsRow(
                         title: String(localized: "Accessibility permission required", bundle: .appLanguage),
                         subtitle: String(
-                            localized: "Tinycast can't read your selection until it is granted.",
+                            localized: "\(AppIdentity.name) can't read your selection until it is granted.",
                             bundle: .appLanguage)
                     ) {
                         Image(systemName: "exclamationmark.triangle.fill")
@@ -275,7 +275,7 @@ struct QuickActionsSettingsView: View {
                     .font(.title2.weight(.bold))
 
                 Text(
-                    "Tell Tinycast how you want \(String(localized: String.LocalizationValue(action.title), bundle: .appLanguage)) to handle your selected text."
+                    "Tell \(AppIdentity.name) how you want \(String(localized: String.LocalizationValue(action.title), bundle: .appLanguage)) to handle your selected text."
                 )
                 .foregroundStyle(.secondary)
 

@@ -193,7 +193,7 @@ struct CustomCommandEditorSheet: View {
             panel.directoryURL = URL(
                 fileURLWithPath: (workingDirectory as NSString).expandingTildeInPath)
         }
-        // Tinycast is an accessory app, so the panel opens behind the frontmost app without this.
+        // the app is an accessory app, so the panel opens behind the frontmost app without this.
         NSApp.activate(ignoringOtherApps: true)
         guard panel.runModal() == .OK, let url = panel.url else { return }
         workingDirectory = (url.path as NSString).abbreviatingWithTildeInPath

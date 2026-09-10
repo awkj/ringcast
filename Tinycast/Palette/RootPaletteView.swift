@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct RootPaletteView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.locale) private var localizationLocale
     @Environment(AppCore.self) private var core
     @Environment(PaletteState.self) private var vm
@@ -42,6 +43,20 @@ struct RootPaletteView: View {
 
     /// Compact vs. full; the source of truth is on `AppCore`, so the two can't disagree.
     private var isCollapsed: Bool { core.paletteCoordinator.paletteIsCollapsed }
+
+    private var isLightLauncher: Bool { colorScheme == .light && vm.mode == .launcher }
+
+    private var searchFont: Font {
+        isLightLauncher ? Theme.Typography.launcherSearch : Theme.Typography.searchField
+    }
+
+    private var searchNSFont: NSFont {
+        isLightLauncher ? Theme.Typography.launcherSearchNSFont : Theme.Typography.searchFieldNSFont
+    }
+
+    private var panelRadius: CGFloat {
+        isLightLauncher ? Theme.Radius.launcherPanel : Theme.Radius.panel
+    }
 
     /// The current mode's screen: its rows are the visible order the flat selection indexes.
     private var screen: any PaletteScreen {
@@ -191,23 +206,6 @@ struct RootPaletteView: View {
             })
     }
 
-    /// The bottom-left app menu content (About / Support / Settings).
-    private var appMenuContent: PopoverMenuContent {
-        PopoverMenuContent(items: [
-            PopoverMenuItem(title: String(localized: "About Tinycast", bundle: .appLanguage), systemImage: "info.circle") {
-                core.settingsCoordinator.showAbout()
-            },
-            PopoverMenuItem(title: String(localized: "Support Tinycast", bundle: .appLanguage), systemImage: "heart") {
-                core.supportCoordinator.showSupport()
-            },
-            PopoverMenuItem(title: String(
-                localized: "Settings",
-                bundle: .appLanguage), systemImage: "gearshape", shortcut: "⌘,") {
-                core.settingsCoordinator.showSettings()
-            }
-        ])
-    }
-
     /// The one source every menu path addresses rows through, so none can disagree.
     private var menuContent: PaletteMenuContent? {
         switch openMenu {
@@ -216,9 +214,6 @@ struct RootPaletteView: View {
             return screen.menuContent(
                 at: selection(in: screen), menuSelection: $menuSelection,
                 onActivate: activateMenuItem)
-        case .app:
-            return PaletteMenuContent(
-                popover: appMenuContent, selection: $menuSelection, onActivate: activateMenuItem)
         case .clipboardFilter:
             return PaletteMenuContent(
                 popover: clipboardFilterContent, selection: $menuSelection,
@@ -267,11 +262,18 @@ struct RootPaletteView: View {
                 }
                 .safeAreaInset(edge: .top, spacing: 0) { header }
                 .safeAreaInset(edge: .bottom, spacing: 0) {
-                    if !isCollapsed {
+                    if !isCollapsed && !isLightLauncher {
                         bottomBar(
                             pillLabel: screen.primaryActionTitle, showActionGroup: showActionGroup,
                             formPrimaryShortcut: isExtensionForm,
                             showActions: screen.hasActions(at: sel))
+                    }
+                }
+                .overlay(alignment: .bottom) {
+                    if !isCollapsed && isLightLauncher {
+                        bottomBar(
+                            pillLabel: screen.primaryActionTitle, showActionGroup: showActionGroup,
+                            formPrimaryShortcut: false, showActions: screen.hasActions(at: sel))
                     }
                 }
                 // The panel has no title bar, so this thin top margin is the only place left to grab it.
@@ -298,7 +300,7 @@ struct RootPaletteView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .background(Theme.Colors.panelScrim)
                 .background(VisualEffectView())
-                .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.panel, style: .continuous))),
+                .clipShape(RoundedRectangle(cornerRadius: panelRadius, style: .continuous))),
             selection: sel)
     }
 
@@ -325,6 +327,7 @@ struct RootPaletteView: View {
                 vm.selection = 0
                 scroll = ScrollIntent(kind: .top)
             }
+            .onChange(of: isLightLauncher) { core.paletteCoordinator.syncPaletteSize() }
             .onChange(of: vm.mode) {
                 vm.selection = 0
                 vm.clipboardFilter = .all
@@ -350,7 +353,7 @@ struct RootPaletteView: View {
             // ⌘. arrives as a token rather than a key press. See `PaletteState.pinChordToken`.
             .onChange(of: vm.pinChordToken) { pinSelection() }
             // ⌘1…⌘0 arrives as a slot index from AppKit keyCode matching.
-            .onChange(of: vm.favoriteSlotToken) { activateFavoriteSlotShortcut() }
+            .onChange(of: vm.numberSlotToken) { activateNumberSlotShortcut() }
             // One optional makes "exactly one menu" structural; this only mirrors it for the panel.
             .onChange(of: openMenu) {
                 vm.menuOpen = menuOpen
@@ -602,11 +605,11 @@ struct RootPaletteView: View {
     private var header: some View {
         HStack(alignment: .center, spacing: 0) {
             // Matches the list rows and section headers' own indent below.
-            headerGutter(width: Theme.Spacing.md * 2)
+            headerGutter(width: isLightLauncher ? Theme.Spacing.launcherInset : Theme.Spacing.md * 2)
             // Every sub-screen leaves the same way, so the slot reads the same on all of them.
             if vm.mode != .launcher {
                 HeaderBackButton(help: backHelp, action: goBack)
-            } else {
+            } else if !isLightLauncher {
                 Image(systemName: vm.mode.systemImage)
                     .font(Theme.Typography.headerIcon)
                     .symbolRenderingMode(.hierarchical)
@@ -738,13 +741,14 @@ struct RootPaletteView: View {
     /// The field's own text, floored for the caret and capped so the strip stays on screen.
     /// Empty, that is the prompt where one is drawn — which is what seats the strip right after it.
     private func searchFieldWidth(for accessory: PaletteHeaderAccessory) -> CGFloat {
-        let font = Theme.Typography.searchFieldNSFont
+        let font = searchNSFont
         let text = vm.query.isEmpty ? searchPrompt : vm.query
         let typed = (text as NSString).size(withAttributes: [.font: font]).width
-        let chrome = Theme.Size.headerIconSlot + Theme.Spacing.md * 4
+        let chrome = (isLightLauncher ? 0 : Theme.Size.headerIconSlot) + Theme.Spacing.md * 4
+        let width = isLightLauncher ? Theme.Size.launcherWidth : Theme.Size.panelWidth
         // +3pt so the caret sits after the last glyph rather than on top of it.
         return min(
-            max(typed + 3, 18), max(Theme.Size.panelWidth - accessory.width - chrome, 60))
+            max(typed + 3, 18), max(width - accessory.width - chrome, 60))
     }
 
     /// In the argument form the field is that argument's input, so it names the argument.
@@ -766,7 +770,7 @@ struct RootPaletteView: View {
         @Bindable var vm = vm
         return TextField("", text: $vm.query)
             .textFieldStyle(.plain)
-            .font(Theme.Typography.searchField)
+            .font(searchFont)
             .tint(Theme.Colors.textPrimary)
             .focused($searchFocused)
             // Fills the row's height, so there's no gap above it for topDragStrip to meet.
@@ -775,7 +779,7 @@ struct RootPaletteView: View {
                 // An IME's marked text leaves `query` empty, so the placeholder would overlap it.
                 if vm.query.isEmpty, !vm.isComposing {
                     Text(searchPrompt)
-                        .font(Theme.Typography.searchField)
+                        .font(searchFont)
                         .foregroundStyle(Theme.Colors.textTertiary)
                         .lineLimit(1)
                         // Never a click target: tapping the placeholder must still land the caret.
@@ -788,7 +792,7 @@ struct RootPaletteView: View {
             .overlay {
                 if settings.paletteDraggable {
                     TextTrailingDragHandle(
-                        text: vm.query, font: Theme.Typography.searchFieldNSFont,
+                        text: vm.query, font: searchNSFont,
                         onBegan: beginDrag, onEnded: endDrag)
                 }
             }
@@ -806,27 +810,69 @@ struct RootPaletteView: View {
         vm.mode == .uninstall ? Theme.Colors.destructive : .primary
     }
 
+    private static var footerIdentity: String {
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        return [AppIdentity.name, version].compactMap { $0 }.joined(separator: " ")
+    }
+
+    @ViewBuilder
     private func bottomBar(
         pillLabel: String, showActionGroup: Bool, formPrimaryShortcut: Bool, showActions: Bool
     ) -> some View {
-        // Floating controls, no bar; the edge dissolve ghosts the rows passing beneath.
-        HStack(spacing: 0) {
-            appMenuButton
-            Spacer()
-            if showActionGroup {
-                actionGroup(
-                    pillLabel: pillLabel, formPrimaryShortcut: formPrimaryShortcut,
-                    showActions: showActions)
+        if vm.mode == .launcher {
+            launcherFooter(pillLabel: pillLabel, showActionGroup: showActionGroup, showActions: showActions)
+        } else {
+            HStack(spacing: 0) {
+                SettingsCircleButton { core.settingsCoordinator.showSettings() }
+                Spacer()
+                if showActionGroup {
+                    actionGroup(
+                        pillLabel: pillLabel, formPrimaryShortcut: formPrimaryShortcut,
+                        showActions: showActions)
+                }
             }
+            .padding(.horizontal, Theme.Spacing.md)
+            .frame(height: Theme.Size.bottomBarHeight)
+            .frame(maxWidth: .infinity)
         }
-        .padding(.horizontal, Theme.Spacing.md)
-        .frame(height: Theme.Size.bottomBarHeight)
-        .frame(maxWidth: .infinity)
     }
 
-    private var appMenuButton: some View {
-        MenuCircleButton {
-            if openMenu == .app { closeMenus() } else { open(.app, highlighting: 0) }
+    private func launcherFooter(pillLabel: String, showActionGroup: Bool, showActions: Bool) -> some View {
+        HStack(spacing: Theme.Spacing.xl) {
+            Button {
+                core.settingsCoordinator.showSettings()
+            } label: {
+                Text("⌘, \(String(localized: "Settings", bundle: .appLanguage))")
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text("Settings"))
+            Spacer()
+            if showActionGroup {
+                Text("↩ \(pillLabel)")
+                if showActions {
+                    Text("⌘K \(String(localized: "Actions", bundle: .appLanguage))")
+                }
+            }
+        }
+        .font(Theme.Typography.launcherFooter)
+        .foregroundStyle(Theme.Colors.textSecondary)
+        .lineLimit(1)
+        .padding(.horizontal, Theme.Spacing.xxl)
+        .frame(height: Theme.Size.launcherFooterHeight)
+        .overlay {
+            Text(Self.footerIdentity)
+                .font(Theme.Typography.launcherFooter)
+                .foregroundStyle(Theme.Colors.textSecondary)
+                .lineLimit(1)
+                .frame(maxWidth: Theme.Size.menuWidth)
+                .allowsHitTesting(false)
+        }
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(Theme.Colors.separator)
+                .frame(height: Theme.Size.hairline)
+                .padding(.horizontal, Theme.Spacing.xxl)
+                .allowsHitTesting(false)
         }
     }
 
@@ -985,7 +1031,6 @@ struct RootPaletteView: View {
 
     private var menuCorner: MenuPanelController.Corner? {
         switch openMenu {
-        case .app: .bottomLeading
         case .actions: .bottomTrailing
         case .argumentOptions: .belowHeaderTrailing
         case .clipboardFilter, .aiModel, .aiReasoning, .extensionAccessory: .belowHeaderTrailing
@@ -1065,11 +1110,17 @@ struct RootPaletteView: View {
         }
     }
 
-    /// Dispatches the Cmd+number slot action to the active screen.
-    private func activateFavoriteSlotShortcut() {
-        guard let index = vm.favoriteSlotIndex else { return }
+    /// Number chords address results when expanded, favorites when compact, and pins in Clipboard.
+    private func activateNumberSlotShortcut() {
+        guard let index = vm.numberSlotIndex else { return }
         if let launcher = screen as? LauncherScreen {
-            _ = launcher.launchFavorite(at: index)
+            if isCollapsed {
+                _ = launcher.launchFavorite(at: index)
+            } else if launcher.selectResultSlot(at: index) {
+                closeMenus()
+                scroll = ScrollIntent(kind: .follow)
+                activateSelection()
+            }
             return
         }
         if let clipboard = screen as? ClipboardScreen {
@@ -1196,7 +1247,6 @@ private enum OpenMenu {
     case extensionAccessory
     /// An `options=` argument field's choices, hung under the header where the chip sits.
     case argumentOptions
-    case app
     case clipboardFilter
     case aiModel
     case aiReasoning
@@ -1212,24 +1262,22 @@ private struct SearchFieldHiding: ViewModifier {
     }
 }
 
-/// The footer's menu circle; hover lives here, so a sweep never re-renders the body.
-private struct MenuCircleButton: View {
+private struct SettingsCircleButton: View {
     @Environment(\.locale) private var localizationLocale
     let action: () -> Void
     @State private var hovered = false
 
     var body: some View {
         Button(action: action) {
-            VStack(alignment: .leading, spacing: 3) {
-                Capsule().frame(width: 14, height: 1.5)
-                Capsule().frame(width: 8, height: 1.5)
-            }
+            SymbolImage(name: "gearshape", size: Theme.Size.settingsButtonIcon)
             .foregroundStyle(Theme.Colors.textSecondary)
             .frame(width: Theme.Size.menuButton, height: Theme.Size.menuButton)
             .background(Circle().fill(hovered ? Theme.Colors.rowHover : Color.clear))
             .contentShape(.circle)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(Text("Settings"))
+        .help(String(localized: "Settings", bundle: .appLanguage))
         .onHover { hovered = $0 }
         .frosted(in: Circle())
     }

@@ -18,13 +18,13 @@ enum ReleaseNotes {
     }
 
     /// A line scanner over what GitHub's release-notes API produces, not a general Markdown parser.
-    static func blocks(from summary: String) -> [Block] {
+    static func blocks(from summary: String, repository: String? = AppIdentity.updateRepository) -> [Block] {
         var blocks: [Block] = []
         var paragraph: [String] = []
 
         func flush() {
             guard !paragraph.isEmpty else { return }
-            blocks.append(.paragraph(linkified(paragraph.joined(separator: "\n"))))
+            blocks.append(.paragraph(linkified(paragraph.joined(separator: "\n"), repository: repository)))
             paragraph.removeAll()
         }
 
@@ -39,7 +39,7 @@ enum ReleaseNotes {
                 blocks.append(heading)
             } else if let bullet = bullet(in: line) {
                 flush()
-                blocks.append(.bullet(linkified(bullet)))
+                blocks.append(.bullet(linkified(bullet, repository: repository)))
             } else {
                 paragraph.append(line)
             }
@@ -58,7 +58,7 @@ enum ReleaseNotes {
     }
 
     /// GitHub autolinks a mention on the web; here they must be spelled as Markdown.
-    private static func linkified(_ text: String) -> String {
+    private static func linkified(_ text: String, repository: String?) -> String {
         var output = ""
         var index = text.startIndex
         var previous: Character?
@@ -71,7 +71,7 @@ enum ReleaseNotes {
                 previous = ")"
                 index = text.index(after: close)
             } else if let (link, next) = mention(in: rest, after: previous)
-                ?? pullRequest(in: rest, after: previous)
+                ?? pullRequest(in: rest, after: previous, repository: repository)
             {
                 output += link
                 previous = text[text.index(before: next)]
@@ -96,12 +96,12 @@ enum ReleaseNotes {
     }
 
     private static func pullRequest(
-        in rest: Substring, after previous: Character?
+        in rest: Substring, after previous: Character?, repository: String?
     ) -> (String, String.Index)? {
-        guard rest.first == "#", previous.map({ $0.isWhitespace || $0 == "(" }) ?? true else { return nil }
+        guard let repository, rest.first == "#", previous.map({ $0.isWhitespace || $0 == "(" }) ?? true else { return nil }
         let number = rest.dropFirst().prefix(while: { $0.isASCII && $0.isNumber })
         guard !number.isEmpty else { return nil }
-        let url = "https://github.com/\(ReleaseFeed.repository)/pull/\(number)"
+        let url = "https://github.com/\(repository)/pull/\(number)"
         return ("[#\(number)](\(url))", number.endIndex)
     }
 

@@ -52,7 +52,7 @@ final class ExtensionCoordinator {
                     message:
                         String(localized: """
                             Extensions are third-party JavaScript, run on this Mac. A running command \
-                            holds a JavaScript engine in memory until you leave it — expect Tinycast \
+                            holds a JavaScript engine in memory until you leave it — expect \(AppIdentity.name) \
                             to use noticeably more RAM while one is open.
                             """, bundle: .appLanguage),
                     symbol: "puzzlepiece.extension", confirmTitle: String(
@@ -197,7 +197,7 @@ final class ExtensionCoordinator {
         paletteCoordinator.hidePalette(restoreFocus: false)
         settingsCoordinator.showSettings(tab: .extensions)
         NotificationCenter.default.post(
-            name: .tinycastSelectExtension, object: owner.manifest.name)
+            name: .selectExtension, object: owner.manifest.name)
     }
 
     // MARK: - Host callbacks, routed here so the manager never touches a window itself
@@ -247,5 +247,5 @@ final class ExtensionCoordinator {
 
 extension Notification.Name {
     /// Carries an extension's name so the Settings pane can select it once shown.
-    static let tinycastSelectExtension = Notification.Name("tinycastSelectExtension")
+    static let selectExtension = Notification.Name("selectExtension")
 }

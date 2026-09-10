@@ -31,9 +31,9 @@ final class PaletteState {
     /// AppKit binds ⌘. to `cancelOperation:`, so the field editor eats it before `onKeyPress`.
     private(set) var pinChordToken = UUID()
     /// Bumped when AppKit resolves ⌘1…⌘0 to a slot index from the physical number row.
-    private(set) var favoriteSlotToken = UUID()
-    /// The last slot index from `noteFavoriteSlot`, consumed by the SwiftUI layer.
-    private(set) var favoriteSlotIndex: Int?
+    private(set) var numberSlotToken = UUID()
+    /// The last slot index from `noteNumberSlot`, consumed by the SwiftUI layer.
+    private(set) var numberSlotIndex: Int?
     /// Set by the compact bar's overflow to expand without a query; cleared by `prepare`.
     var forceExpanded = false
     /// The paste target, mirrored on every show; `prepare` resets the screen, not this.
@@ -133,9 +133,9 @@ final class PaletteState {
         pinChordToken = UUID()
     }
 
-    func noteFavoriteSlot(_ index: Int) {
-        favoriteSlotIndex = index
-        favoriteSlotToken = UUID()
+    func noteNumberSlot(_ index: Int) {
+        numberSlotIndex = index
+        numberSlotToken = UUID()
     }
 
     func noteCommandHeld(_ held: Bool) {

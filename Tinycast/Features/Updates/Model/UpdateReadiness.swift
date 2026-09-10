@@ -30,7 +30,7 @@ enum UpdateReadiness {
             case .recordingHotKey: return "Finish recording the shortcut first."
             case .promptingForArguments: return "Finish the open command prompt first."
             case .dialogOpen: return "Close the open dialog first."
-            case .paletteOpen: return "Close Tinycast's window first."
+            case .paletteOpen: return "Close \(AppIdentity.name)'s window first."
             }
         }
     }

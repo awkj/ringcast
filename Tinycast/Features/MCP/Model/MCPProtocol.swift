@@ -28,12 +28,12 @@ enum MCPProtocol {
         return try encode(object, newlineTerminated: newlineTerminated)
     }
 
-    /// Tinycast exposes nothing back, so a server request is always declined the same way.
+    /// the app exposes nothing back, so a server request is always declined the same way.
     static func decline(id: JSONValue, newlineTerminated: Bool = false) throws -> Data {
         try encode(
             [
                 "jsonrpc": "2.0", "id": id.jsonObject,
-                "error": ["code": -32_601, "message": "Tinycast exposes no MCP capabilities."]
+                "error": ["code": -32_601, "message": "\(AppIdentity.name) exposes no MCP capabilities."]
             ],
             newlineTerminated: newlineTerminated)
     }

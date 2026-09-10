@@ -23,34 +23,55 @@ the section below is a note for anyone who wants it, not a step.
 
 ## Build & run
 
+With [just](https://github.com/casey/just) installed (`brew install just`):
+
 ```sh
-open Tinycast.xcodeproj    # then ⌘R
+just dev mac           # build Debug, quit the running Dev app, and launch the new build
+just build mac         # build Release without launching
+just build mac Debug   # build Debug without launching
+```
+
+Both commands reuse `build/DerivedData` for incremental builds. The apps are written to
+`build/DerivedData/Build/Products/Debug/RingCast Dev.app` and
+`build/DerivedData/Build/Products/Release/RingCast.app`; the launch recipe reads the name from
+`Config/AppIdentity.json`. `just` alone lists the available commands.
+
+These local shortcuts use ad-hoc signing, so they work without installing a signing certificate.
+Accessibility may need to be granted again after rebuilding. To use the stable identity from the
+setup above, run `RINGCAST_CODE_SIGN_IDENTITY='Tinycast Self-Signed' just dev mac` (or export that
+variable in your shell). Xcode's signing configuration and release packaging stay as configured.
+
+Alternatively, use Xcode:
+
+```sh
+open Launcher.xcodeproj    # then ⌘R
 ```
 
 Or from the command line:
 
 ```sh
-xcodebuild -project Tinycast.xcodeproj -scheme Tinycast -configuration Debug build
+xcodebuild -project Launcher.xcodeproj -scheme Launcher -configuration Debug build
 ```
 
 `xcodebuild` uses whatever `xcode-select` points at; if that's the Command Line Tools rather than
 Xcode, prefix with `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer` (the SwiftUI
 `@State`/`@FocusState` macros need Xcode's macOS platform).
 
-`Tinycast.xcodeproj` is committed and generated from `project.yml` via XcodeGen — after changing
+`Launcher.xcodeproj` is committed and generated from `project.yml` via XcodeGen — after changing
 project settings in `project.yml`, run `xcodegen generate` and commit the result. There is no
 `Package.swift`, and `Bundle.module` must never be used.
 
 ### Localizing the interface
 
-Edit `Tinycast/Resources/Localizable.xcstrings` and `InfoPlist.xcstrings` in Xcode. The build emits
+Edit `Config/Localization/Localizable.xcstrings` and `InfoPlist.xcstrings`, then run
+`node Scripts/sync-identity.mjs`. The copies under `Tinycast/Resources/` are generated. The build emits
 localizable strings for literal call sites; display keys supplied by pure models are maintained
 explicitly in the catalog. Keep English and Simplified Chinese translations complete when adding copy.
 
 To inspect a Debug build in Chinese without changing system preferences:
 
 ```sh
-open -n "path/to/Tinycast Dev.app" --args -AppleLanguages '(zh-Hans)'
+open -n "path/to/RingCast Dev.app" --args -AppleLanguages '(zh-Hans)'
 ```
 
 Use `(en)` for English. These launch arguments apply to this process only. `localization-test` compiles
@@ -62,9 +83,17 @@ and removes the test domain afterward. Existing app
 preferences are untouched. To test the Settings picker manually, launch without `-AppleLanguages`:
 launch arguments take precedence over saved preferences.
 
+### App identity
+
+`Config/AppIdentity.json` is the only editable source for the application name, author, bundle identifier,
+URL scheme, backup extension, repository, signing identity and channel suffixes.
+After editing it, run `node Scripts/sync-identity.mjs`. See [identity.md](identity.md) for the fields
+and generated outputs. Xcode's project and target are always `Launcher`; the app's product name
+comes from the configuration. Source folders and private runtime protocol names are independent of branding.
+
 ### The dev channel
 
-Debug builds are a separate channel: **`Tinycast Dev.app`**, bundle id `com.tinycast.app.dev`. Every
+Debug builds are a separate channel: **`RingCast Dev.app`**, bundle id `io.github.awkj.ringcast.dev`. Every
 persisted thing is keyed by bundle id — `~/Library/Preferences/<id>.plist` (settings and hotkey
 bindings), `~/Library/Application Support/<id>/` (the onboarding marker, Notes, snippets, quicklinks,
 clipboard history, calculator history, launch ranking and frequent emoji),
@@ -96,14 +125,14 @@ and the flag database:
 
 ```sh
 brew install xcode-build-server
-xcodebuild -project Tinycast.xcodeproj -scheme Tinycast -configuration Debug \
+xcodebuild -project Launcher.xcodeproj -scheme Launcher -configuration Debug \
     -derivedDataPath build/DerivedData build 2>&1 | tee /tmp/tinycast-build.log
 ./Scripts/sync-lsp.sh /tmp/tinycast-build.log
 ```
 
 Both files are git-ignored because they embed absolute paths, and `sourcekit-lsp` looks for
 `buildServer.json` at the workspace root by name, so it cannot live in a subfolder. After this the
-**Build Tinycast.app (debug)** task (⌘⇧B) and **F5** re-run the script on every build, so new and
+**Build RingCast.app (debug)** task (⌘⇧B) and **F5** re-run the script on every build, so new and
 renamed files keep resolving.
 
 **Do not run `xcode-build-server config`.** It writes `kind: xcode`, and in that mode the server ignores

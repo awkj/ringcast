@@ -23,7 +23,6 @@ struct AboutView: View {
     }()
 
     private static let iconSize: CGFloat = 88
-    private static let supportTile: CGFloat = 30
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,7 +34,6 @@ struct AboutView: View {
                 }
                 .settingsAnchor(.aboutAbout)
                 links
-                support
             }
             .formStyle(.grouped)
             .settingsScrollTarget(.about)
@@ -68,13 +66,15 @@ struct AboutView: View {
                     .overlay(
                         Capsule().strokeBorder(Theme.Colors.cardStroke, lineWidth: 1)
                     )
-                Button {
-                    core.updateCoordinator.checkForUpdates()
-                } label: {
-                    SettingsRowTitle(.aboutAbout, "Check for Updates")
+                if core.updateCoordinator.isEnabled {
+                    Button {
+                        core.updateCoordinator.checkForUpdates()
+                    } label: {
+                        SettingsRowTitle(.aboutAbout, "Check for Updates")
+                    }
+                    .buttonStyle(.link)
+                    .font(.caption)
                 }
-                .buttonStyle(.link)
-                .font(.caption)
             }
 
             Text("A tiny, native macOS launcher.")
@@ -93,37 +93,8 @@ struct AboutView: View {
         }
     }
 
-    private var support: some View {
-        Section {
-            HStack(spacing: Theme.Spacing.xl) {
-                // Brand is a fixed hue, so an alpha on it holds up in both appearances.
-                RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous)
-                    .fill(Theme.Colors.brand.opacity(0.16))
-                    .frame(width: Self.supportTile, height: Self.supportTile)
-                    .overlay(
-                        Image(systemName: "heart.fill")
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(Theme.Colors.brand)
-                    )
-                VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
-                    SettingsRowTitle(.aboutLinks, "Support")
-                        .font(.body.weight(.medium))
-                    Text("Free and open source, funded out of pocket.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                Spacer(minLength: Theme.Spacing.lg)
-                Button("Support…") { core.supportCoordinator.showSupport() }
-                    .buttonStyle(.borderedProminent)
-                    .tint(Theme.Colors.brand)
-            }
-            .padding(.vertical, Theme.Spacing.xs)
-        }
-    }
-
     private var footer: some View {
-        Text("© 2026 Abue Ammar · Released under AGPL-3.0")
+        Text("© 2026 \(AppIdentity.author) · Released under AGPL-3.0")
             .font(.caption2)
             .foregroundStyle(.tertiary)
     }
@@ -146,25 +117,9 @@ private struct AboutLink: Identifiable {
     static var all: [AboutLink] {
         [
             AboutLink(
-                id: "website", glyph: .symbol("globe"),
-                title: String(localized: "Website", bundle: .appLanguage),
-                detail: "abue-ammar.github.io/tinycast",
-                url: URL(string: "https://abue-ammar.github.io/tinycast/")!),
-            AboutLink(
                 id: "github", glyph: .brand("BrandGitHub"), title: "GitHub",
-                detail: "github.com/abue-ammar/tinycast",
-                url: URL(string: "https://github.com/abue-ammar/tinycast")!),
-            AboutLink(
-                id: "discord", glyph: .brand("BrandDiscord"), title: "Discord",
-                detail: String(localized: "Join the Tinycast community", bundle: .appLanguage),
-                url: URL(string: "https://discord.gg/v2Eeb4QQy3")!),
-            AboutLink(
-                id: "x", glyph: .brand("BrandX"), title: "X", detail: "@abue_ammar",
-                url: URL(string: "https://x.com/abue_ammar")!),
-            AboutLink(
-                id: "email", glyph: .symbol("envelope"),
-                title: String(localized: "Email", bundle: .appLanguage),
-                detail: "iabueammar@gmail.com", url: URL(string: "mailto:iabueammar@gmail.com")!)
+                detail: "github.com/\(AppIdentity.repository)",
+                url: AppIdentity.repositoryURL)
         ]
     }
 }

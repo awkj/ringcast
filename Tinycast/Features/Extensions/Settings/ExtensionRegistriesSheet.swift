@@ -16,7 +16,7 @@ struct ExtensionRegistriesSheet: View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: Theme.Spacing.xs) {
                 Text("Registries").font(.title2.weight(.bold))
-                Text("Where Tinycast looks when you search for an extension to install.")
+                Text("Where \(AppIdentity.name) looks when you search for an extension to install.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

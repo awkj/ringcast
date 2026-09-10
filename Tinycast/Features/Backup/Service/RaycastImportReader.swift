@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-/// Maps a decrypted Raycast payload onto Tinycast's fields. See docs/features/raycast-import.md.
+/// Maps a decrypted Raycast payload onto the app's fields. See docs/features/raycast-import.md.
 enum RaycastImportReader {
     static func read(file: URL, passphrase: String) throws -> RaycastImport.Result {
         try map(RaycastDecoder.decrypt(try Data(contentsOf: file), passphrase: passphrase))

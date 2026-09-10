@@ -10,7 +10,7 @@ protocol ExtensionOAuthTokenStore: Sendable {
 }
 
 struct KeychainOAuthTokenStore: ExtensionOAuthTokenStore {
-    private let serviceName = "com.tinycast.extensions.oauth"
+    private let serviceName = "\(Bundle.main.bundleIdentifier ?? AppIdentity.bundleIdentifier).extensions.oauth"
 
     func get(account: String) -> String? {
         let query: [String: Any] = [

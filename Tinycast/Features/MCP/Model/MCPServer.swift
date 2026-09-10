@@ -1,6 +1,6 @@
 import Foundation
 
-/// How Tinycast reaches a server. Secrets are never here — only the names that address them.
+/// How the app reaches a server. Secrets are never here — only the names that address them.
 enum MCPTransportKind: Codable, Equatable, Hashable, Sendable {
     case http(url: String, headerName: String)
     case stdio(command: String, arguments: [String], environmentKeys: [String])

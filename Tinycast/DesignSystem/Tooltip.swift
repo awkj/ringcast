@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// A hover label in Tinycast's own vocabulary, replacing a system `.help()` tooltip.
+/// A hover label in the app's own vocabulary, replacing a system `.help()` tooltip.
 private struct TooltipModifier: ViewModifier {
     let text: String?
     @State private var hovered = false

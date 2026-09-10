@@ -3,6 +3,7 @@ import Foundation
 @main
 @MainActor
 struct UpdatesTests {
+    static let testRepository = "example/releases"
     static var failures = 0
     static var passes = 0
 
@@ -15,7 +16,8 @@ struct UpdatesTests {
         }
     }
 
-    static func main() {
+    static func main() async throws {
+        try await disabledUpdatesStayOffline()
         parsesVersions()
         ordersVersions()
         roundTripsVersionsThroughJSON()
@@ -31,6 +33,55 @@ struct UpdatesTests {
 
         print("\(passes) passed, \(failures) failed")
         if failures > 0 { exit(1) }
+    }
+
+    static func disabledUpdatesStayOffline() async throws {
+        expect(
+            ReleaseNotes.blocks(from: "Fixed #42", repository: nil) == [.paragraph("Fixed #42")],
+            "release notes do not borrow the About repository when no update source is configured")
+        let disabled = UpdateSource(enabled: false, repository: "example/releases")
+        let missing = UpdateSource(enabled: true, repository: nil)
+        let configured = UpdateSource(enabled: true, repository: "example/releases")
+        expect(disabled.endpoint == nil, "disabled updates expose no remote endpoint")
+        expect(missing.endpoint == nil, "the project repository is never an update-source fallback")
+        expect(!disabled.allowsUpdates(on: .stable), "Release builds respect the off switch")
+        expect(!disabled.allowsUpdates(on: .beta), "Beta builds respect the off switch")
+        expect(configured.allowsUpdates(on: .stable), "an explicit source enables stable updates")
+        expect(!configured.allowsUpdates(on: .development), "development builds remain isolated")
+        expect(
+            UpdateSource(enabled: true, repository: "example/releases?redirect=upstream").endpoint == nil,
+            "invalid repository names cannot add a request destination")
+
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        let cache = root.appendingPathComponent("update-check.json")
+        let release = AvailableRelease(
+            version: AppVersion("99.0.0")!, tag: "v99.0.0", notes: "cached update",
+            assetURL: URL(string: "https://example.invalid/stale.zip")!, assetSize: 1, publishedAt: nil)
+        let cachedRelease = try JSONSerialization.jsonObject(with: JSONEncoder().encode(release))
+        let contents = try JSONSerialization.data(withJSONObject: ["latest": cachedRelease, "lastCheckedAt": 0])
+        try contents.write(to: cache)
+        let store = UpdateCheckStore(
+            source: disabled, bundleID: AppIdentity.bundleIdentifier, cacheFileURL: cache)
+        var announced = false
+        store.onUpdateAvailable = { _ in announced = true; return true }
+        store.start()
+        let checked = await store.check()
+        store.skip(release)
+        expect(!store.isEnabled && !checked && !store.isChecking, "neither launch nor manual action starts a check")
+        expect(store.latest == nil && store.update == nil && !announced, "stale cache cannot offer an update")
+        expect((try? Data(contentsOf: cache)) == contents, "disabled updates never write the cache")
+        let destination = root.appendingPathComponent("download.zip")
+        do {
+            for try await _ in UpdateDownloader.download(release, to: destination) {
+                expect(false, "disabled downloads produce no progress events")
+            }
+            expect(false, "a direct download request must be rejected")
+        } catch {
+            expect(error as? UpdateFailure == .disabled, "download is rejected before contacting any server")
+        }
+        expect(!FileManager.default.fileExists(atPath: destination.path), "disabled downloads create no files")
     }
 
     // MARK: - AppVersion
@@ -98,9 +149,9 @@ struct UpdatesTests {
     // MARK: - ReleaseChannel
 
     static func derivesChannels() {
-        let stable = ReleaseChannel(bundleID: "com.tinycast.app")
-        let beta = ReleaseChannel(bundleID: "com.tinycast.app.beta")
-        let dev = ReleaseChannel(bundleID: "com.tinycast.app.dev")
+        let stable = ReleaseChannel(bundleID: AppIdentity.bundleIdentifier)
+        let beta = ReleaseChannel(bundleID: AppIdentity.betaBundleIdentifier)
+        let dev = ReleaseChannel(bundleID: AppIdentity.developmentBundleIdentifier)
 
         expect(stable == .stable, "the stable bundle id is the stable channel")
         expect(beta == .beta, "the beta bundle id is the beta channel")
@@ -127,7 +178,7 @@ struct UpdatesTests {
     }
 
     static func entry(
-        tag: String, prerelease: Bool, draft: Bool = false, assets: [String] = ["Tinycast-x.zip"],
+        tag: String, prerelease: Bool, draft: Bool = false, assets: [String] = ["KiKi-x.zip"],
         body: String = "Notes."
     ) -> String {
         let list = assets.map {
@@ -192,7 +243,7 @@ struct UpdatesTests {
             "a release with no assets is skipped")
         expect(
             ReleaseFeed.newest(
-                from: feed(entry(tag: "v0.3.0", prerelease: false, assets: ["Tinycast-x.dmg"])),
+                from: feed(entry(tag: "v0.3.0", prerelease: false, assets: ["KiKi-x.dmg"])),
                 channel: .stable, architecture: .appleSilicon) == nil,
             "a DMG-only release is not installable, so it is not offered")
         expect(
@@ -219,7 +270,7 @@ struct UpdatesTests {
         let both = feed(
             entry(
                 tag: "v0.3.0", prerelease: false,
-                assets: ["Tinycast-0.3.0.zip", "Tinycast-Universal-0.3.0.zip"]))
+                assets: ["KiKi-0.3.0.zip", "KiKi-Universal-0.3.0.zip"]))
         expect(
             ReleaseFeed.newest(from: both, channel: .stable, architecture: .intel)?
                 .assetURL.absoluteString.contains("-Universal-") == true,
@@ -229,13 +280,13 @@ struct UpdatesTests {
                 .assetURL.absoluteString.contains("-Universal-") == false,
             "Apple silicon prefers the thin zip, and never pays for the Intel slice")
 
-        let thinOnly = feed(entry(tag: "v0.3.0", prerelease: false, assets: ["Tinycast-0.3.0.zip"]))
+        let thinOnly = feed(entry(tag: "v0.3.0", prerelease: false, assets: ["KiKi-0.3.0.zip"]))
         expect(
             ReleaseFeed.newest(from: thinOnly, channel: .stable, architecture: .intel) == nil,
             "Intel is offered nothing rather than an arm64 build it cannot launch")
 
         let universalOnly = feed(
-            entry(tag: "v0.3.0", prerelease: false, assets: ["Tinycast-Universal-0.3.0.zip"]))
+            entry(tag: "v0.3.0", prerelease: false, assets: ["KiKi-Universal-0.3.0.zip"]))
         expect(
             ReleaseFeed.newest(from: universalOnly, channel: .stable, architecture: .appleSilicon)?
                 .version == AppVersion("0.3.0"),
@@ -315,7 +366,7 @@ struct UpdatesTests {
     }
 
     static func laysOutTheChangelog() {
-        let blocks = ReleaseNotes.blocks(from: ReleaseNotes.summary(of: composedBody))
+        let blocks = ReleaseNotes.blocks(from: ReleaseNotes.summary(of: composedBody), repository: testRepository)
         expect(blocks.count == 5, "five blocks: two headings, three bullets")
         expect(blocks.first == .heading(level: 2, text: "What's Changed"), "a heading loses its hashes")
         expect(
@@ -323,7 +374,7 @@ struct UpdatesTests {
                 == .bullet(
                     "Adjust top padding in **UpdateWindowView** by "
                         + "[@abue-ammar](https://github.com/abue-ammar) in "
-                        + "[#304](https://github.com/\(ReleaseFeed.repository)/pull/304)"),
+                        + "[#304](https://github.com/\(testRepository)/pull/304)"),
             "a bullet loses its marker, keeps its inline markup, and links its author and PR")
         expect(
             blocks.contains(.heading(level: 2, text: "New Contributors")),
@@ -354,12 +405,12 @@ struct UpdatesTests {
 
     static func linksMentionsAndPullRequests() {
         func rendered(_ text: String) -> String {
-            guard case .bullet(let linked)? = ReleaseNotes.blocks(from: "* \(text)").first else {
+            guard case .bullet(let linked)? = ReleaseNotes.blocks(from: "* \(text)", repository: testRepository).first else {
                 return "not a bullet"
             }
             return linked
         }
-        let pull = "https://github.com/\(ReleaseFeed.repository)/pull"
+        let pull = "https://github.com/\(testRepository)/pull"
 
         expect(
             rendered("Fix by @abue-ammar in #304")

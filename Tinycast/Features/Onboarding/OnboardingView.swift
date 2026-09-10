@@ -79,7 +79,7 @@ struct OnboardingView: View {
 
     private var title: String {
         switch step {
-        case 0: String(localized: "Welcome to Tinycast", bundle: .appLanguage)
+        case 0: String(localized: "Welcome to \(AppIdentity.name)", bundle: .appLanguage)
         case 1: String(localized: "Enable Pasting", bundle: .appLanguage)
         case 2: String(localized: "Import from Raycast", bundle: .appLanguage)
         default: String(localized: "You're all set", bundle: .appLanguage)
@@ -89,7 +89,7 @@ struct OnboardingView: View {
     private var subtitle: String {
         switch step {
         case 0: String(localized: "Set a shortcut to summon the launcher from anywhere.", bundle: .appLanguage)
-        case 1: String(localized: "Let Tinycast paste items back into the app you were using.", bundle: .appLanguage)
+        case 1: String(localized: "Let \(AppIdentity.name) paste items back into the app you were using.", bundle: .appLanguage)
         case 2: String(localized: "Bring your shortcuts, favorites, and clipboard history along.", bundle: .appLanguage)
         default: readyMessage
         }
@@ -113,9 +113,9 @@ struct OnboardingView: View {
 
     private var readyMessage: String {
         if let caps = hotKeys.binding(for: .togglePalette)?.keycaps {
-            return String(localized: "Press \(caps.joined()) anytime to start using Tinycast.", bundle: .appLanguage)
+            return String(localized: "Press \(caps.joined()) anytime to start using \(AppIdentity.name).", bundle: .appLanguage)
         }
-        return String(localized: "Tinycast is ready. Set a shortcut in Settings to summon it.", bundle: .appLanguage)
+        return String(localized: "\(AppIdentity.name) is ready. Set a shortcut in Settings to summon it.", bundle: .appLanguage)
     }
 
     // MARK: - Step content
@@ -136,7 +136,7 @@ struct OnboardingView: View {
             OnboardingCard {
                 OnboardingRow(
                     title: String(localized: "App Launcher", bundle: .appLanguage),
-                    subtitle: String(localized: "Press this shortcut to open Tinycast.", bundle: .appLanguage),
+                    subtitle: String(localized: "Press this shortcut to open \(AppIdentity.name).", bundle: .appLanguage),
                     systemImage: "magnifyingglass", tint: .blue
                 ) {
                     ShortcutRecorder(action: .togglePalette)
@@ -144,7 +144,7 @@ struct OnboardingView: View {
                 OnboardingDivider()
                 OnboardingRow(
                     title: String(localized: "Launch at login", bundle: .appLanguage),
-                    subtitle: String(localized: "Start Tinycast automatically when you log in.", bundle: .appLanguage),
+                    subtitle: String(localized: "Start \(AppIdentity.name) automatically when you log in.", bundle: .appLanguage),
                     systemImage: "power", tint: .green
                 ) {
                     Toggle("", isOn: $settings.launchAtLogin)

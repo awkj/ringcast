@@ -1,8 +1,9 @@
+import { appIdentity } from "./app-identity.generated.js";
 // The single seam between the JS runtime and Swift. Swift installs `__tinycastHost` on the global
 // before evaluating the bundle; everything else in here goes through these helpers.
 
 const raw = globalThis.__tinycastHost;
-if (!raw) throw new Error("__tinycastHost missing — the runtime was evaluated outside Tinycast.");
+if (!raw) throw new Error(`__tinycastHost missing — the runtime was evaluated outside ${appIdentity.name}.`);
 
 export const hostRaw = raw;
 

@@ -60,7 +60,7 @@ final class WindowMover {
 
         if catalogued.kind == .fullscreen {
             guard toggleFullScreen(window) else { return false }
-            // The size chain is moot, but the pre-Tinycast frame is still the Restore target.
+            // The size chain is moot, but the pre-the app frame is still the Restore target.
             memory.forgetCycle(key: key)
             return true
         }

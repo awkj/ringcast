@@ -4,8 +4,6 @@ import Foundation
 @MainActor
 @Observable
 final class UpdateCheckStore {
-    private nonisolated static let endpoint = URL(
-        string: "https://api.github.com/repos/\(ReleaseFeed.repository)/releases?per_page=20")!
     /// Daily, measured from `lastCheckedAt`, so relaunching never re-asks GitHub.
     private static let refreshInterval: TimeInterval = 24 * 3600
     /// Shorter retry, so a machine offline at launch sees a release soon after it reconnects.
@@ -16,6 +14,8 @@ final class UpdateCheckStore {
     /// Keeps the first check, and any window it raises, clear of the login rush.
     private static let startupDelay = Duration.seconds(30)
 
+    private let source: UpdateSource
+    let isEnabled: Bool
     let channel: ReleaseChannel
     let runningVersion: AppVersion?
 
@@ -27,19 +27,25 @@ final class UpdateCheckStore {
     /// Raised on an unskipped release; `false` answers that the prompt was withheld and is owed.
     @ObservationIgnored var onUpdateAvailable: (@MainActor (AvailableRelease) -> Bool)?
 
-    private let fileURL: URL
+    private let fileURL: URL?
     private var skippedVersion: AppVersion?
     /// At most one uninvited appearance per version per launch.
     @ObservationIgnored private var announcedVersion: AppVersion?
     @ObservationIgnored private var withheldRetries = 0
     @ObservationIgnored private var pump: Task<Void, Never>?
 
-    init() {
-        channel = .development
+    init(
+        source: UpdateSource = .current,
+        bundleID: String? = Bundle.main.bundleIdentifier,
+        cacheFileURL: URL? = nil
+    ) {
+        self.source = source
+        channel = ReleaseChannel(bundleID: bundleID)
+        isEnabled = source.allowsUpdates(on: channel)
         runningVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String)
             .flatMap(AppVersion.init)
-        fileURL = AppPaths.caches().appendingPathComponent("update-check.json")
-        guard channel.updatesItself, let data = try? Data(contentsOf: fileURL),
+        fileURL = isEnabled ? (cacheFileURL ?? AppPaths.caches().appendingPathComponent("update-check.json")) : nil
+        guard isEnabled, let fileURL, let data = try? Data(contentsOf: fileURL),
             let cache = try? JSONDecoder().decode(Cache.self, from: data)
         else { return }
         latest = cache.latest
@@ -51,18 +57,18 @@ final class UpdateCheckStore {
 
     /// Newer than what is running. What the window offers, including a version already skipped.
     var update: AvailableRelease? {
-        guard let runningVersion else { return nil }
+        guard isEnabled, let runningVersion else { return nil }
         return ReleaseFeed.offer(latest, running: runningVersion, skipped: nil)
     }
 
     /// The same, minus anything dismissed. Only this may interrupt the user.
     var unskippedUpdate: AvailableRelease? {
-        guard let runningVersion else { return nil }
+        guard isEnabled, let runningVersion else { return nil }
         return ReleaseFeed.offer(latest, running: runningVersion, skipped: skippedVersion)
     }
 
     func start() {
-        guard channel.updatesItself, runningVersion != nil else { return }
+        guard isEnabled, runningVersion != nil else { return }
         // Replace rather than bail: an exited loop leaves a non-nil task that would block restart.
         pump?.cancel()
         pump = Task { [weak self] in
@@ -78,10 +84,10 @@ final class UpdateCheckStore {
     /// The manual path: ignores freshness, and reports whether GitHub actually answered.
     @discardableResult
     func check() async -> Bool {
-        guard channel.updatesItself, !isChecking else { return false }
+        guard isEnabled, let endpoint = source.endpoint, !isChecking else { return false }
         isChecking = true
         defer { isChecking = false }
-        guard let data = await Self.body() else { return false }
+        guard let data = await Self.body(from: endpoint) else { return false }
         latest = ReleaseFeed.newest(from: data, channel: channel, architecture: .current)
         lastCheckedAt = Date()
         persist()
@@ -90,6 +96,7 @@ final class UpdateCheckStore {
 
     /// Dismissing a version is what stops it asking again; a later one still will.
     func skip(_ release: AvailableRelease) {
+        guard isEnabled else { return }
         skippedVersion = release.version
         persist()
     }
@@ -121,6 +128,7 @@ final class UpdateCheckStore {
     }
 
     private func persist() {
+        guard isEnabled, let fileURL else { return }
         let cache = Cache(
             lastCheckedAt: lastCheckedAt, latest: latest, skippedVersion: skippedVersion)
         guard let data = try? JSONEncoder().encode(cache) else { return }
@@ -140,10 +148,10 @@ final class UpdateCheckStore {
         return URLSession(configuration: config)
     }()
 
-    private nonisolated static func body() async -> Data? {
+    private nonisolated static func body(from endpoint: URL) async -> Data? {
         var request = URLRequest(url: endpoint, timeoutInterval: 20)
         // GitHub rejects an API request carrying no User-Agent outright.
-        request.setValue("Tinycast", forHTTPHeaderField: "User-Agent")
+        request.setValue(AppIdentity.name, forHTTPHeaderField: "User-Agent")
         request.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
         request.setValue("2022-11-28", forHTTPHeaderField: "X-GitHub-Api-Version")
         guard let (data, response) = try? await session.data(for: request),
